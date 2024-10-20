@@ -4,11 +4,10 @@ import { useThemeToggle } from '../app/ThemeToggleProvider'; // Adjust the path 
 import { FaLinkedin, FaGithub, FaBehance } from 'react-icons/fa'; // Import icons from React Icons
 import DownloadIcon from '@mui/icons-material/Download'; // Download icon
 import ContactMailIcon from '@mui/icons-material/ContactMail'; // Contact icon
-import TypingText from './Typingtext'; // Import the TypingText component
+import { TypeAnimation } from 'react-type-animation';
 
 const Herosection = () => {
     const { darkMode } = useThemeToggle(); // Access darkMode state
-    const texts = ["Frontend Developer.", "UI Designer."]; // Texts to cycle through
 
     return (
         <Box
@@ -33,8 +32,23 @@ const Herosection = () => {
                         }}
                     >
                         Hello, I’m Shravan<br />
-                        {/* <TypingText texts={texts} speed={100} /> */}
+                      
                     </Typography>
+                    <TypeAnimation
+                        sequence={[
+                            // Same substring at the start will only be typed once, initially
+                          
+                            'Front End Deveoper',
+                            1000,
+                            'Ui Designer',
+                            1000,
+                            
+                        
+                        ]}
+                        speed={50}
+                        style={{ fontSize: '3em' }}
+                        repeat={Infinity}
+                    />
                     <Typography variant="h6" sx={{ mb: 4 }}>
                         Passionate about creating modern and elegant web applications.
                     </Typography>
@@ -87,7 +101,7 @@ const Herosection = () => {
                         </IconButton>
                         <IconButton
                             color="inherit"
-                            href="https://www.behance.net/" // Update with your Behance URL
+                            href="https://www.behance.net/sravankumar9" // Update with your Behance URL
                             target="_blank"
                         >
                             <FaBehance size={30} /> {/* Behance icon */}

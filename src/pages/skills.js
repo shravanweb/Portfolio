@@ -1,7 +1,11 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
+import { useThemeToggle } from '../app/ThemeToggleProvider'; // Import useThemeToggle hook
+
 
 const SkillsSection = () => {
+    const { darkMode } = useThemeToggle(); // Access darkMode state
+
     const skills = [
         { name: 'JavaScript', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
         { name: 'React', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
@@ -20,8 +24,9 @@ const SkillsSection = () => {
             sx={{
                 padding: '70px',
                 textAlign: 'center',
-                backgroundColor: '#f9f9f9', // Light background color
-                color: '#000',
+                padding: '50px',
+                backgroundColor: darkMode ? '#1c1c1c' : '#f9f9f9', // Dark mode background
+                color: darkMode ? '#fff' : '#333', // Dark mode text color
             }}
         >
             <Typography
@@ -31,6 +36,9 @@ const SkillsSection = () => {
                     mb: 4,
                     fontWeight: 'bold',
                     color: '#333',
+                    padding: '50px',
+                  
+                    color: darkMode ? '#fff' : '#333', // Dark mode text color
                 }}
             >
                 My Skills
@@ -55,7 +63,7 @@ const SkillsSection = () => {
                         sx={{
                             display: 'inline-block',
                             padding: '10px',
-                            backgroundColor: '#fff',
+                          
                             borderRadius: '10px',
                             boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
                             textAlign: 'center',
