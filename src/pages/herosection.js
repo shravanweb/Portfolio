@@ -5,6 +5,8 @@ import { FaLinkedin, FaGithub, FaBehance } from 'react-icons/fa'; // Import icon
 import DownloadIcon from '@mui/icons-material/Download'; // Download icon
 import ContactMailIcon from '@mui/icons-material/ContactMail'; // Contact icon
 import { TypeAnimation } from 'react-type-animation';
+import Pic from "../assets/images/pic.png"
+import Download from "../assets/Shravan_Rasamalla-Ui Developer.doc"
 
 const Herosection = () => {
     const { darkMode } = useThemeToggle(); // Access darkMode state
@@ -72,6 +74,8 @@ const Herosection = () => {
                         <Button
                             variant="outlined"
                             color="primary"
+                            href={Download} // Add href prop for the download link
+                            download="Shravan_Rasamalla-Ui Developer.doc" // Specify a filename for the download
                             startIcon={<DownloadIcon />}
                             sx={{
                                 padding: '10px 20px',
@@ -113,7 +117,7 @@ const Herosection = () => {
                 <Grid item xs={12} md={6}>
                     <Box
                         component="img"
-                        src="https://images.unsplash.com/photo-1622925930212-b5b1606f0aab?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG1lbnN8ZW58MHx8MHx8fDA%3D"
+                        src={Pic}
                         alt="Frontend Developer"
                         sx={{
                             width: '70%',

@@ -10,7 +10,7 @@ const Navbar = ({ scrollToSection }) => {
         <AppBar position="sticky">
             <Toolbar>
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                    Portfolio
+                    Shravan Rasamalla
                 </Typography>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                     <Button color="inherit" onClick={() => scrollToSection('home')}>Home</Button>
