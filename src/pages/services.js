@@ -41,7 +41,7 @@ const ServicesSection = () => {
                             fontWeight: 'bold',
                             marginRight: '20px', // Space between heading and line
                             color: darkMode ? '#fff' : '#333',
-                            fontSize:"40px"
+                            fontSize:"25px"
                         }}
                     >
                         Services

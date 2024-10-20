@@ -1,0 +1,11 @@
+.custom-cursor {
+  position: fixed;
+  width: 20px; /* Adjust size as needed */
+  height: 20px; /* Adjust size as needed */
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7); /* Color of the bubble */
+  pointer-events: none; /* Prevent the cursor from interfering with other elements */
+  transition: transform 0.1s ease;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Optional shadow for a glowing effect */
+  transform: translate(-50%, -50%); /* Center the cursor */
+}

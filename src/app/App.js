@@ -8,6 +8,7 @@ import BackToTop from '../pages/backtotop';
 import Contact from '../pages/footer';
 import Herosection from '../pages/herosection';
 import SkillsSection from '../pages/skills';
+import CustomCursor from '../pages/customcursor';
 
 const App = () => {
   // Create references for each section
@@ -42,6 +43,7 @@ const App = () => {
 
   return (
     <ThemeToggleProvider>
+      <CustomCursor/>
       <Router>
         <Navbar scrollToSection={scrollToSection} />
         <div ref={homeRef}>

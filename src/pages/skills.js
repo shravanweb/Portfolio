@@ -36,7 +36,7 @@ const SkillsSection = () => {
                         fontWeight: 'bold',
                         color: darkMode ? '#fff' : '#333',
                         marginRight: '20px', // Space between heading and line
-                        fontSize:"40px"
+                        fontSize:"25px"
                     }}
                 >
                     My Skills
