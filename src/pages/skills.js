@@ -10,7 +10,7 @@ const SkillsSection = () => {
         { name: 'React', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
         { name: 'CSS3', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
         { name: 'HTML5', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
-        { name: 'Git', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
+        { name: 'Git', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original-wordmark.svg' },
         { name: 'GitHub', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
         { name: 'MongoDB', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
         { name: 'Photoshop', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg' },
@@ -75,7 +75,7 @@ const SkillsSection = () => {
                             component="img"
                             src={skill.logo}
                             alt={`${skill.name} logo`}
-                            sx={{ width: '80px', height: '80px', objectFit: 'contain', mb: 2 }}
+                            sx={{ width: '80px', height: '80px', objectFit: 'contain', mb: 2,color:"#FFF" }}
                         />
                         {/* Skill Name */}
                         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>

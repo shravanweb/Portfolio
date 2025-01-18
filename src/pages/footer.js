@@ -54,7 +54,7 @@ const Footer = () => {
                         color: darkMode ? '#888' : '#666',
                     }}
                 >
-                    © 2024 Developer Portfolio by Shravan. All rights reserved.
+                    © 2025 Developer Portfolio by Shravan. All rights reserved.
                 </Typography>
             </Container>
         </Box>

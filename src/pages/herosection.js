@@ -5,8 +5,8 @@ import { FaLinkedin, FaGithub, FaBehance } from 'react-icons/fa'; // Import icon
 import DownloadIcon from '@mui/icons-material/Download'; // Download icon
 import ContactMailIcon from '@mui/icons-material/ContactMail'; // Contact icon
 import { TypeAnimation } from 'react-type-animation';
-import Pic from "../assets/images/pic.png"
-import Download from "../assets/Shravan_Rasamalla-Ui Developer.doc"
+import Pic from "../assets/images/pic.png";
+import Download from "../assets/Shravan_Rasamalla-Ui Developer.doc";
 
 const Herosection = () => {
     const { darkMode } = useThemeToggle(); // Access darkMode state
@@ -17,14 +17,16 @@ const Herosection = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                height: '100vh', // Full viewport height
                 backgroundColor: darkMode ? '#222' : '#fff',
                 color: darkMode ? '#fff' : '#000',
-                padding: '40px 70px 0px',
+                textAlign: 'center', // Center text horizontally
+                padding: '0 20px', // Add padding for smaller screens
             }}
         >
-            <Grid container spacing={3} alignItems="center">
-                {/* Left Section: Text */}
-                <Grid item xs={12} md={6}>
+            <Grid container alignItems="center" justifyContent="center">
+                {/* Content Section */}
+                <Grid item xs={12} md={8}>
                     <Typography
                         variant="h2"
                         component="h1"
@@ -34,18 +36,13 @@ const Herosection = () => {
                         }}
                     >
                         Hello, I’m Shravan<br />
-                      
                     </Typography>
                     <TypeAnimation
                         sequence={[
-                            // Same substring at the start will only be typed once, initially
-
                             'Front End Developer',
                             1000,
-                            'Ui Designer',
+                            'UI Designer',
                             1000,
-                            
-                        
                         ]}
                         speed={50}
                         style={{ fontSize: '3em' }}
@@ -56,7 +53,7 @@ const Herosection = () => {
                     </Typography>
 
                     {/* Buttons Section */}
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: 4 }}>
                         <Button
                             variant="contained"
                             color="primary"
@@ -69,13 +66,11 @@ const Herosection = () => {
                         >
                             Contact Me
                         </Button>
-
-                        {/* Download Resume Button */}
                         <Button
                             variant="outlined"
                             color="primary"
-                            href={Download} // Add href prop for the download link
-                            download="Shravan_Rasamalla-Ui Developer.doc" // Specify a filename for the download
+                            href={Download}
+                            download="Shravan_Rasamalla-Ui Developer.doc"
                             startIcon={<DownloadIcon />}
                             sx={{
                                 padding: '10px 20px',
@@ -88,46 +83,29 @@ const Herosection = () => {
                     </Box>
 
                     {/* Social Icons Section */}
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mt: 4 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 ,marginTop: "32px"}}>
                         <IconButton
                             color="inherit"
                             href="https://www.linkedin.com/in/shravan-rasamalla/"
                             target="_blank"
                         >
-                            <FaLinkedin size={30} /> {/* LinkedIn icon */}
+                            <FaLinkedin size={30} />
                         </IconButton>
                         <IconButton
                             color="inherit"
                             href="https://github.com/shravanweb"
                             target="_blank"
                         >
-                            <FaGithub size={30} /> {/* GitHub icon */}
+                            <FaGithub size={30} />
                         </IconButton>
                         <IconButton
                             color="inherit"
-                            href="https://www.behance.net/sravankumar9" // Update with your Behance URL
+                            href="https://www.behance.net/sravankumar9"
                             target="_blank"
                         >
-                            <FaBehance size={30} /> {/* Behance icon */}
+                            <FaBehance size={30} />
                         </IconButton>
                     </Box>
-                </Grid>
-
-                {/* Right Section: Image */}
-                <Grid item xs={12} md={6}>
-                    <Box
-                        component="img"
-                        src={Pic}
-                        alt="Frontend Developer"
-                        sx={{
-                            width: '70%',
-                            height: '70%',
-                            borderRadius: '10px',
-                            boxShadow: darkMode
-                                ? '0 4px 10px rgba(255, 255, 255, 0.1)'
-                                : '0 4px 10px rgba(0, 0, 0, 0.1)',
-                        }}
-                    />
                 </Grid>
             </Grid>
         </Box>

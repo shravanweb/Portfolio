@@ -1,6 +1,8 @@
     import { Box, Grid, Typography } from '@mui/material';
     import React from 'react';
-    import { useThemeToggle } from '../app/ThemeToggleProvider'; // Adjust the path as necessary
+import { useThemeToggle } from '../app/ThemeToggleProvider'; // Adjust the path as necessary
+import Pic from "../assets/images/pic.png"
+
 
     const Aboutus = () => {
         const { darkMode } = useThemeToggle(); // Access darkMode state
@@ -39,7 +41,7 @@
                     <Grid item xs={12} md={5}>
                         <Box
                             component="img"
-                            src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4"
+                            src={Pic}
                             alt="About Me Image"
                             sx={{
                                 width: '100%',
