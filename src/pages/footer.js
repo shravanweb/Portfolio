@@ -68,7 +68,7 @@ const Footer = () => {
                         </Typography>
                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                             <Link 
-                                href="#home" 
+                                href="/" 
                                 sx={{ 
                                     color: '#aaa',
                                     textDecoration: 'none',
@@ -81,7 +81,7 @@ const Footer = () => {
                                 Home
                             </Link>
                             <Link 
-                                href="#about" 
+                                href="/about" 
                                 sx={{ 
                                     color: '#aaa',
                                     textDecoration: 'none',
@@ -91,10 +91,10 @@ const Footer = () => {
                                     },
                                 }}
                             >
-                                About
+                                About Us
                             </Link>
                             <Link 
-                                href="#skills" 
+                                href="/contact" 
                                 sx={{ 
                                     color: '#aaa',
                                     textDecoration: 'none',
@@ -104,10 +104,10 @@ const Footer = () => {
                                     },
                                 }}
                             >
-                                Skills
+                                Contact Us
                             </Link>
                             <Link 
-                                href="#projects" 
+                                href="/terms" 
                                 sx={{ 
                                     color: '#aaa',
                                     textDecoration: 'none',
@@ -117,7 +117,20 @@ const Footer = () => {
                                     },
                                 }}
                             >
-                                Projects
+                                Terms & Conditions
+                            </Link>
+                            <Link 
+                                href="/privacy" 
+                                sx={{ 
+                                    color: '#aaa',
+                                    textDecoration: 'none',
+                                    transition: 'color 0.3s',
+                                    '&:hover': {
+                                        color: darkMode ? '#ffcc00' : '#007fff',
+                                    },
+                                }}
+                            >
+                                Privacy Policy
                             </Link>
                         </Box>
                     </Grid>
