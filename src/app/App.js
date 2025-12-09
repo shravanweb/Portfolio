@@ -8,6 +8,7 @@ import BackToTop from '../pages/backtotop';
 import Contact from '../pages/footer';
 import Herosection from '../pages/herosection';
 import SkillsSection from '../pages/skills';
+import Projects from '../pages/projects';
 import CustomCursor from '../pages/customcursor';
 
 const App = () => {
@@ -16,25 +17,29 @@ const App = () => {
   const aboutRef = useRef(null);
   const skillsRef = useRef(null);
   const servicesRef = useRef(null);
+  const projectsRef = useRef(null);
   const contactRef = useRef(null);
 
   // Scroll to the referenced section
   const scrollToSection = (section) => {
     switch (section) {
       case 'home':
-        homeRef.current.scrollIntoView({ behavior: 'smooth' });
+        homeRef.current?.scrollIntoView({ behavior: 'smooth' });
         break;
       case 'about':
-        aboutRef.current.scrollIntoView({ behavior: 'smooth' });
+        aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
         break;
       case 'skills':
-        skillsRef.current.scrollIntoView({ behavior: 'smooth' });
+        skillsRef.current?.scrollIntoView({ behavior: 'smooth' });
         break;
       case 'services':
-        servicesRef.current.scrollIntoView({ behavior: 'smooth' });
+        servicesRef.current?.scrollIntoView({ behavior: 'smooth' });
+        break;
+      case 'projects':
+        projectsRef.current?.scrollIntoView({ behavior: 'smooth' });
         break;
       case 'contact':
-        contactRef.current.scrollIntoView({ behavior: 'smooth' });
+        contactRef.current?.scrollIntoView({ behavior: 'smooth' });
         break;
       default:
         break;
@@ -57,6 +62,9 @@ const App = () => {
         </div>
         <div ref={servicesRef}>
           <ServicesSection />
+        </div>
+        <div ref={projectsRef}>
+          <Projects />
         </div>
         <div ref={contactRef}>
           <Contact />
