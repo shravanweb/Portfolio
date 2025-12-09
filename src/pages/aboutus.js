@@ -2,6 +2,8 @@ import { Box, Grid, Typography, Container } from '@mui/material';
 import React from 'react';
 import { useThemeToggle } from '../app/ThemeToggleProvider';
 import Pic from "../assets/images/pic.png";
+import AdSense from '../components/AdSense';
+import AdSense from '../components/AdSense';
 
 const Aboutus = () => {
     const { darkMode } = useThemeToggle();
@@ -108,6 +110,11 @@ const Aboutus = () => {
                         </Typography>
                     </Grid>
                 </Grid>
+
+                {/* AdSense Ad Unit */}
+                <Box sx={{ mt: 6 }}>
+                    <AdSense adFormat="auto" />
+                </Box>
             </Container>
         </Box>
     );

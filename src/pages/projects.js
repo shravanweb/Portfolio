@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Grid, Typography, Card, CardMedia, CardContent, CardActions, Button, Container } from '@mui/material';
 import { useThemeToggle } from '../app/ThemeToggleProvider';
+import AdSense from '../components/AdSense';
 
 const projects = [
     {
@@ -69,6 +70,11 @@ const Projects = () => {
                             borderRadius: '2px',
                         }}
                     />
+                </Box>
+
+                {/* AdSense Ad Unit */}
+                <Box sx={{ mb: 4, mt: 2 }}>
+                    <AdSense adFormat="auto" />
                 </Box>
 
                 <Grid container spacing={4} justifyContent="center">

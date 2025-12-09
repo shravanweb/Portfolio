@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, Grid, Card, CardContent, CardMedia, Container } from '@mui/material';
 import { useThemeToggle } from '../app/ThemeToggleProvider';
+import AdSense from '../components/AdSense';
 
 const services = [
     {
@@ -65,6 +66,11 @@ const ServicesSection = () => {
                             borderRadius: '2px',
                         }}
                     />
+                </Box>
+
+                {/* AdSense Ad Unit */}
+                <Box sx={{ mb: 4, mt: 2 }}>
+                    <AdSense adFormat="auto" />
                 </Box>
 
                 <Grid container spacing={4}>
