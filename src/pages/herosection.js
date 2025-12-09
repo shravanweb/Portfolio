@@ -1,13 +1,14 @@
 import React from 'react';
 import { Grid, Typography, Button, Box, IconButton } from '@mui/material';
-import { useThemeToggle } from '../app/ThemeToggleProvider'; // Adjust the path as necessary
-import { FaLinkedin, FaGithub, FaBehance } from 'react-icons/fa'; // Import icons from React Icons
-import DownloadIcon from '@mui/icons-material/Download'; // Download icon
-import ContactMailIcon from '@mui/icons-material/ContactMail'; // Contact icon
+import { useThemeToggle } from '../app/ThemeToggleProvider';
+import { FaLinkedin, FaGithub, FaBehance } from 'react-icons/fa';
+import DownloadIcon from '@mui/icons-material/Download';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
 import { TypeAnimation } from 'react-type-animation';
 import Pic from "../assets/images/pic.png";
 import Download from "../assets/Shravan_Rasamalla-Ui Developer.doc";
 import HeroBackground3D from '../components/HeroBackground3D';
+import AdSense from '../components/AdSense';
 
 const Herosection = () => {
     const { darkMode } = useThemeToggle(); // Access darkMode state
