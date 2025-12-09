@@ -3,7 +3,6 @@ import React from 'react';
 import { useThemeToggle } from '../app/ThemeToggleProvider';
 import Pic from "../assets/images/pic.png";
 import AdSense from '../components/AdSense';
-import AdSense from '../components/AdSense';
 
 const Aboutus = () => {
     const { darkMode } = useThemeToggle();
