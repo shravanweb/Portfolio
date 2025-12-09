@@ -132,6 +132,32 @@ const Footer = () => {
                             >
                                 Privacy Policy
                             </Link>
+                            <Link 
+                                href="/disclaimer" 
+                                sx={{ 
+                                    color: '#aaa',
+                                    textDecoration: 'none',
+                                    transition: 'color 0.3s',
+                                    '&:hover': {
+                                        color: darkMode ? '#ffcc00' : '#007fff',
+                                    },
+                                }}
+                            >
+                                Disclaimer
+                            </Link>
+                            <Link 
+                                href="/cookie-policy" 
+                                sx={{ 
+                                    color: '#aaa',
+                                    textDecoration: 'none',
+                                    transition: 'color 0.3s',
+                                    '&:hover': {
+                                        color: darkMode ? '#ffcc00' : '#007fff',
+                                    },
+                                }}
+                            >
+                                Cookie Policy
+                            </Link>
                         </Box>
                     </Grid>
 

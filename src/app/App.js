@@ -14,6 +14,8 @@ import TermsAndConditions from '../pages/TermsAndConditions';
 import PrivacyPolicy from '../pages/PrivacyPolicy';
 import ContactPage from '../pages/ContactPage';
 import AboutPage from '../pages/AboutPage';
+import Disclaimer from '../pages/Disclaimer';
+import CookiePolicy from '../pages/CookiePolicy';
 
 const MainContent = ({ scrollToSection, homeRef, aboutRef, skillsRef, servicesRef, projectsRef, contactRef }) => {
   const location = useLocation();
@@ -30,6 +32,12 @@ const MainContent = ({ scrollToSection, homeRef, aboutRef, skillsRef, servicesRe
   }
   if (location.pathname === '/about' || location.pathname === '/about-us') {
     return <AboutPage />;
+  }
+  if (location.pathname === '/disclaimer') {
+    return <Disclaimer />;
+  }
+  if (location.pathname === '/cookie-policy' || location.pathname === '/cookies') {
+    return <CookiePolicy />;
   }
   
   // Default: show main portfolio page

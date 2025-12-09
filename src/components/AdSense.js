@@ -6,6 +6,7 @@ const AdSense = ({ adSlot, adFormat = 'auto', fullWidthResponsive = true, style 
   const adRef = useRef(null);
   const pushedRef = useRef(false);
   const [scriptLoaded, setScriptLoaded] = useState(false);
+  const [adStatus, setAdStatus] = useState('loading');
   const { darkMode } = useThemeToggle();
   // Use client ID from HTML script or env variable
   const clientId = process.env.REACT_APP_ADSENSE_CLIENT_ID || 'ca-pub-6696519751206944';
@@ -42,6 +43,25 @@ const AdSense = ({ adSlot, adFormat = 'auto', fullWidthResponsive = true, style 
     return () => clearInterval(interval);
   }, []);
 
+  // Monitor ad status
+  useEffect(() => {
+    if (!adRef.current) return;
+
+    const observer = new MutationObserver(() => {
+      const status = adRef.current?.getAttribute('data-adsbygoogle-status');
+      if (status) {
+        setAdStatus(status);
+      }
+    });
+
+    observer.observe(adRef.current, {
+      attributes: true,
+      attributeFilter: ['data-adsbygoogle-status'],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   useEffect(() => {
     if (!scriptLoaded || pushedRef.current || !adRef.current) return;
 
@@ -58,6 +78,7 @@ const AdSense = ({ adSlot, adFormat = 'auto', fullWidthResponsive = true, style 
           // If ad is already done or in progress, don't push again
           if (status === 'done' || status === 'filled') {
             pushedRef.current = true;
+            setAdStatus(status);
             console.log('✅ AdSense ad already loaded');
             return;
           }
@@ -67,12 +88,15 @@ const AdSense = ({ adSlot, adFormat = 'auto', fullWidthResponsive = true, style 
             try {
               (window.adsbygoogle = window.adsbygoogle || []).push({});
               pushedRef.current = true;
+              setAdStatus('initialized');
               console.log('✅ AdSense ad initialized successfully');
             } catch (pushError) {
               console.error('❌ AdSense push error:', pushError);
               retryCount++;
               if (retryCount < maxRetries) {
                 setTimeout(initializeAd, 2000);
+              } else {
+                setAdStatus('error');
               }
             }
           }
@@ -82,10 +106,12 @@ const AdSense = ({ adSlot, adFormat = 'auto', fullWidthResponsive = true, style 
             setTimeout(initializeAd, 1000);
           } else {
             console.warn('⚠️ AdSense script not loaded after max retries');
+            setAdStatus('error');
           }
         }
       } catch (err) {
         console.error('❌ AdSense initialization error:', err);
+        setAdStatus('error');
       }
     };
 
@@ -99,6 +125,7 @@ const AdSense = ({ adSlot, adFormat = 'auto', fullWidthResponsive = true, style 
 
   // Show debug info in development
   const isDevelopment = process.env.NODE_ENV === 'development';
+  const showPlaceholder = isDevelopment && (adStatus === 'loading' || adStatus === 'unfilled' || adStatus === 'error');
 
   return (
     <Box
@@ -110,22 +137,77 @@ const AdSense = ({ adSlot, adFormat = 'auto', fullWidthResponsive = true, style 
         margin: '40px 0',
         minHeight: '100px',
         width: '100%',
+        position: 'relative',
         ...style,
       }}
     >
-      <ins
-        ref={adRef}
-        className="adsbygoogle"
-        style={{
-          display: 'block',
+      {/* AdSense Ad Container */}
+      <Box
+        sx={{
           width: '100%',
           minHeight: '100px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          border: showPlaceholder 
+            ? `2px dashed ${darkMode ? 'rgba(255, 204, 0, 0.3)' : 'rgba(0, 127, 255, 0.3)'}` 
+            : 'none',
+          borderRadius: showPlaceholder ? '8px' : '0',
+          backgroundColor: showPlaceholder 
+            ? darkMode ? 'rgba(255, 204, 0, 0.05)' : 'rgba(0, 127, 255, 0.05)' 
+            : 'transparent',
+          padding: showPlaceholder ? '20px' : '0',
         }}
-        data-ad-client={clientId}
-        data-ad-slot={adSlot || ''}
-        data-ad-format={adFormat}
-        data-full-width-responsive={fullWidthResponsive ? 'true' : 'false'}
-      />
+      >
+        <ins
+          ref={adRef}
+          className="adsbygoogle"
+          style={{
+            display: 'block',
+            width: '100%',
+            minHeight: '100px',
+          }}
+          data-ad-client={clientId}
+          data-ad-slot={adSlot || ''}
+          data-ad-format={adFormat}
+          data-full-width-responsive={fullWidthResponsive ? 'true' : 'false'}
+        />
+        {showPlaceholder && (
+          <Box
+            sx={{
+              position: 'absolute',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 1,
+              pointerEvents: 'none',
+            }}
+          >
+            <Typography
+              variant="caption"
+              sx={{
+                color: darkMode ? '#ffcc00' : '#007fff',
+                fontSize: '0.75rem',
+                fontWeight: 500,
+              }}
+            >
+              📢 AdSense Ad Placeholder
+            </Typography>
+            <Typography
+              variant="caption"
+              sx={{
+                color: darkMode ? '#888' : '#666',
+                fontSize: '0.65rem',
+              }}
+            >
+              {adStatus === 'loading' && '⏳ Loading...'}
+              {adStatus === 'unfilled' && '⏳ Waiting for ads...'}
+              {adStatus === 'error' && '❌ Ad failed to load'}
+              {adStatus === 'initialized' && '✅ Ad initialized'}
+            </Typography>
+          </Box>
+        )}
+      </Box>
       {isDevelopment && (
         <Typography
           variant="caption"
@@ -136,6 +218,7 @@ const AdSense = ({ adSlot, adFormat = 'auto', fullWidthResponsive = true, style 
           }}
         >
           {scriptLoaded ? '✅ Script loaded' : '⏳ Loading script...'} | 
+          Status: {adStatus} | 
           {adSlot ? ` Slot: ${adSlot}` : ' Auto ads'}
         </Typography>
       )}
