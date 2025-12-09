@@ -1,9 +1,11 @@
 import React from 'react';
 import { Box, Container, Grid, Typography, Link } from '@mui/material';
 import { useThemeToggle } from '../app/ThemeToggleProvider'; // Import useThemeToggle hook
+import useVisitorCount from '../hooks/useVisitorCount'; // Import visitor count hook
 
 const Footer = () => {
     const { darkMode } = useThemeToggle(); // Use darkMode from ThemeToggleProvider
+    const { visitorCount, loading } = useVisitorCount(); // Get visitor count
 
     return (
         <Box
@@ -46,16 +48,61 @@ const Footer = () => {
                     </Grid>
                 </Grid>
 
-                <Typography
-                    variant="body2"
+                <Box
                     sx={{
                         textAlign: 'center',
                         mt: 4,
-                        color: darkMode ? '#888' : '#666',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        gap: 1,
                     }}
                 >
-                    © 2025 Developer Portfolio by Shravan. All rights reserved.
-                </Typography>
+                    <Typography
+                        variant="body2"
+                        sx={{
+                            color: darkMode ? '#888' : '#666',
+                        }}
+                    >
+                        © 2025 Developer Portfolio by Shravan. All rights reserved.
+                    </Typography>
+                    {!loading && visitorCount !== null && (
+                        <Typography
+                            variant="body2"
+                            sx={{
+                                color: darkMode ? '#666' : '#999',
+                                fontSize: '0.875rem',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 0.5,
+                            }}
+                        >
+                            <Box
+                                component="span"
+                                sx={{
+                                    display: 'inline-block',
+                                    width: '8px',
+                                    height: '8px',
+                                    borderRadius: '50%',
+                                    backgroundColor: darkMode ? '#4caf50' : '#66bb6a',
+                                    animation: 'pulse 2s infinite',
+                                    '@keyframes pulse': {
+                                        '0%': {
+                                            opacity: 1,
+                                        },
+                                        '50%': {
+                                            opacity: 0.5,
+                                        },
+                                        '100%': {
+                                            opacity: 1,
+                                        },
+                                    },
+                                }}
+                            />
+                            Total Visitors: <strong>{visitorCount.toLocaleString()}</strong>
+                        </Typography>
+                    )}
+                </Box>
             </Container>
         </Box>
     );
