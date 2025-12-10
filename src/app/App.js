@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { ThemeToggleProvider } from './ThemeToggleProvider';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from '../header/navbar';
 import Aboutus from '../pages/aboutus';
 import ServicesSection from '../pages/services';
@@ -17,30 +17,7 @@ import AboutPage from '../pages/AboutPage';
 import Disclaimer from '../pages/Disclaimer';
 import CookiePolicy from '../pages/CookiePolicy';
 
-const MainContent = ({ scrollToSection, homeRef, aboutRef, skillsRef, servicesRef, projectsRef, contactRef }) => {
-  const location = useLocation();
-  
-  // If on a route page, show that page
-  if (location.pathname === '/terms' || location.pathname === '/terms-and-conditions') {
-    return <TermsAndConditions />;
-  }
-  if (location.pathname === '/privacy' || location.pathname === '/privacy-policy') {
-    return <PrivacyPolicy />;
-  }
-  if (location.pathname === '/contact' || location.pathname === '/contact-us') {
-    return <ContactPage />;
-  }
-  if (location.pathname === '/about' || location.pathname === '/about-us') {
-    return <AboutPage />;
-  }
-  if (location.pathname === '/disclaimer') {
-    return <Disclaimer />;
-  }
-  if (location.pathname === '/cookie-policy' || location.pathname === '/cookies') {
-    return <CookiePolicy />;
-  }
-  
-  // Default: show main portfolio page
+const HomePage = ({ scrollToSection, homeRef, aboutRef, skillsRef, servicesRef, projectsRef, contactRef }) => {
   return (
     <>
       <div ref={homeRef}>
@@ -62,6 +39,52 @@ const MainContent = ({ scrollToSection, homeRef, aboutRef, skillsRef, servicesRe
         <Contact />
       </div>
     </>
+  );
+};
+
+const MainContent = ({ scrollToSection, homeRef, aboutRef, skillsRef, servicesRef, projectsRef, contactRef }) => {
+  return (
+    <Routes>
+      <Route 
+        path="/" 
+        element={
+          <HomePage 
+            scrollToSection={scrollToSection}
+            homeRef={homeRef}
+            aboutRef={aboutRef}
+            skillsRef={skillsRef}
+            servicesRef={servicesRef}
+            projectsRef={projectsRef}
+            contactRef={contactRef}
+          />
+        } 
+      />
+      <Route path="/terms" element={<TermsAndConditions />} />
+      <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+      <Route path="/privacy" element={<PrivacyPolicy />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/contact-us" element={<ContactPage />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/about-us" element={<AboutPage />} />
+      <Route path="/disclaimer" element={<Disclaimer />} />
+      <Route path="/cookie-policy" element={<CookiePolicy />} />
+      <Route path="/cookies" element={<CookiePolicy />} />
+      <Route 
+        path="*" 
+        element={
+          <HomePage 
+            scrollToSection={scrollToSection}
+            homeRef={homeRef}
+            aboutRef={aboutRef}
+            skillsRef={skillsRef}
+            servicesRef={servicesRef}
+            projectsRef={projectsRef}
+            contactRef={contactRef}
+          />
+        } 
+      />
+    </Routes>
   );
 };
 
