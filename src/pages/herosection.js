@@ -8,7 +8,6 @@ import { TypeAnimation } from 'react-type-animation';
 import Pic from "../assets/images/pic.png";
 import Download from "../assets/Shravan_Rasamalla-Ui Developer.doc";
 import HeroBackground3D from '../components/HeroBackground3D';
-import AdSense from '../components/AdSense';
 
 const Herosection = () => {
     const { darkMode } = useThemeToggle(); // Access darkMode state

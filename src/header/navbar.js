@@ -2,9 +2,12 @@ import React from 'react';
 import { AppBar, Toolbar, Button, Box, Typography, IconButton } from '@mui/material';
 import { Brightness4, Brightness7 } from '@mui/icons-material';
 import { useThemeToggle } from '../app/ThemeToggleProvider';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar = ({ scrollToSection }) => {
     const { toggleTheme, darkMode } = useThemeToggle();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const navItems = [
         { label: 'Home', section: 'home' },
@@ -14,6 +17,24 @@ const Navbar = ({ scrollToSection }) => {
         { label: 'Projects', section: 'projects' },
         { label: 'Contact', section: 'contact' },
     ];
+
+    const handleNavigation = (section) => {
+        // If we're not on the homepage, navigate there with state
+        if (location.pathname !== '/') {
+            navigate('/', { state: { scrollTo: section }, replace: false });
+        } else {
+            // We're already on homepage, just scroll
+            scrollToSection(section);
+        }
+    };
+
+    const handleLogoClick = () => {
+        if (location.pathname !== '/') {
+            navigate('/');
+        } else {
+            scrollToSection('home');
+        }
+    };
 
     return (
         <AppBar 
@@ -40,7 +61,7 @@ const Navbar = ({ scrollToSection }) => {
                         backgroundClip: 'text',
                         cursor: 'pointer',
                     }}
-                    onClick={() => scrollToSection('home')}
+                    onClick={handleLogoClick}
                 >
                     Shravan Rasamalla
                 </Typography>
@@ -48,7 +69,7 @@ const Navbar = ({ scrollToSection }) => {
                     {navItems.map((item) => (
                         <Button
                             key={item.section}
-                            onClick={() => scrollToSection(item.section)}
+                            onClick={() => handleNavigation(item.section)}
                             sx={{
                                 color: darkMode ? '#fff' : '#333',
                                 fontWeight: 500,

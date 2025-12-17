@@ -11,7 +11,7 @@ const AdSense = ({ adSlot, adFormat = 'auto', fullWidthResponsive = true, style 
   // Use client ID from HTML script or env variable
   const clientId = process.env.REACT_APP_ADSENSE_CLIENT_ID || 'ca-pub-6696519751206944';
 
-  // Check if AdSense script is loaded
+  // Load AdSense script dynamically if not already loaded
   useEffect(() => {
     const checkScript = () => {
       if (window.adsbygoogle) {
@@ -21,27 +21,56 @@ const AdSense = ({ adSlot, adFormat = 'auto', fullWidthResponsive = true, style 
       return false;
     };
 
-    // Check immediately
+    // Check if script is already loaded
     if (checkScript()) return;
 
-    // Check periodically
+    // Check if script tag already exists in DOM
+    let script = document.querySelector('script[src*="adsbygoogle.js"]');
+    
+    if (!script) {
+      // Dynamically load AdSense script only when this component mounts
+      script = document.createElement('script');
+      script.async = true;
+      script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${clientId}`;
+      script.crossOrigin = 'anonymous';
+      script.setAttribute('data-ad-client', clientId);
+      
+      script.onload = () => {
+        setScriptLoaded(true);
+      };
+      
+      script.onerror = () => {
+        console.error('❌ Failed to load AdSense script');
+        setScriptLoaded(false);
+      };
+      
+      document.head.appendChild(script);
+    } else {
+      // Script exists, wait for it to load
+      if (script.complete || script.readyState === 'complete') {
+        setScriptLoaded(true);
+      } else {
+        script.addEventListener('load', () => {
+          setScriptLoaded(true);
+        });
+        script.addEventListener('error', () => {
+          console.error('❌ AdSense script failed to load');
+          setScriptLoaded(false);
+        });
+      }
+    }
+
+    // Check periodically as fallback
     const interval = setInterval(() => {
       if (checkScript()) {
         clearInterval(interval);
       }
     }, 500);
 
-    // Also check when script tag loads
-    const script = document.querySelector('script[src*="adsbygoogle.js"]');
-    if (script) {
-      script.addEventListener('load', () => {
-        setScriptLoaded(true);
-        clearInterval(interval);
-      });
-    }
-
-    return () => clearInterval(interval);
-  }, []);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [clientId]);
 
   // Monitor ad status
   useEffect(() => {

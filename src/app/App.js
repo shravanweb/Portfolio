@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { ThemeToggleProvider } from './ThemeToggleProvider';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from '../header/navbar';
 import Aboutus from '../pages/aboutus';
 import ServicesSection from '../pages/services';
@@ -17,7 +17,55 @@ import AboutPage from '../pages/AboutPage';
 import Disclaimer from '../pages/Disclaimer';
 import CookiePolicy from '../pages/CookiePolicy';
 
-const HomePage = ({ scrollToSection, homeRef, aboutRef, skillsRef, servicesRef, projectsRef, contactRef }) => {
+const HomePage = ({ scrollToSection, homeRef, aboutRef, skillsRef, servicesRef, projectsRef, contactRef, scrollToSectionOnMount }) => {
+  // Scroll to section on mount if needed (when navigating from another page)
+  useEffect(() => {
+    if (scrollToSectionOnMount) {
+      // Wait for DOM to be ready and refs to be attached
+      let retryCount = 0;
+      const maxRetries = 10;
+      
+      const scrollToTarget = () => {
+        // Get the appropriate ref based on section
+        let targetRef = null;
+        switch (scrollToSectionOnMount) {
+          case 'home':
+            targetRef = homeRef;
+            break;
+          case 'about':
+            targetRef = aboutRef;
+            break;
+          case 'skills':
+            targetRef = skillsRef;
+            break;
+          case 'services':
+            targetRef = servicesRef;
+            break;
+          case 'projects':
+            targetRef = projectsRef;
+            break;
+          case 'contact':
+            targetRef = contactRef;
+            break;
+          default:
+            return;
+        }
+        
+        // Check if ref is available, if not, try again
+        if (targetRef?.current) {
+          targetRef.current.scrollIntoView({ behavior: 'smooth' });
+        } else if (retryCount < maxRetries) {
+          retryCount++;
+          // Retry after a short delay
+          setTimeout(scrollToTarget, 50);
+        }
+      };
+      
+      // Initial delay to allow component to fully render
+      setTimeout(scrollToTarget, 150);
+    }
+  }, [scrollToSectionOnMount, homeRef, aboutRef, skillsRef, servicesRef, projectsRef, contactRef]);
+
   return (
     <>
       <div ref={homeRef}>
@@ -43,6 +91,9 @@ const HomePage = ({ scrollToSection, homeRef, aboutRef, skillsRef, servicesRef, 
 };
 
 const MainContent = ({ scrollToSection, homeRef, aboutRef, skillsRef, servicesRef, projectsRef, contactRef }) => {
+  const location = useLocation();
+  const scrollToSectionOnMount = location.state?.scrollTo || null;
+
   return (
     <Routes>
       <Route 
@@ -56,6 +107,7 @@ const MainContent = ({ scrollToSection, homeRef, aboutRef, skillsRef, servicesRe
             servicesRef={servicesRef}
             projectsRef={projectsRef}
             contactRef={contactRef}
+            scrollToSectionOnMount={scrollToSectionOnMount}
           />
         } 
       />
@@ -81,6 +133,7 @@ const MainContent = ({ scrollToSection, homeRef, aboutRef, skillsRef, servicesRe
             servicesRef={servicesRef}
             projectsRef={projectsRef}
             contactRef={contactRef}
+            scrollToSectionOnMount={scrollToSectionOnMount}
           />
         } 
       />
@@ -88,7 +141,7 @@ const MainContent = ({ scrollToSection, homeRef, aboutRef, skillsRef, servicesRe
   );
 };
 
-const App = () => {
+const AppContent = () => {
   // Create references for each section
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
@@ -124,20 +177,28 @@ const App = () => {
   };
 
   return (
+    <>
+      <Navbar scrollToSection={scrollToSection} />
+      <MainContent 
+        scrollToSection={scrollToSection}
+        homeRef={homeRef}
+        aboutRef={aboutRef}
+        skillsRef={skillsRef}
+        servicesRef={servicesRef}
+        projectsRef={projectsRef}
+        contactRef={contactRef}
+      />
+      <BackToTop />
+    </>
+  );
+};
+
+const App = () => {
+  return (
     <ThemeToggleProvider>
       <CustomCursor/>
       <Router>
-        <Navbar scrollToSection={scrollToSection} />
-        <MainContent 
-          scrollToSection={scrollToSection}
-          homeRef={homeRef}
-          aboutRef={aboutRef}
-          skillsRef={skillsRef}
-          servicesRef={servicesRef}
-          projectsRef={projectsRef}
-          contactRef={contactRef}
-        />
-        <BackToTop />
+        <AppContent />
       </Router>
     </ThemeToggleProvider>
   );
