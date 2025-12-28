@@ -33,48 +33,61 @@ const Projects = () => {
     return (
         <Box
             sx={{
-                backgroundColor: darkMode ? '#121212' : '#f8f9fa',
-                padding: { xs: '60px 20px', md: '100px 40px' },
+                backgroundColor: 'var(--bg-primary)',
+                padding: { xs: '60px 20px', md: '120px 40px' },
                 minHeight: '100vh',
                 position: 'relative',
             }}
             id="projects"
         >
             <Container maxWidth="lg">
-                <Box sx={{ textAlign: 'center', mb: 8 }}>
+                <Box sx={{ textAlign: 'center', mb: 10 }}>
                     <Typography
                         variant="h2"
                         component="h2"
                         sx={{
-                            fontWeight: 700,
-                            fontSize: { xs: '2rem', md: '3rem' },
+                            fontWeight: 900,
+                            fontSize: { xs: '2rem', md: '3.5rem' },
                             mb: 2,
                             background: darkMode 
-                                ? 'linear-gradient(135deg, #ffffff 0%, #ffcc00 100%)'
-                                : 'linear-gradient(135deg, #007fff 0%, #005fbb 100%)',
+                                ? 'linear-gradient(135deg, #00d4ff 0%, #0066ff 100%)'
+                                : 'linear-gradient(135deg, #0066ff 0%, #6366f1 100%)',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                             backgroundClip: 'text',
+                            letterSpacing: '-1px',
                         }}
                     >
-                        My Projects
+                        Featured Projects
                     </Typography>
                     <Box
                         sx={{
                             width: '80px',
                             height: '4px',
                             background: darkMode 
-                                ? 'linear-gradient(90deg, #ffcc00, #ffaa00)'
-                                : 'linear-gradient(90deg, #007fff, #005fbb)',
+                                ? 'linear-gradient(90deg, #00d4ff, #0066ff)'
+                                : 'linear-gradient(90deg, #0066ff, #6366f1)',
                             margin: '0 auto',
                             borderRadius: '2px',
+                            mb: 3,
                         }}
                     />
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            color: 'var(--text-muted)',
+                            fontWeight: 400,
+                            fontSize: '1.1rem',
+                            mb: 6,
+                        }}
+                    >
+                        Explore my portfolio of carefully crafted projects that demonstrate expertise in modern web development, user experience design, and innovative solutions.
+                    </Typography>
                 </Box>
 
                 {/* AdSense Ad Unit */}
                 <Box sx={{ mb: 4, mt: 2 }}>
-                    <AdSense adFormat="auto" />
+                    <AdSense adFormat="auto" requireMinContent={true} />
                 </Box>
 
                 <Grid container spacing={4} justifyContent="center">
@@ -82,21 +95,19 @@ const Projects = () => {
                         <Grid item xs={12} sm={6} md={4} key={index}>
                             <Card
                                 sx={{
-                                    backgroundColor: darkMode ? '#1e1e1e' : '#ffffff',
-                                    color: darkMode ? '#e0e0e0' : '#333',
+                                    backgroundColor: darkMode ? 'var(--bg-secondary)' : 'var(--bg-secondary)',
+                                    color: 'var(--text-color)',
                                     borderRadius: '20px',
                                     overflow: 'hidden',
-                                    border: `2px solid ${darkMode ? 'rgba(255, 204, 0, 0.1)' : 'rgba(0, 127, 255, 0.1)'}`,
-                                    transition: 'all 0.3s ease',
+                                    border: `1px solid var(--border-color)`,
+                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                     height: '100%',
                                     display: 'flex',
                                     flexDirection: 'column',
                                     '&:hover': {
-                                        transform: 'translateY(-10px)',
-                                        boxShadow: darkMode 
-                                            ? '0 20px 60px rgba(255, 204, 0, 0.3)' 
-                                            : '0 20px 60px rgba(0, 127, 255, 0.3)',
-                                        borderColor: darkMode ? '#ffcc00' : '#007fff',
+                                        transform: 'translateY(-12px)',
+                                        boxShadow: 'var(--shadow-lg)',
+                                        borderColor: darkMode ? 'var(--accent-color)' : 'var(--accent-color)',
                                     },
                                 }}
                             >
@@ -115,9 +126,10 @@ const Projects = () => {
                                         variant="h5"
                                         component="div"
                                         sx={{
-                                            fontWeight: 700,
-                                            color: darkMode ? '#ffcc00' : '#007fff',
+                                            fontWeight: 800,
+                                            color: darkMode ? 'var(--accent-color)' : 'var(--accent-color)',
                                             mb: 2,
+                                            fontSize: '1.2rem',
                                         }}
                                     >
                                         {project.title}
@@ -125,9 +137,10 @@ const Projects = () => {
                                     <Typography
                                         variant="body2"
                                         sx={{
-                                            color: darkMode ? '#e0e0e0' : '#555',
+                                            color: 'var(--text-color)',
                                             lineHeight: 1.8,
                                             mb: 2,
+                                            fontWeight: 500,
                                         }}
                                     >
                                         {project.description}
@@ -141,9 +154,9 @@ const Projects = () => {
                                                     py: 0.5,
                                                     borderRadius: '12px',
                                                     backgroundColor: darkMode 
-                                                        ? 'rgba(255, 204, 0, 0.1)' 
-                                                        : 'rgba(0, 127, 255, 0.1)',
-                                                    color: darkMode ? '#ffcc00' : '#007fff',
+                                                        ? 'rgba(0, 212, 255, 0.1)' 
+                                                        : 'rgba(0, 212, 255, 0.15)',
+                                                    color: darkMode ? 'var(--accent-color)' : '#00d4ff',
                                                     fontSize: '0.75rem',
                                                     fontWeight: 600,
                                                 }}
@@ -164,8 +177,8 @@ const Projects = () => {
                                             fontWeight: 600,
                                             textTransform: 'none',
                                             background: darkMode 
-                                                ? 'linear-gradient(135deg, #ffcc00 0%, #ffaa00 100%)'
-                                                : 'linear-gradient(135deg, #007fff 0%, #005fbb 100%)',
+                                                ? 'linear-gradient(135deg, var(--accent-color) 0%, #00a8cc 100%)'
+                                                : 'linear-gradient(135deg, var(--accent-color) 0%, #00b8d4 100%)',
                                             color: darkMode ? '#000' : '#fff',
                                             '&:hover': {
                                                 transform: 'scale(1.02)',

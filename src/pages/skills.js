@@ -21,27 +21,28 @@ const SkillsSection = () => {
     return (
         <Box
             sx={{
-                padding: { xs: '60px 20px', md: '100px 40px' },
-                backgroundColor: darkMode ? '#121212' : '#f8f9fa',
-                color: darkMode ? '#fff' : '#333',
+                padding: { xs: '60px 20px', md: '120px 40px' },
+                backgroundColor: 'var(--bg-primary)',
+                color: 'var(--text-color)',
                 position: 'relative',
             }}
         >
             <Container maxWidth="lg">
-                <Box sx={{ textAlign: 'center', mb: 8 }}>
+                <Box sx={{ textAlign: 'center', mb: 10 }}>
                     <Typography
                         variant="h2"
                         component="h2"
                         sx={{
-                            fontWeight: 700,
-                            fontSize: { xs: '2rem', md: '3rem' },
+                            fontWeight: 900,
+                            fontSize: { xs: '2rem', md: '3.5rem' },
                             mb: 2,
                             background: darkMode 
-                                ? 'linear-gradient(135deg, #ffffff 0%, #ffcc00 100%)'
-                                : 'linear-gradient(135deg, #007fff 0%, #005fbb 100%)',
+                                ? 'linear-gradient(135deg, #00d4ff 0%, #0066ff 100%)'
+                                : 'linear-gradient(135deg, #0066ff 0%, #6366f1 100%)',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                             backgroundClip: 'text',
+                            letterSpacing: '-1px',
                         }}
                     >
                         My Skills
@@ -51,33 +52,43 @@ const SkillsSection = () => {
                             width: '80px',
                             height: '4px',
                             background: darkMode 
-                                ? 'linear-gradient(90deg, #ffcc00, #ffaa00)'
-                                : 'linear-gradient(90deg, #007fff, #005fbb)',
+                                ? 'linear-gradient(90deg, #00d4ff, #0066ff)'
+                                : 'linear-gradient(90deg, #0066ff, #6366f1)',
                             margin: '0 auto',
                             borderRadius: '2px',
+                            mb: 3,
                         }}
                     />
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            color: 'var(--text-muted)',
+                            fontWeight: 400,
+                            fontSize: '1.1rem',
+                        }}
+                    >
+                        Proficient technologies and tools
+                    </Typography>
                 </Box>
 
-                <Grid container spacing={4}>
+                <Grid container spacing={3}>
                     {skills.map((skill, index) => (
                         <Grid item xs={6} sm={4} md={3} key={index}>
                             <Paper
                                 elevation={0}
                                 sx={{
-                                    p: 3,
+                                    p: 4,
                                     textAlign: 'center',
-                                    backgroundColor: darkMode ? '#1e1e1e' : '#ffffff',
-                                    border: `2px solid ${darkMode ? 'rgba(255, 204, 0, 0.1)' : 'rgba(0, 127, 255, 0.1)'}`,
+                                    backgroundColor: darkMode ? 'var(--bg-secondary)' : 'var(--bg-secondary)',
+                                    border: `1px solid var(--border-color)`,
                                     borderRadius: '16px',
-                                    transition: 'all 0.3s ease',
+                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                     cursor: 'pointer',
                                     '&:hover': {
-                                        transform: 'translateY(-8px)',
-                                        boxShadow: darkMode 
-                                            ? '0 12px 40px rgba(255, 204, 0, 0.2)' 
-                                            : '0 12px 40px rgba(0, 127, 255, 0.2)',
-                                        borderColor: darkMode ? '#ffcc00' : '#007fff',
+                                        transform: 'translateY(-12px)',
+                                        boxShadow: 'var(--shadow-lg)',
+                                        borderColor: darkMode ? 'var(--accent-color)' : 'var(--accent-color)',
+                                        backgroundColor: darkMode ? 'var(--bg-tertiary)' : 'var(--bg-tertiary)',
                                     },
                                 }}
                             >
@@ -90,15 +101,15 @@ const SkillsSection = () => {
                                         height: '64px',
                                         objectFit: 'contain',
                                         mb: 2,
-                                        filter: darkMode ? 'brightness(1.2)' : 'none',
+                                        filter: darkMode ? 'brightness(1.1)' : 'brightness(0.9)',
                                     }}
                                 />
                                 <Typography
                                     variant="h6"
                                     sx={{
-                                        fontWeight: 600,
+                                        fontWeight: 700,
                                         mb: 1,
-                                        color: darkMode ? '#fff' : '#333',
+                                        color: 'var(--text-color-2)',
                                         fontSize: '1rem',
                                     }}
                                 >
@@ -106,24 +117,43 @@ const SkillsSection = () => {
                                 </Typography>
                                 <Box
                                     sx={{
-                                        width: '100%',
-                                        height: '4px',
-                                        backgroundColor: darkMode ? '#333' : '#e0e0e0',
-                                        borderRadius: '2px',
-                                        overflow: 'hidden',
-                                        mt: 1,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: 1,
                                     }}
                                 >
                                     <Box
                                         sx={{
-                                            width: `${skill.level}%`,
-                                            height: '100%',
-                                            background: darkMode 
-                                                ? 'linear-gradient(90deg, #ffcc00, #ffaa00)'
-                                                : 'linear-gradient(90deg, #007fff, #005fbb)',
-                                            transition: 'width 0.5s ease',
+                                            flex: 1,
+                                            height: '6px',
+                                            backgroundColor: darkMode ? 'rgba(0, 212, 255, 0.2)' : 'rgba(0, 102, 255, 0.2)',
+                                            borderRadius: '3px',
+                                            overflow: 'hidden',
                                         }}
-                                    />
+                                    >
+                                        <Box
+                                            sx={{
+                                                height: '100%',
+                                                width: `${skill.level}%`,
+                                                background: darkMode 
+                                                    ? 'linear-gradient(90deg, #00d4ff, #0066ff)'
+                                                    : 'linear-gradient(90deg, #0066ff, #6366f1)',
+                                                borderRadius: '3px',
+                                                transition: 'width 0.5s ease',
+                                            }}
+                                        />
+                                    </Box>
+                                    <Typography
+                                        variant="caption"
+                                        sx={{
+                                            color: 'var(--text-muted)',
+                                            fontWeight: 600,
+                                            minWidth: '30px',
+                                            textAlign: 'right',
+                                        }}
+                                    >
+                                        {skill.level}%
+                                    </Typography>
                                 </Box>
                             </Paper>
                         </Grid>

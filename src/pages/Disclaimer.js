@@ -8,9 +8,9 @@ const Disclaimer = () => {
     return (
         <Box
             sx={{
-                padding: { xs: '60px 20px', md: '100px 40px' },
-                backgroundColor: darkMode ? '#0a0a0a' : '#ffffff',
-                color: darkMode ? '#fff' : '#333',
+                padding: { xs: '60px 20px', md: '120px 40px' },
+                backgroundColor: darkMode ? 'var(--bg-primary)' : 'var(--bg-secondary)',
+                color: 'var(--text-color)',
                 minHeight: '100vh',
             }}
         >
@@ -19,12 +19,12 @@ const Disclaimer = () => {
                     variant="h2"
                     component="h1"
                     sx={{
-                        fontWeight: 700,
-                        fontSize: { xs: '2rem', md: '3rem' },
+                        fontWeight: 900,
+                        fontSize: { xs: '2.5rem', md: '3.5rem' },
                         mb: 4,
                         background: darkMode 
-                            ? 'linear-gradient(135deg, #ffffff 0%, #ffcc00 100%)'
-                            : 'linear-gradient(135deg, #007fff 0%, #005fbb 100%)',
+                            ? 'linear-gradient(135deg, var(--accent-color) 0%, #6366f1 100%)'
+                            : 'linear-gradient(135deg, var(--accent-color) 0%, #6366f1 100%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                         backgroundClip: 'text',
@@ -33,27 +33,27 @@ const Disclaimer = () => {
                     Disclaimer
                 </Typography>
 
-                <Typography variant="body1" sx={{ mb: 4, color: darkMode ? '#e0e0e0' : '#555', lineHeight: 1.9 }}>
+                <Typography variant="body1" sx={{ mb: 4, color: 'var(--muted-text)', lineHeight: 1.9 }}>
                     <strong>Last Updated:</strong> {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                 </Typography>
 
                 <Box sx={{ mb: 4 }}>
-                    <Typography variant="h5" sx={{ mb: 2, color: darkMode ? '#ffcc00' : '#007fff', fontWeight: 600 }}>
+                    <Typography variant="h5" sx={{ mb: 2, color: 'var(--accent-color)', fontWeight: 600 }}>
                         1. General Information
                     </Typography>
-                    <Typography variant="body1" sx={{ mb: 3, color: darkMode ? '#e0e0e0' : '#555', lineHeight: 1.9 }}>
+                    <Typography variant="body1" sx={{ mb: 3, color: 'var(--text-color)', lineHeight: 1.9 }}>
                         The information contained on this website (shravan-portfolio-5qhd.onrender.com) is for general information purposes only. While we endeavor to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose.
                     </Typography>
                 </Box>
 
                 <Box sx={{ mb: 4 }}>
-                    <Typography variant="h5" sx={{ mb: 2, color: darkMode ? '#ffcc00' : '#007fff', fontWeight: 600 }}>
+                    <Typography variant="h5" sx={{ mb: 2, color: 'var(--accent-color)', fontWeight: 600 }}>
                         2. No Warranties
                     </Typography>
-                    <Typography variant="body1" sx={{ mb: 3, color: darkMode ? '#e0e0e0' : '#555', lineHeight: 1.9 }}>
+                    <Typography variant="body1" sx={{ mb: 3, color: 'var(--text-color)', lineHeight: 1.9 }}>
                         This website is provided "as is" without any representations or warranties, express or implied. Rasamalla Shravan makes no representations or warranties in relation to this website or the information and materials provided on this website. Without prejudice to the generality of the foregoing paragraph, we do not warrant that:
                     </Typography>
-                    <Box component="ul" sx={{ pl: 4, mb: 3, color: darkMode ? '#e0e0e0' : '#555', lineHeight: 1.9 }}>
+                    <Box component="ul" sx={{ pl: 4, mb: 3, color: 'var(--text-color)', lineHeight: 1.9 }}>
                         <li>This website will be constantly available, or available at all</li>
                         <li>The information on this website is complete, true, accurate, or non-misleading</li>
                         <li>This website will meet your requirements or expectations</li>
@@ -62,19 +62,19 @@ const Disclaimer = () => {
                 </Box>
 
                 <Box sx={{ mb: 4 }}>
-                    <Typography variant="h5" sx={{ mb: 2, color: darkMode ? '#ffcc00' : '#007fff', fontWeight: 600 }}>
+                    <Typography variant="h5" sx={{ mb: 2, color: 'var(--accent-color)', fontWeight: 600 }}>
                         3. Limitation of Liability
                     </Typography>
-                    <Typography variant="body1" sx={{ mb: 3, color: darkMode ? '#e0e0e0' : '#555', lineHeight: 1.9 }}>
+                    <Typography variant="body1" sx={{ mb: 3, color: 'var(--text-color)', lineHeight: 1.9 }}>
                         Nothing in this website disclaimer will exclude or limit any warranty implied by law that it would be unlawful to exclude or limit. To the maximum extent permitted by applicable law, we exclude all representations, warranties, conditions, and terms relating to our website and the use of this website. We will not be liable to you in respect of any losses arising out of any event or events beyond our reasonable control. We will not be liable to you in respect of any business losses, including (without limitation) loss of or damage to profits, income, revenue, use, production, anticipated savings, business, contracts, commercial opportunities, or goodwill.
                     </Typography>
                 </Box>
 
                 <Box sx={{ mb: 4 }}>
-                    <Typography variant="h5" sx={{ mb: 2, color: darkMode ? '#ffcc00' : '#007fff', fontWeight: 600 }}>
+                    <Typography variant="h5" sx={{ mb: 2, color: 'var(--accent-color)', fontWeight: 600 }}>
                         4. Professional Advice
                     </Typography>
-                    <Typography variant="body1" sx={{ mb: 3, color: darkMode ? '#e0e0e0' : '#555', lineHeight: 1.9 }}>
+                    <Typography variant="body1" sx={{ mb: 3, color: 'var(--text-color)', lineHeight: 1.9 }}>
                         The information on this website is not intended to constitute professional advice. You should not rely upon the material or information on the website as a basis for making any business, legal, or any other decisions. Whilst we endeavor to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose.
                     </Typography>
                 </Box>

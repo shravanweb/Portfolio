@@ -10,10 +10,10 @@ const Footer = () => {
     return (
         <Box
             sx={{
-                backgroundColor: darkMode ? '#000000' : '#1a1a1a',
-                color: darkMode ? '#fff' : '#fff',
-                py: 6,
-                borderTop: `1px solid ${darkMode ? '#333' : '#2a2a2a'}`,
+                backgroundColor: darkMode ? 'var(--bg-primary)' : 'var(--bg-secondary)',
+                color: 'var(--text-color)',
+                py: 8,
+                borderTop: `1px solid var(--border-color)`,
                 position: 'relative',
             }}
         >
@@ -26,8 +26,8 @@ const Footer = () => {
                                 fontWeight: 700,
                                 mb: 2,
                                 background: darkMode 
-                                    ? 'linear-gradient(135deg, #ffffff 0%, #ffcc00 100%)'
-                                    : 'linear-gradient(135deg, #ffffff 0%, #007fff 100%)',
+                                    ? 'linear-gradient(135deg, var(--accent-color) 0%, #6366f1 100%)'
+                                    : 'linear-gradient(135deg, var(--accent-color) 0%, #6366f1 100%)',
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
                                 backgroundClip: 'text',
@@ -38,7 +38,7 @@ const Footer = () => {
                         <Typography 
                             variant="body2" 
                             sx={{ 
-                                color: '#aaa',
+                                color: 'var(--muted-text)',
                                 mb: 2,
                             }}
                         >
@@ -47,7 +47,7 @@ const Footer = () => {
                         <Typography 
                             variant="body2" 
                             sx={{ 
-                                color: '#888',
+                                color: 'var(--muted-text)',
                                 lineHeight: 1.8,
                             }}
                         >
@@ -61,7 +61,7 @@ const Footer = () => {
                             sx={{ 
                                 fontWeight: 600, 
                                 mb: 3,
-                                color: darkMode ? '#ffcc00' : '#007fff',
+                                color: 'var(--accent-color)',
                             }}
                         >
                             Quick Links
@@ -70,11 +70,11 @@ const Footer = () => {
                             <Link 
                                 href="/" 
                                 sx={{ 
-                                    color: '#aaa',
+                                    color: 'var(--muted-text)',
                                     textDecoration: 'none',
-                                    transition: 'color 0.3s',
+                                    transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                     '&:hover': {
-                                        color: darkMode ? '#ffcc00' : '#007fff',
+                                        color: 'var(--accent-color)',
                                     },
                                 }}
                             >
@@ -83,11 +83,11 @@ const Footer = () => {
                             <Link 
                                 href="/about" 
                                 sx={{ 
-                                    color: '#aaa',
+                                    color: 'var(--muted-text)',
                                     textDecoration: 'none',
-                                    transition: 'color 0.3s',
+                                    transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                     '&:hover': {
-                                        color: darkMode ? '#ffcc00' : '#007fff',
+                                        color: 'var(--accent-color)',
                                     },
                                 }}
                             >
@@ -96,11 +96,11 @@ const Footer = () => {
                             <Link 
                                 href="/contact" 
                                 sx={{ 
-                                    color: '#aaa',
+                                    color: 'var(--muted-text)',
                                     textDecoration: 'none',
-                                    transition: 'color 0.3s',
+                                    transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                     '&:hover': {
-                                        color: darkMode ? '#ffcc00' : '#007fff',
+                                        color: 'var(--accent-color)',
                                     },
                                 }}
                             >
@@ -109,11 +109,11 @@ const Footer = () => {
                             <Link 
                                 href="/terms" 
                                 sx={{ 
-                                    color: '#aaa',
+                                    color: 'var(--muted-text)',
                                     textDecoration: 'none',
-                                    transition: 'color 0.3s',
+                                    transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                     '&:hover': {
-                                        color: darkMode ? '#ffcc00' : '#007fff',
+                                        color: 'var(--accent-color)',
                                     },
                                 }}
                             >
@@ -122,11 +122,11 @@ const Footer = () => {
                             <Link 
                                 href="/privacy" 
                                 sx={{ 
-                                    color: '#aaa',
+                                    color: 'var(--muted-text)',
                                     textDecoration: 'none',
-                                    transition: 'color 0.3s',
+                                    transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                     '&:hover': {
-                                        color: darkMode ? '#ffcc00' : '#007fff',
+                                        color: 'var(--accent-color)',
                                     },
                                 }}
                             >
@@ -135,11 +135,11 @@ const Footer = () => {
                             <Link 
                                 href="/disclaimer" 
                                 sx={{ 
-                                    color: '#aaa',
+                                    color: 'var(--muted-text)',
                                     textDecoration: 'none',
-                                    transition: 'color 0.3s',
+                                    transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                     '&:hover': {
-                                        color: darkMode ? '#ffcc00' : '#007fff',
+                                        color: 'var(--accent-color)',
                                     },
                                 }}
                             >
@@ -148,11 +148,11 @@ const Footer = () => {
                             <Link 
                                 href="/cookie-policy" 
                                 sx={{ 
-                                    color: '#aaa',
+                                    color: 'var(--muted-text)',
                                     textDecoration: 'none',
-                                    transition: 'color 0.3s',
+                                    transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                     '&:hover': {
-                                        color: darkMode ? '#ffcc00' : '#007fff',
+                                        color: 'var(--accent-color)',
                                     },
                                 }}
                             >
@@ -167,7 +167,7 @@ const Footer = () => {
                             sx={{ 
                                 fontWeight: 600, 
                                 mb: 3,
-                                color: darkMode ? '#ffcc00' : '#007fff',
+                                color: 'var(--accent-color)',
                             }}
                         >
                             Contact Me
@@ -176,7 +176,7 @@ const Footer = () => {
                             <Typography 
                                 variant="body2" 
                                 sx={{ 
-                                    color: '#aaa',
+                                    color: 'var(--muted-text)',
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: 1,
@@ -185,11 +185,11 @@ const Footer = () => {
                                 📧 <Link 
                                     href="mailto:rsravan40@gmail.com" 
                                     sx={{ 
-                                        color: '#aaa',
+                                        color: 'var(--muted-text)',
                                         textDecoration: 'none',
-                                        transition: 'color 0.3s',
+                                        transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                         '&:hover': {
-                                            color: darkMode ? '#ffcc00' : '#007fff',
+                                            color: 'var(--accent-color)',
                                         },
                                     }}
                                 >
@@ -199,7 +199,7 @@ const Footer = () => {
                             <Typography 
                                 variant="body2" 
                                 sx={{ 
-                                    color: '#aaa',
+                                    color: 'var(--muted-text)',
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: 1,
@@ -208,11 +208,11 @@ const Footer = () => {
                                 📱 <Link 
                                     href="tel:+91-7661824166" 
                                     sx={{ 
-                                        color: '#aaa',
+                                        color: 'var(--muted-text)',
                                         textDecoration: 'none',
-                                        transition: 'color 0.3s',
+                                        transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                         '&:hover': {
-                                            color: darkMode ? '#ffcc00' : '#007fff',
+                                            color: 'var(--accent-color)',
                                         },
                                     }}
                                 >
@@ -228,7 +228,7 @@ const Footer = () => {
                         textAlign: 'center',
                         mt: 6,
                         pt: 4,
-                        borderTop: `1px solid ${darkMode ? '#333' : '#2a2a2a'}`,
+                        borderTop: `1px solid var(--border-color)`,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
@@ -238,7 +238,7 @@ const Footer = () => {
                     <Typography
                         variant="body2"
                         sx={{
-                            color: '#888',
+                            color: 'var(--muted-text)',
                         }}
                     >
                         © {new Date().getFullYear()} Shravan Rasamalla. All rights reserved.
@@ -247,7 +247,7 @@ const Footer = () => {
                         <Typography
                             variant="body2"
                             sx={{
-                                color: '#888',
+                                color: 'var(--muted-text)',
                                 fontSize: '0.875rem',
                                 display: 'flex',
                                 alignItems: 'center',

@@ -1,28 +1,55 @@
 :root {
-    --bg-color: #0c0c0c;
-    --primary-color: #0d0d0d;
+    /* Dark Mode Colors */
+    --bg-primary: #0a0e27;
+    --bg-secondary: #1a1f3a;
+    --bg-tertiary: #252d48;
+    --primary-color: #0a0e27;
     --secondary-color: #fff;
-    --text-color: #fff;
+    --accent-color: #00d4ff;
+    --accent-alt: #6366f1;
+    --text-color: #e0e0e0;
     --text-color-2: #fff;
-    --text-color-3: rgb(204, 0, 0);
-    --overlay-color: rgb(12 12 12 / 63%);
+    --text-color-3: #00d4ff;
+    --text-muted: #9ca3af;
+    --overlay-color: rgb(10 14 39 / 85%);
+    --border-color: rgba(0, 212, 255, 0.1);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 [data-theme="light"] {
-    --bg-color: #ffffff;
+    --bg-primary: #f8f9ff;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f3f4f6;
     --primary-color: #ffffff;
-    --secondary-color: #000;
-    --text-color: #000;
-    --text-color-2: #000;
-    --text-color-3: rgb(204, 0, 0);
-    --overlay-color: rgb(255 255 255 / 70%);
+    --secondary-color: #0a0e27;
+    --accent-color: #0066ff;
+    --accent-alt: #6366f1;
+    --text-color: #333333;
+    --text-color-2: #1f2937;
+    --text-color-3: #0066ff;
+    --text-muted: #6b7280;
+    --overlay-color: rgb(248 249 255 / 85%);
+    --border-color: rgba(0, 102, 255, 0.1);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.12);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html,
 body {
     height: 100%;
-      font-family: 'Poppins', sans-serif !important;
-
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    background-color: var(--bg-primary);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
@@ -30,4 +57,30 @@ body {
     height: 100%;
     overflow-x: hidden;
     overflow-y: visible;
+    line-height: 1.6;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 5px;
+    opacity: 0.7;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-alt);
+}
+
+/* Text Selection */
+::selection {
+    background-color: var(--accent-color);
+    color: var(--bg-primary);
 }

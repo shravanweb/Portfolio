@@ -9,9 +9,9 @@ const ContactPage = () => {
     return (
         <Box
             sx={{
-                padding: { xs: '60px 20px', md: '100px 40px' },
-                backgroundColor: darkMode ? '#0a0a0a' : '#ffffff',
-                color: darkMode ? '#fff' : '#333',
+                padding: { xs: '60px 20px', md: '120px 40px' },
+                backgroundColor: darkMode ? 'var(--bg-primary)' : 'var(--bg-secondary)',
+                color: 'var(--text-color)',
                 minHeight: '100vh',
             }}
         >
@@ -20,13 +20,13 @@ const ContactPage = () => {
                     variant="h2"
                     component="h1"
                     sx={{
-                        fontWeight: 700,
-                        fontSize: { xs: '2rem', md: '3rem' },
-                        mb: 4,
+                        fontWeight: 900,
+                        fontSize: { xs: '2.5rem', md: '3.5rem' },
+                        mb: 2,
                         textAlign: 'center',
                         background: darkMode 
-                            ? 'linear-gradient(135deg, #ffffff 0%, #ffcc00 100%)'
-                            : 'linear-gradient(135deg, #007fff 0%, #005fbb 100%)',
+                            ? 'linear-gradient(135deg, var(--accent-color) 0%, #6366f1 100%)'
+                            : 'linear-gradient(135deg, var(--accent-color) 0%, #6366f1 100%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                         backgroundClip: 'text',
@@ -40,7 +40,7 @@ const ContactPage = () => {
                     sx={{ 
                         mb: 6, 
                         textAlign: 'center',
-                        color: darkMode ? '#e0e0e0' : '#555', 
+                        color: 'var(--muted-text)', 
                         lineHeight: 1.9,
                         fontSize: '1.1rem',
                     }}
@@ -55,28 +55,30 @@ const ContactPage = () => {
                             sx={{
                                 p: 4,
                                 borderRadius: '20px',
-                                backgroundColor: darkMode ? '#1e1e1e' : '#f8f9fa',
-                                border: `2px solid ${darkMode ? 'rgba(255, 204, 0, 0.1)' : 'rgba(0, 127, 255, 0.1)'}`,
+                                backgroundColor: darkMode ? 'var(--bg-secondary)' : 'var(--bg-secondary)',
+                                border: `1px solid var(--border-color)`,
                                 height: '100%',
+                                boxShadow: 'var(--shadow-lg)',
                             }}
                         >
-                            <Typography variant="h5" sx={{ mb: 3, color: darkMode ? '#ffcc00' : '#007fff', fontWeight: 600 }}>
+                            <Typography variant="h5" sx={{ mb: 3, color: 'var(--accent-color)', fontWeight: 600 }}>
                                 Contact Information
                             </Typography>
                             
                             <Box sx={{ mb: 3 }}>
-                                <Typography variant="body2" sx={{ mb: 1, color: darkMode ? '#888' : '#666', fontWeight: 600 }}>
+                                <Typography variant="body2" sx={{ mb: 1, color: 'var(--muted-text)', fontWeight: 600 }}>
                                     Email Address
                                 </Typography>
                                 <Typography variant="body1" sx={{ mb: 2 }}>
                                     <Link 
                                         href="mailto:rsravan40@gmail.com" 
                                         sx={{ 
-                                            color: darkMode ? '#ffcc00' : '#007fff',
+                                            color: 'var(--accent-color)',
                                             textDecoration: 'none',
                                             fontSize: '1.1rem',
+                                            transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                             '&:hover': {
-                                                textDecoration: 'underline',
+                                                color: '#6366f1',
                                             },
                                         }}
                                     >
@@ -85,21 +87,22 @@ const ContactPage = () => {
                                 </Typography>
                             </Box>
 
-                            <Divider sx={{ my: 3, borderColor: darkMode ? '#333' : '#e0e0e0' }} />
+                            <Divider sx={{ my: 3, borderColor: 'var(--border-color)' }} />
 
                             <Box sx={{ mb: 3 }}>
-                                <Typography variant="body2" sx={{ mb: 1, color: darkMode ? '#888' : '#666', fontWeight: 600 }}>
+                                <Typography variant="body2" sx={{ mb: 1, color: 'var(--muted-text)', fontWeight: 600 }}>
                                     Phone Number
                                 </Typography>
                                 <Typography variant="body1" sx={{ mb: 2 }}>
                                     <Link 
                                         href="tel:+91-7661824166" 
                                         sx={{ 
-                                            color: darkMode ? '#ffcc00' : '#007fff',
+                                            color: 'var(--accent-color)',
                                             textDecoration: 'none',
                                             fontSize: '1.1rem',
+                                            transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                             '&:hover': {
-                                                textDecoration: 'underline',
+                                                color: '#6366f1',
                                             },
                                         }}
                                     >
@@ -108,21 +111,21 @@ const ContactPage = () => {
                                 </Typography>
                             </Box>
 
-                            <Divider sx={{ my: 3, borderColor: darkMode ? '#333' : '#e0e0e0' }} />
+                            <Divider sx={{ my: 3, borderColor: 'var(--border-color)' }} />
 
                             <Box sx={{ mb: 3 }}>
-                                <Typography variant="body2" sx={{ mb: 1, color: darkMode ? '#888' : '#666', fontWeight: 600 }}>
+                                <Typography variant="body2" sx={{ mb: 1, color: 'var(--muted-text)', fontWeight: 600 }}>
                                     Location
                                 </Typography>
-                                <Typography variant="body1" sx={{ color: darkMode ? '#e0e0e0' : '#555', fontSize: '1.1rem' }}>
+                                <Typography variant="body1" sx={{ color: 'var(--text-color)', fontSize: '1.1rem' }}>
                                     India
                                 </Typography>
                             </Box>
 
-                            <Divider sx={{ my: 3, borderColor: darkMode ? '#333' : '#e0e0e0' }} />
+                            <Divider sx={{ my: 3, borderColor: 'var(--border-color)' }} />
 
                             <Box>
-                                <Typography variant="body2" sx={{ mb: 2, color: darkMode ? '#888' : '#666', fontWeight: 600 }}>
+                                <Typography variant="body2" sx={{ mb: 2, color: 'var(--muted-text)', fontWeight: 600 }}>
                                     Social Media
                                 </Typography>
                                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
@@ -131,10 +134,11 @@ const ContactPage = () => {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         sx={{ 
-                                            color: darkMode ? '#ffcc00' : '#007fff',
+                                            color: 'var(--accent-color)',
                                             textDecoration: 'none',
+                                            transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                             '&:hover': {
-                                                textDecoration: 'underline',
+                                                color: '#6366f1',
                                             },
                                         }}
                                     >
@@ -145,10 +149,11 @@ const ContactPage = () => {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         sx={{ 
-                                            color: darkMode ? '#ffcc00' : '#007fff',
+                                            color: 'var(--accent-color)',
                                             textDecoration: 'none',
+                                            transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                             '&:hover': {
-                                                textDecoration: 'underline',
+                                                color: '#6366f1',
                                             },
                                         }}
                                     >
@@ -159,10 +164,11 @@ const ContactPage = () => {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         sx={{ 
-                                            color: darkMode ? '#ffcc00' : '#007fff',
+                                            color: 'var(--accent-color)',
                                             textDecoration: 'none',
+                                            transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                             '&:hover': {
-                                                textDecoration: 'underline',
+                                                color: '#6366f1',
                                             },
                                         }}
                                     >
@@ -179,21 +185,22 @@ const ContactPage = () => {
                             sx={{
                                 p: 4,
                                 borderRadius: '20px',
-                                backgroundColor: darkMode ? '#1e1e1e' : '#f8f9fa',
-                                border: `2px solid ${darkMode ? 'rgba(255, 204, 0, 0.1)' : 'rgba(0, 127, 255, 0.1)'}`,
+                                backgroundColor: darkMode ? 'var(--bg-secondary)' : 'var(--bg-secondary)',
+                                border: `1px solid var(--border-color)`,
                                 height: '100%',
+                                boxShadow: 'var(--shadow-lg)',
                             }}
                         >
-                            <Typography variant="h5" sx={{ mb: 3, color: darkMode ? '#ffcc00' : '#007fff', fontWeight: 600 }}>
+                            <Typography variant="h5" sx={{ mb: 3, color: 'var(--accent-color)', fontWeight: 600 }}>
                                 Get in Touch
                             </Typography>
                             
-                            <Typography variant="body1" sx={{ mb: 3, color: darkMode ? '#e0e0e0' : '#555', lineHeight: 1.9 }}>
+                            <Typography variant="body1" sx={{ mb: 3, color: 'var(--text-color)', lineHeight: 1.9 }}>
                                 I'm available for freelance projects, full-time opportunities, and collaborations. Feel free to reach out through any of the contact methods listed.
                             </Typography>
 
                             <Box sx={{ mb: 3 }}>
-                                <Typography variant="body2" sx={{ mb: 1, color: darkMode ? '#888' : '#666', fontWeight: 600 }}>
+                                <Typography variant="body2" sx={{ mb: 1, color: 'var(--muted-text)', fontWeight: 600 }}>
                                     Response Time
                                 </Typography>
                                 <Typography variant="body1" sx={{ color: darkMode ? '#e0e0e0' : '#555' }}>

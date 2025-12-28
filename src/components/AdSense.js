@@ -2,17 +2,55 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { useThemeToggle } from '../app/ThemeToggleProvider';
 
-const AdSense = ({ adSlot, adFormat = 'auto', fullWidthResponsive = true, style = {} }) => {
+const AdSense = ({ 
+  adSlot, 
+  adFormat = 'auto', 
+  fullWidthResponsive = true, 
+  style = {},
+  requireMinContent = true // New: Only show ads if there's sufficient page content
+}) => {
   const adRef = useRef(null);
   const pushedRef = useRef(false);
   const [scriptLoaded, setScriptLoaded] = useState(false);
   const [adStatus, setAdStatus] = useState('loading');
+  const [hasMinContent, setHasMinContent] = useState(true);
   const { darkMode } = useThemeToggle();
   // Use client ID from HTML script or env variable
   const clientId = process.env.REACT_APP_ADSENSE_CLIENT_ID || 'ca-pub-6696519751206944';
 
+  // Check if page has sufficient content for ads (AdSense policy compliance)
+  useEffect(() => {
+    if (!requireMinContent) {
+      setHasMinContent(true);
+      return;
+    }
+
+    const checkContentLength = () => {
+      // Get main content area (exclude header, footer, nav)
+      const main = document.querySelector('main') || document.querySelector('[role="main"]') || document.body;
+      const textContent = main?.innerText || '';
+      const wordCount = textContent.split(/\s+/).filter(word => word.length > 0).length;
+      
+      // Require at least 300 words of content for ads (Google AdSense best practices)
+      const hasEnoughContent = wordCount >= 300;
+      setHasMinContent(hasEnoughContent);
+      
+      if (!hasEnoughContent) {
+        console.warn(`⚠️ Page has insufficient content (${wordCount} words). Minimum 300 words recommended for AdSense.`);
+      }
+    };
+
+    // Check immediately and after content loads
+    checkContentLength();
+    const timer = setTimeout(checkContentLength, 500);
+
+    return () => clearTimeout(timer);
+  }, [requireMinContent]);
+
   // Load AdSense script dynamically if not already loaded
   useEffect(() => {
+    if (!hasMinContent) return; // Don't load script if content requirement not met
+
     const checkScript = () => {
       if (window.adsbygoogle) {
         setScriptLoaded(true);
@@ -70,7 +108,7 @@ const AdSense = ({ adSlot, adFormat = 'auto', fullWidthResponsive = true, style 
     return () => {
       clearInterval(interval);
     };
-  }, [clientId]);
+  }, [clientId, hasMinContent]);
 
   // Monitor ad status
   useEffect(() => {
@@ -155,6 +193,44 @@ const AdSense = ({ adSlot, adFormat = 'auto', fullWidthResponsive = true, style 
   // Show debug info in development
   const isDevelopment = process.env.NODE_ENV === 'development';
   const showPlaceholder = isDevelopment && (adStatus === 'loading' || adStatus === 'unfilled' || adStatus === 'error');
+
+  // Don't render ads if content requirement not met
+  if (!hasMinContent) {
+    if (isDevelopment) {
+      return (
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            margin: '40px 0',
+            minHeight: '100px',
+            width: '100%',
+            position: 'relative',
+            border: '2px dashed rgba(255, 100, 100, 0.3)',
+            borderRadius: '8px',
+            backgroundColor: 'rgba(255, 100, 100, 0.05)',
+            padding: '20px',
+            ...style,
+          }}
+        >
+          <Typography
+            variant="caption"
+            sx={{
+              color: '#ff6464',
+              fontSize: '0.85rem',
+              fontWeight: 500,
+              textAlign: 'center',
+            }}
+          >
+            ⚠️ AdSense Disabled: Page doesn't meet minimum content requirement (300+ words)
+          </Typography>
+        </Box>
+      );
+    }
+    return null;
+  }
 
   return (
     <Box
