@@ -1,144 +1,113 @@
-const logotext = "JOHN";
+const logotext = "SHRAVAN";
 const meta = {
-    title: "John Doe",
-    description: "I’m John Doe data scientist _ Full stack devloper,currently working in Berlin",
+    title: "Rasamalla Shravan",
+    description: "I’m Rasamalla Shravan, a Frontend Developer and UI Designer, currently working in India.",
 };
 
 const introdata = {
-    title: "I’m John Doe",
+    title: "I’m Rasamalla Shravan",
     animated: {
         first: "I love coding",
         second: "I code cool websites",
-        third: "I develop mobile apps",
+        third: "I develop interactive apps",
     },
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum",
+    description: "Experienced Frontend Developer with a passion for creating visually stunning and user-friendly web applications. Specializing in React, JavaScript, and modern web technologies.",
     your_img_url: "https://images.unsplash.com/photo-1514790193030-c89d266d5a9d",
 };
 
 const dataabout = {
-    title: "abit about my self",
-    aboutme: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis dolor id ligula semper elementum feugiat pretium nulla. Nunc non commodo dolor. Nunc mollis dignissim facilisis. Morbi ut magna ultricies.",
+    title: "About Me",
+    aboutme: "I am a passionate Frontend Developer and UI Designer with over 7 years of experience. I specialize in building responsive, high-performance web applications using React, JavaScript, and modern CSS frameworks. My goal is to create digital experiences that are not only functional but also visually appealing and user-centric.",
 };
 const worktimeline = [{
-        jobtitle: "Designer of week",
-        where: "YAdfi",
-        date: "2020",
+        jobtitle: "Frontend Developer",
+        where: "Tech Company",
+        date: "2023 - Present",
     },
     {
-        jobtitle: "Designer of week",
-        where: "Jamalya",
-        date: "2019",
+        jobtitle: "UI Designer",
+        where: "Creative Studio",
+        date: "2021 - 2023",
     },
     {
-        jobtitle: "Designer of week",
-        where: "ALquds",
-        date: "2019",
+        jobtitle: "Web Developer",
+        where: "Digital Agency",
+        date: "2019 - 2021",
     },
 ];
 
 const skills = [{
-        name: "Python",
+        name: "React",
         value: 90,
     },
     {
-        name: "Djano",
+        name: "JavaScript",
         value: 85,
     },
     {
-        name: "Javascript",
+        name: "HTML/CSS",
+        value: 95,
+    },
+    {
+        name: "UI Design",
         value: 80,
     },
     {
-        name: "React",
-        value: 60,
-    },
-    {
-        name: "Jquery",
-        value: 85,
+        name: "Node.js",
+        value: 70,
     },
 ];
 
 const services = [{
-        title: "UI & UX Design",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum sollicitudin.",
+        title: "Website Design",
+        description: "Creating responsive and modern website designs that look great on all devices.",
     },
     {
-        title: "Mobile Apps",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum sollicitudin.",
+        title: "Frontend Development",
+        description: "Building interactive and high-performance web applications using React and modern JavaScript.",
     },
     {
-        title: "Wordpress Design",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum sollicitudin.",
+        title: "UI/UX Consultations",
+        description: " improving user interface and user experience for existing applications.",
     },
 ];
 
 const dataportfolio = [{
         img: "https://picsum.photos/400/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
+        description: "A modern web application built with React.",
         link: "#",
     },
     {
         img: "https://picsum.photos/400/800/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
+        description: "E-commerce platform with seamless checkout experience.",
         link: "#",
     },
     {
         img: "https://picsum.photos/400/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
+        description: "Portfolio website for a creative professional.",
         link: "#",
     },
     {
         img: "https://picsum.photos/400/600/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
+        description: "Social media dashboard with real-time analytics.",
         link: "#",
     },
     {
         img: "https://picsum.photos/400/300/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
+        description: "Interactive landing page for a mobile app.",
         link: "#",
     },
     {
         img: "https://picsum.photos/400/700/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-
-    {
-        img: "https://picsum.photos/400/600/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-    {
-        img: "https://picsum.photos/400/300/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-    {
-        img: "https://picsum.photos/400/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-    {
-        img: "https://picsum.photos/400/550/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-    {
-        img: "https://picsum.photos/400/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-    {
-        img: "https://picsum.photos/400/700/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
+        description: "Corporate website redesign for a financial firm.",
         link: "#",
     },
 ];
 
 const contactConfig = {
-    YOUR_EMAIL: "name@domain.com",
-    YOUR_FONE: "(555)123-4567",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vehicula eu nunc et sollicitudin. Cras pulvinar, nisi at imperdiet pharetra. ",
+    YOUR_EMAIL: "rsravan40@gmail.com",
+    YOUR_FONE: "+91-7661824166",
+    description: "Feel free to reach out for collaborations or just a friendly hello.",
     // creat an emailjs.com account 
     // check out this tutorial https://www.emailjs.com/docs/examples/reactjs/
     YOUR_SERVICE_ID: "service_id",
@@ -147,9 +116,9 @@ const contactConfig = {
 };
 
 const socialprofils = {
-    github: "https://github.com",
+    github: "https://github.com/shravanweb",
     facebook: "https://facebook.com",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/in/shravan-rasamalla/",
     twitter: "https://twitter.com",
 };
 export {

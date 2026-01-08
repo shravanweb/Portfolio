@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, Grid, Card, CardContent, CardMedia, Container } from '@mui/material';
 import { useThemeToggle } from '../app/ThemeToggleProvider';
 import AdSense from '../components/AdSense';
+import { motion } from 'framer-motion';
 
 const services = [
     {
@@ -15,7 +16,7 @@ const services = [
         title: 'Logo Design',
         description: 'Crafting memorable and impactful logos that represent your brand identity and resonate with your audience. Each design is unique, scalable, and perfectly aligned with your brand vision. A great logo tells your brand story at a glance.',
         detailedDescription: 'Expert logo design that captures your brand essence. I work closely with you to understand your vision and values, creating logos that stand the test of time. Whether you need a modern minimalist design or something more elaborate, I deliver professional branding solutions.',
-        imageUrl: 'https://plus.unsplash.com/premium_photo-1661770132071-026114fffb61?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        imageUrl: 'https://plus.unsplash.com/premium_photo-1661770132071-026114fffb61?q=80&w=2070&auto=format&fit=crop',
         icon: '🎨',
     },
     {
@@ -30,25 +31,56 @@ const services = [
 const ServicesSection = () => {
     const { darkMode } = useThemeToggle();
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2
+            }
+        }
+    };
+
+    const cardVariants = {
+        hidden: { opacity: 0, scale: 0.95 },
+        visible: {
+            opacity: 1,
+            scale: 1,
+            transition: {
+                type: "spring",
+                stiffness: 100,
+                damping: 15
+            }
+        }
+    };
+
     return (
         <Box
             sx={{
-                py: { xs: 8, md: 12 },
+                py: { xs: 8, md: 14 },
                 backgroundColor: darkMode ? 'var(--bg-primary)' : 'var(--bg-primary)',
                 color: darkMode ? 'var(--text-color)' : 'var(--text-color)',
                 position: 'relative',
             }}
+            id="services"
         >
             <Container maxWidth="lg">
-                <Box sx={{ textAlign: 'center', mb: 10 }}>
+                <Box
+                    component={motion.div}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
+                    sx={{ textAlign: 'center', mb: 12 }}
+                >
                     <Typography
                         variant="h2"
                         component="h2"
                         sx={{
                             fontWeight: 900,
-                            fontSize: { xs: '2rem', md: '3.5rem' },
+                            fontSize: { xs: '2.5rem', md: '4rem' },
                             mb: 2,
-                            background: darkMode 
+                            background: darkMode
                                 ? 'linear-gradient(135deg, #00d4ff 0%, #0066ff 100%)'
                                 : 'linear-gradient(135deg, #0066ff 0%, #6366f1 100%)',
                             WebkitBackgroundClip: 'text',
@@ -63,7 +95,7 @@ const ServicesSection = () => {
                         sx={{
                             width: '80px',
                             height: '4px',
-                            background: darkMode 
+                            background: darkMode
                                 ? 'linear-gradient(90deg, #00d4ff, #0066ff)'
                                 : 'linear-gradient(90deg, #0066ff, #6366f1)',
                             margin: '0 auto',
@@ -76,8 +108,10 @@ const ServicesSection = () => {
                         sx={{
                             color: 'var(--text-muted)',
                             fontWeight: 400,
-                            fontSize: '1.1rem',
+                            fontSize: '1.2rem',
                             mb: 6,
+                            maxWidth: '700px',
+                            margin: '0 auto',
                         }}
                     >
                         Comprehensive design and development solutions tailored to bring your vision to life. With years of experience and a portfolio of successful projects, I deliver quality results that exceed expectations.
@@ -85,58 +119,96 @@ const ServicesSection = () => {
                 </Box>
 
                 {/* AdSense Ad Unit */}
-                <Box sx={{ mb: 4, mt: 2 }}>
+                <Box sx={{ mb: 8 }}>
                     <AdSense adFormat="auto" requireMinContent={true} />
                 </Box>
 
-                <Grid container spacing={4}>
+                <Grid
+                    container
+                    spacing={4}
+                    component={motion.div}
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                >
                     {services.map((service, index) => (
-                        <Grid item xs={12} sm={6} md={4} key={index}>
+                        <Grid
+                            item
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            key={index}
+                            component={motion.div}
+                            variants={cardVariants}
+                        >
                             <Card
                                 sx={{
                                     height: '100%',
-                                    borderRadius: '20px',
+                                    borderRadius: '24px',
                                     overflow: 'hidden',
-                                    backgroundColor: darkMode ? 'var(--bg-secondary)' : 'var(--bg-secondary)',
-                                    border: `1px solid var(--border-color)`,
-                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                    backgroundColor: darkMode ? 'rgba(255, 255, 255, 0.03)' : '#ffffff',
+                                    backdropFilter: 'blur(10px)',
+                                    border: `1px solid ${darkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)'}`,
+                                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    boxShadow: darkMode ? 'none' : '0 10px 40px rgba(0,0,0,0.05)',
                                     '&:hover': {
                                         transform: 'translateY(-12px)',
-                                        boxShadow: 'var(--shadow-lg)',
+                                        boxShadow: darkMode
+                                            ? '0 20px 40px rgba(0,0,0,0.4)'
+                                            : '0 30px 60px rgba(0,0,0,0.12)',
                                         borderColor: darkMode ? 'var(--accent-color)' : 'var(--accent-color)',
                                     },
                                 }}
                             >
-                                <CardMedia
-                                    component="img"
-                                    height="240"
-                                    image={service.imageUrl}
-                                    alt={service.title}
-                                    sx={{
-                                        objectFit: 'cover',
-                                        filter: darkMode ? 'brightness(0.7)' : 'brightness(0.95)',
-                                    }}
-                                />
-                                <CardContent sx={{ p: 4 }}>
-                                    <Typography
-                                        variant="h4"
+                                <Box sx={{ position: 'relative', overflow: 'hidden' }}>
+                                    <CardMedia
+                                        component="img"
+                                        height="220"
+                                        image={service.imageUrl}
+                                        alt={service.title}
                                         sx={{
-                                            fontSize: '3rem',
-                                            mb: 2,
-                                            textAlign: 'center',
+                                            objectFit: 'cover',
+                                            filter: darkMode ? 'brightness(0.85)' : 'brightness(0.95)',
+                                            transition: 'transform 0.6s ease',
+                                            '&:hover': {
+                                                transform: 'scale(1.1)',
+                                            },
+                                        }}
+                                    />
+                                    <Box
+                                        sx={{
+                                            position: 'absolute',
+                                            bottom: '-30px',
+                                            left: '50%',
+                                            transform: 'translateX(-50%)',
+                                            width: '60px',
+                                            height: '60px',
+                                            borderRadius: '50%',
+                                            backgroundColor: darkMode ? '#1a1f3a' : '#fff',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '2rem',
+                                            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                                            zIndex: 2,
                                         }}
                                     >
                                         {service.icon}
-                                    </Typography>
+                                    </Box>
+                                </Box>
+                                <CardContent sx={{ p: 4, pt: 5, flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                     <Typography
                                         variant="h5"
                                         component="div"
                                         sx={{
-                                            fontWeight: 800,
+                                            fontWeight: 700,
                                             mb: 2,
-                                            color: darkMode ? 'var(--accent-color)' : 'var(--accent-color)',
+                                            color: darkMode ? '#fff' : '#1a1a1a',
                                             textAlign: 'center',
-                                            fontSize: '1.3rem',
+                                            fontSize: '1.4rem',
                                         }}
                                     >
                                         {service.title}
@@ -144,11 +216,12 @@ const ServicesSection = () => {
                                     <Typography
                                         variant="body2"
                                         sx={{
-                                            color: 'var(--text-color)',
-                                            lineHeight: 1.8,
+                                            color: 'var(--text-muted)',
+                                            lineHeight: 1.7,
                                             textAlign: 'center',
-                                            mb: 2,
-                                            fontWeight: 500,
+                                            mb: 3,
+                                            fontWeight: 400,
+                                            fontSize: '0.95rem',
                                         }}
                                     >
                                         {service.description}
@@ -156,10 +229,11 @@ const ServicesSection = () => {
                                     <Typography
                                         variant="body2"
                                         sx={{
-                                            color: 'var(--text-muted)',
-                                            lineHeight: 1.7,
+                                            color: darkMode ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)',
+                                            lineHeight: 1.6,
                                             textAlign: 'center',
                                             fontSize: '0.9rem',
+                                            mt: 'auto',
                                         }}
                                     >
                                         {service.detailedDescription}
