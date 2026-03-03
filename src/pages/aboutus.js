@@ -1,215 +1,226 @@
-import { Box, Grid, Typography, Container } from '@mui/material';
+import { Box, Grid, Typography, Container, Stack, Button } from '@mui/material';
 import React from 'react';
 import { useThemeToggle } from '../app/ThemeToggleProvider';
-import Pic from "../assets/images/pic.png";
-import AdSense from '../components/AdSense';
+import { HiOutlineDownload, HiOutlineLightningBolt } from 'react-icons/hi';
 import { motion } from 'framer-motion';
+
+const Pic = "/img.png";
 
 const Aboutus = () => {
     const { darkMode } = useThemeToggle();
 
+    const stats = [
+        { label: 'Years Experience', value: '7+', icon: <HiOutlineLightningBolt /> },
+        { label: 'Successful Projects', value: '50+', icon: <HiOutlineLightningBolt /> },
+        { label: 'Industry Partners', value: '12+', icon: <HiOutlineLightningBolt /> },
+    ];
+
     return (
         <Box
+            id="about"
             sx={{
-                padding: { xs: '80px 20px', md: '140px 40px' },
-                backgroundColor: darkMode ? 'var(--bg-primary)' : 'var(--bg-primary)',
+                py: { xs: 8, md: 16 },
+                backgroundColor: 'transparent',
                 color: 'var(--text-color)',
                 position: 'relative',
                 overflow: 'hidden',
-                zIndex: 2,
             }}
-            id="about"
         >
             <Container maxWidth="lg">
-                <Box
-                    component={motion.div}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
-                    sx={{
-                        textAlign: 'center',
-                        mb: 12,
-                    }}
-                >
-                    <Typography
-                        variant="h2"
-                        component="h2"
-                        sx={{
-                            fontWeight: 900,
-                            fontSize: { xs: '2.5rem', md: '4rem' },
-                            mb: 2,
-                            background: darkMode
-                                ? 'linear-gradient(135deg, #00d4ff 0%, #0066ff 100%)'
-                                : 'linear-gradient(135deg, #0066ff 0%, #6366f1 100%)',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
-                            backgroundClip: 'text',
-                            letterSpacing: '-1.5px',
-                        }}
-                    >
-                        About Me
-                    </Typography>
-                    <Box
-                        component={motion.div}
-                        initial={{ width: 0 }}
-                        whileInView={{ width: '80px' }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        sx={{
-                            height: '6px',
-                            background: darkMode
-                                ? 'linear-gradient(90deg, #00d4ff, #0066ff)'
-                                : 'linear-gradient(90deg, #0066ff, #6366f1)',
-                            margin: '0 auto',
-                            borderRadius: '3px',
-                            mb: 4,
-                        }}
-                    />
-                    <Typography
-                        variant="h6"
-                        sx={{
-                            color: 'var(--text-muted)',
-                            fontWeight: 400,
-                            fontSize: '1.2rem',
-                            maxWidth: '600px',
-                            margin: '0 auto',
-                        }}
-                    >
-                        My journey, passion, and expertise in the digital world
-                    </Typography>
-                </Box>
-
-                <Grid container spacing={8} alignItems="center">
+                <Grid container spacing={{ xs: 6, md: 12 }} alignItems="center">
                     <Grid item xs={12} md={5}>
-                        <Box
-                            component={motion.div}
-                            initial={{ opacity: 0, x: -50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8 }}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
                             viewport={{ once: true }}
-                            sx={{
-                                position: 'relative',
-                                '&::before': {
-                                    content: '""',
-                                    position: 'absolute',
-                                    top: '20px',
-                                    left: '-20px',
-                                    right: '20px',
-                                    bottom: '-20px',
-                                    border: `2px solid ${darkMode ? 'rgba(0, 212, 255, 0.3)' : 'rgba(0, 102, 255, 0.1)'}`,
-                                    borderRadius: '30px',
-                                    zIndex: 0,
-                                    transition: 'transform 0.3s ease',
-                                },
-                                '&:hover::before': {
-                                    transform: 'translate(-10px, 10px)',
-                                }
-                            }}
                         >
                             <Box
-                                component="img"
-                                src={Pic}
-                                alt="Rasamalla Shravan"
                                 sx={{
-                                    width: '100%',
-                                    height: 'auto',
-                                    borderRadius: '30px',
-                                    boxShadow: '0 20px 60px rgba(0,0,0,0.2)',
                                     position: 'relative',
                                     zIndex: 1,
-                                    transition: 'transform 0.5s ease',
-                                    filter: 'grayscale(20%)',
-                                    '&:hover': {
-                                        transform: 'scale(1.02)',
-                                        filter: 'grayscale(0%)',
-                                    },
+                                    '&::after': {
+                                        content: '""',
+                                        position: 'absolute',
+                                        inset: '-20px',
+                                        border: '2px solid var(--accent-color)',
+                                        borderRadius: '40px',
+                                        opacity: 0.2,
+                                        zIndex: -1,
+                                        animation: 'float 6s ease-in-out infinite'
+                                    }
                                 }}
-                            />
-                        </Box>
+                            >
+                                <Box
+                                    component="img"
+                                    src={Pic}
+                                    alt="Shravan Rasamalla"
+                                    sx={{
+                                        width: '100%',
+                                        height: 'auto',
+                                        borderRadius: '32px',
+                                        filter: darkMode ? 'grayscale(20%) brightness(0.9)' : 'none',
+                                        transition: 'var(--transition-slow)',
+                                        boxShadow: 'var(--shadow-xl)',
+                                        display: 'block',
+                                        '&:hover': {
+                                            filter: 'grayscale(0%) brightness(1)',
+                                            transform: 'translateY(-10px)'
+                                        }
+                                    }}
+                                />
+
+                                <Box
+                                    className="glass-effect"
+                                    sx={{
+                                        position: 'absolute',
+                                        bottom: -30,
+                                        right: -30,
+                                        p: 3,
+                                        borderRadius: '24px',
+                                        display: { xs: 'none', lg: 'block' },
+                                        border: '1px solid var(--border-color)',
+                                        maxWidth: '200px'
+                                    }}
+                                >
+                                    <Typography variant="h6" sx={{ fontWeight: 800, color: 'var(--accent-color)', mb: 0.5 }}>
+                                        Full Stack
+                                    </Typography>
+                                    <Typography variant="caption" sx={{ color: 'var(--text-muted)', fontWeight: 600 }}>
+                                        Specialized in high-performance web architecture.
+                                    </Typography>
+                                </Box>
+                            </Box>
+                        </motion.div>
                     </Grid>
 
                     <Grid item xs={12} md={7}>
                         <Box
                             component={motion.div}
-                            initial={{ opacity: 0, x: 50 }}
+                            initial={{ opacity: 0, x: 30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
                             viewport={{ once: true }}
                         >
                             <Typography
-                                variant="h4"
+                                variant="overline"
                                 sx={{
+                                    color: 'var(--accent-color)',
                                     fontWeight: 800,
+                                    letterSpacing: '3px',
+                                    mb: 2,
+                                    display: 'block'
+                                }}
+                            >
+                                About the Architect
+                            </Typography>
+
+                            <Typography
+                                variant="h2"
+                                className="section-title gradient-text"
+                                sx={{ mb: 4, textAlign: 'left', margin: 0 }}
+                            >
+                                Transforming Vision into Digital Precision
+                            </Typography>
+
+                            <Typography
+                                variant="body1"
+                                sx={{
+                                    color: 'var(--text-muted)',
+                                    fontSize: '1.15rem',
+                                    lineHeight: 1.8,
                                     mb: 4,
-                                    color: darkMode ? '#fff' : '#1a1a1a',
-                                    fontSize: { xs: '1.8rem', md: '2.5rem' },
-                                    lineHeight: 1.2,
+                                    fontWeight: 400
                                 }}
                             >
-                                Transforming ideas into <Box component="span" sx={{ color: 'var(--accent-color)' }}>digital reality</Box>
+                                I am Shravan Rasamalla, a dedicated <strong>Frontend Architect</strong> and
+                                <strong>UI/UX Specialist</strong>. My mission is to bridge the gap between
+                                complex engineering and human-centric design. With over 7 years of deep-diving
+                                into the digital landscape, I've mastered the art of building scalable,
+                                lightning-fast applications that don't just work—they inspire.
                             </Typography>
 
                             <Typography
                                 variant="body1"
                                 sx={{
-                                    lineHeight: 2,
-                                    color: 'var(--text-color)',
-                                    mb: 3,
+                                    color: 'var(--text-muted)',
                                     fontSize: '1.1rem',
-                                    fontWeight: 300,
-                                    letterSpacing: '0.3px',
+                                    lineHeight: 1.8,
+                                    mb: 6,
+                                    fontWeight: 300
                                 }}
                             >
-                                I am a passionate <strong>Frontend Developer</strong> and <strong>UI Designer</strong> with extensive experience in building high-quality web applications. My approach combines technical expertise with creative problem-solving to deliver products that stand out.
+                                My expertise lies in the <strong>React ecosystem</strong>, where I combine
+                                performance optimization with stunning visual aesthetics. I believe every
+                                line of code should contribute to a seamless user journey.
                             </Typography>
 
-                            <Typography
-                                variant="body1"
-                                sx={{
-                                    lineHeight: 2,
-                                    color: 'var(--text-color)',
-                                    mb: 3,
-                                    fontSize: '1.1rem',
-                                    fontWeight: 300,
-                                    letterSpacing: '0.3px',
-                                }}
-                            >
-                                Whether it's crafting pixel-perfect user interfaces, optimizing performance, or ensuring accessibility, I pay attention to every detail. I specialize in the <strong>React ecosystem</strong> and modern CSS frameworks, constantly learning and adapting to the ever-evolving web landscape.
-                            </Typography>
+                            <Grid container spacing={4} sx={{ mb: 6 }}>
+                                {stats.map((stat, index) => (
+                                    <Grid item xs={4} key={index}>
+                                        <Typography variant="h3" sx={{ fontWeight: 900, color: 'var(--text-color-2)', mb: 0.5 }}>
+                                            {stat.value}
+                                        </Typography>
+                                        <Typography variant="caption" sx={{ color: 'var(--accent-color)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px' }}>
+                                            {stat.label}
+                                        </Typography>
+                                    </Grid>
+                                ))}
+                            </Grid>
 
-                            <Typography
-                                variant="body1"
-                                sx={{
-                                    lineHeight: 2,
-                                    color: 'var(--text-color)',
-                                    mb: 4,
-                                    fontSize: '1.1rem',
-                                    fontWeight: 300,
-                                    letterSpacing: '0.3px',
-                                }}
-                            >
-                                Beyond code, I believe in the power of collaboration and clear communication. I treat every project as a partnership, working closely with clients to truly understand their vision and goals.
-                            </Typography>
-
-                            <Box sx={{ display: 'flex', gap: 4 }}>
-                                <Box>
-                                    <Typography variant="h3" sx={{ fontWeight: 900, color: 'var(--accent-color)' }}>7+</Typography>
-                                    <Typography variant="body2" sx={{ opacity: 0.7, textTransform: 'uppercase', letterSpacing: '1px', mt: 1 }}>Years Experience</Typography>
-                                </Box>
-                                <Box>
-                                    <Typography variant="h3" sx={{ fontWeight: 900, color: 'var(--accent-color)' }}>50+</Typography>
-                                    <Typography variant="body2" sx={{ opacity: 0.7, textTransform: 'uppercase', letterSpacing: '1px', mt: 1 }}>Projects Done</Typography>
-                                </Box>
-                            </Box>
+                            <Stack direction="row" spacing={3}>
+                                <Button
+                                    variant="contained"
+                                    startIcon={<HiOutlineDownload />}
+                                    sx={{
+                                        bgcolor: 'var(--text-color-2)',
+                                        color: darkMode ? '#000' : '#fff',
+                                        fontWeight: 800,
+                                        borderRadius: '12px',
+                                        px: 4,
+                                        py: 1.5,
+                                        textTransform: 'none',
+                                        '&:hover': {
+                                            bgcolor: 'var(--accent-color)',
+                                            color: '#000'
+                                        }
+                                    }}
+                                >
+                                    Download CV
+                                </Button>
+                                <Button
+                                    variant="outlined"
+                                    sx={{
+                                        borderColor: 'var(--border-color)',
+                                        color: 'var(--text-color-2)',
+                                        fontWeight: 700,
+                                        borderRadius: '12px',
+                                        px: 4,
+                                        textTransform: 'none',
+                                        '&:hover': {
+                                            borderColor: 'var(--accent-color)',
+                                            color: 'var(--accent-color)',
+                                            bgcolor: 'transparent'
+                                        }
+                                    }}
+                                >
+                                    My Journey
+                                </Button>
+                            </Stack>
                         </Box>
                     </Grid>
                 </Grid>
-
-                {/* AdSense Ad Unit */}
-                <Box sx={{ mt: 10 }}>
-                    <AdSense adFormat="auto" requireMinContent={true} />
-                </Box>
             </Container>
+
+            <style>
+                {`
+                    @keyframes float {
+                        0% { transform: translateY(0px) rotate(0deg); }
+                        50% { transform: translateY(-20px) rotate(2deg); }
+                        100% { transform: translateY(0px) rotate(0deg); }
+                    }
+                `}
+            </style>
         </Box>
     );
 };

@@ -1,41 +1,50 @@
 import React from 'react';
-import { Box, Container, Typography, Grid, Link, Divider } from '@mui/material';
+import { Box, Container, Typography, Grid, Link, Stack, IconButton } from '@mui/material';
 import { useThemeToggle } from '../app/ThemeToggleProvider';
 import Contact from './footer';
 import { motion } from 'framer-motion';
+import { HiOutlineMail, HiOutlinePhone, HiOutlineLocationMarker, HiOutlineGlobeAlt } from 'react-icons/hi';
+import { FaLinkedin, FaGithub, FaBehance, FaTwitter } from 'react-icons/fa';
 
 const ContactPage = () => {
     const { darkMode } = useThemeToggle();
 
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.2
-            }
+    const contactInfo = [
+        {
+            title: 'Email Address',
+            value: 'rsravan40@gmail.com',
+            link: 'mailto:rsravan40@gmail.com',
+            icon: <HiOutlineMail size={28} />,
+            subtitle: 'Direct line for inquiries'
+        },
+        {
+            title: 'Phone Number',
+            value: '+91 76618 24166',
+            link: 'tel:+917661824166',
+            icon: <HiOutlinePhone size={28} />,
+            subtitle: 'Mon-Fri from 9am to 6pm'
+        },
+        {
+            title: 'Office Location',
+            value: 'Hyderabad, India',
+            link: '#',
+            icon: <HiOutlineLocationMarker size={28} />,
+            subtitle: 'Working remotely worldwide'
         }
-    };
+    ];
 
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                type: "spring",
-                stiffness: 100,
-                damping: 10
-            }
-        }
-    };
+    const socialLinks = [
+        { icon: <FaLinkedin size={22} />, url: "https://www.linkedin.com/in/shravan-rasamalla/", label: "LinkedIn" },
+        { icon: <FaGithub size={22} />, url: "https://github.com/shravanweb", label: "GitHub" },
+        { icon: <FaBehance size={22} />, url: "https://www.behance.net/shravanrasamalla", label: "Behance" },
+        { icon: <FaTwitter size={22} />, url: "#", label: "Twitter" }
+    ];
 
     return (
         <Box
             sx={{
-                paddingTop: { xs: '100px', md: '140px' },
-                paddingBottom: '0',
-                backgroundColor: darkMode ? 'var(--bg-primary)' : 'var(--bg-secondary)',
+                paddingTop: { xs: '120px', md: '180px' },
+                backgroundColor: 'transparent',
                 color: 'var(--text-color)',
                 minHeight: '100vh',
                 position: 'relative',
@@ -46,40 +55,29 @@ const ContactPage = () => {
                     component={motion.div}
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    sx={{ textAlign: 'center', mb: 10 }}
+                    transition={{ duration: 0.8 }}
+                    sx={{ textAlign: 'center', mb: { xs: 8, md: 12 } }}
                 >
                     <Typography
-                        variant="h2"
-                        component="h1"
+                        variant="overline"
                         sx={{
-                            fontWeight: 900,
-                            fontSize: { xs: '2.5rem', md: '4rem' },
+                            color: 'var(--accent-color)',
+                            fontWeight: 800,
+                            letterSpacing: '3px',
                             mb: 2,
-                            background: darkMode
-                                ? 'linear-gradient(135deg, #00d4ff 0%, #0066ff 100%)'
-                                : 'linear-gradient(135deg, #0066ff 0%, #6366f1 100%)',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
-                            backgroundClip: 'text',
-                            letterSpacing: '-1.5px',
+                            display: 'block'
                         }}
                     >
-                        Contact Us
+                        Get in Touch
                     </Typography>
 
-                    <Box
-                        sx={{
-                            width: '80px',
-                            height: '4px',
-                            background: darkMode
-                                ? 'linear-gradient(90deg, #00d4ff, #0066ff)'
-                                : 'linear-gradient(90deg, #0066ff, #6366f1)',
-                            margin: '0 auto',
-                            borderRadius: '2px',
-                            mb: 3,
-                        }}
-                    />
+                    <Typography
+                        variant="h2"
+                        className="section-title gradient-text"
+                        sx={{ mb: 3 }}
+                    >
+                        Let's Engineer Something Extraordinary
+                    </Typography>
 
                     <Typography
                         variant="body1"
@@ -89,194 +87,163 @@ const ContactPage = () => {
                             color: 'var(--text-muted)',
                             lineHeight: 1.8,
                             fontSize: '1.2rem',
+                            fontWeight: 300
                         }}
                     >
-                        Get in touch with us. We'd love to hear from you and answer any questions you may have.
+                        Whether you have a groundbreaking idea or a complex engineering challenge,
+                        I'm here to translate your vision into digital excellence.
                     </Typography>
                 </Box>
 
-                <Grid
-                    container
-                    spacing={4}
-                    justifyContent="center"
-                    component={motion.div}
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
-                >
-                    {/* Contact Information */}
-                    <Grid item xs={12} md={6} component={motion.div} variants={itemVariants}>
-                        <Box
-                            sx={{
-                                p: 5,
-                                borderRadius: '24px',
-                                backgroundColor: darkMode ? 'rgba(255, 255, 255, 0.03)' : '#ffffff',
-                                backdropFilter: 'blur(10px)',
-                                border: `1px solid ${darkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)'}`,
-                                height: '100%',
-                                boxShadow: darkMode ? 'none' : '0 10px 40px rgba(0,0,0,0.05)',
-                                transition: 'transform 0.3s ease',
-                                '&:hover': {
-                                    transform: 'translateY(-5px)',
-                                }
-                            }}
-                        >
-                            <Typography variant="h5" sx={{ mb: 4, color: darkMode ? '#fff' : '#1a1a1a', fontWeight: 700 }}>
-                                Contact Information
+                <Grid container spacing={4} sx={{ mb: 12 }}>
+                    {contactInfo.map((info, index) => (
+                        <Grid item xs={12} md={4} key={index}>
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                            >
+                                <Box
+                                    className="glass-effect"
+                                    sx={{
+                                        p: 4,
+                                        height: '100%',
+                                        borderRadius: '24px',
+                                        border: '1px solid var(--border-color)',
+                                        textAlign: 'center',
+                                        transition: 'var(--transition-base)',
+                                        '&:hover': {
+                                            transform: 'translateY(-10px)',
+                                            borderColor: 'var(--accent-color)',
+                                            boxShadow: 'var(--shadow-xl)'
+                                        }
+                                    }}
+                                >
+                                    <Box
+                                        sx={{
+                                            width: '64px',
+                                            height: '64px',
+                                            borderRadius: '16px',
+                                            bgcolor: 'rgba(56, 189, 248, 0.05)',
+                                            color: 'var(--accent-color)',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            margin: '0 auto 24px',
+                                            border: '1px solid rgba(56, 189, 248, 0.1)'
+                                        }}
+                                    >
+                                        {info.icon}
+                                    </Box>
+
+                                    <Typography variant="h6" sx={{ fontWeight: 800, color: 'var(--text-color-2)', mb: 1 }}>
+                                        {info.title}
+                                    </Typography>
+
+                                    <Typography variant="caption" sx={{ color: 'var(--text-muted)', fontWeight: 600, display: 'block', mb: 2 }}>
+                                        {info.subtitle}
+                                    </Typography>
+
+                                    <Link
+                                        href={info.link}
+                                        sx={{
+                                            color: 'var(--text-color)',
+                                            textDecoration: 'none',
+                                            fontWeight: 700,
+                                            fontSize: '1.05rem',
+                                            '&:hover': { color: 'var(--accent-color)' }
+                                        }}
+                                    >
+                                        {info.value}
+                                    </Link>
+                                </Box>
+                            </motion.div>
+                        </Grid>
+                    ))}
+                </Grid>
+
+                <Grid container spacing={8} sx={{ mb: 12 }}>
+                    <Grid item xs={12} md={6}>
+                        <Box sx={{ p: { md: 4 } }}>
+                            <Typography variant="h4" sx={{ fontWeight: 900, color: 'var(--text-color-2)', mb: 3 }}>
+                                Connect Globally
+                            </Typography>
+                            <Typography variant="body1" sx={{ color: 'var(--text-muted)', lineHeight: 1.8, mb: 4, fontWeight: 300 }}>
+                                Digital boundaries don't exist in my workspace. I collaborate with teams
+                                and visionaries across all time zones, ensuring seamless delivery through
+                                robust communication and agile workflows.
                             </Typography>
 
-                            <Box sx={{ mb: 4 }}>
-                                <Typography variant="caption" sx={{ display: 'block', mb: 1, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>
-                                    Email Address
-                                </Typography>
-                                <Typography variant="body1">
-                                    <Link
-                                        href="mailto:rsravan40@gmail.com"
+                            <Stack direction="row" spacing={2}>
+                                {socialLinks.map((social, index) => (
+                                    <IconButton
+                                        key={index}
+                                        href={social.url}
+                                        target="_blank"
                                         sx={{
-                                            color: darkMode ? '#00d4ff' : '#0066ff',
-                                            textDecoration: 'none',
-                                            fontSize: '1.2rem',
-                                            fontWeight: 500,
-                                            transition: 'color 0.3s ease',
-                                            '&:hover': { color: '#6366f1' },
+                                            color: 'var(--text-muted)',
+                                            border: '1px solid var(--border-color)',
+                                            borderRadius: '12px',
+                                            width: '50px',
+                                            height: '50px',
+                                            transition: 'var(--transition-base)',
+                                            '&:hover': {
+                                                color: 'var(--accent-color)',
+                                                borderColor: 'var(--accent-color)',
+                                                bgcolor: 'rgba(56, 189, 248, 0.05)',
+                                                transform: 'translateY(-3px)'
+                                            }
                                         }}
                                     >
-                                        rsravan40@gmail.com
-                                    </Link>
-                                </Typography>
-                            </Box>
-
-                            <Divider sx={{ my: 3, borderColor: darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)' }} />
-
-                            <Box sx={{ mb: 4 }}>
-                                <Typography variant="caption" sx={{ display: 'block', mb: 1, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>
-                                    Phone Number
-                                </Typography>
-                                <Typography variant="body1">
-                                    <Link
-                                        href="tel:+91-7661824166"
-                                        sx={{
-                                            color: darkMode ? '#00d4ff' : '#0066ff',
-                                            textDecoration: 'none',
-                                            fontSize: '1.2rem',
-                                            fontWeight: 500,
-                                            transition: 'color 0.3s ease',
-                                            '&:hover': { color: '#6366f1' },
-                                        }}
-                                    >
-                                        +91-7661824166
-                                    </Link>
-                                </Typography>
-                            </Box>
-
-                            <Divider sx={{ my: 3, borderColor: darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)' }} />
-
-                            <Box sx={{ mb: 4 }}>
-                                <Typography variant="caption" sx={{ display: 'block', mb: 1, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>
-                                    Location
-                                </Typography>
-                                <Typography variant="body1" sx={{ fontSize: '1.2rem' }}>
-                                    India
-                                </Typography>
-                            </Box>
-
-                            <Divider sx={{ my: 3, borderColor: darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)' }} />
-
-                            <Box>
-                                <Typography variant="caption" sx={{ display: 'block', mb: 2, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>
-                                    Social Media
-                                </Typography>
-                                <Box sx={{ display: 'flex', gap: 3 }}>
-                                    {[
-                                        { name: 'LinkedIn', url: 'https://www.linkedin.com/in/shravan-rasamalla/' },
-                                        { name: 'GitHub', url: 'https://github.com/shravanweb' },
-                                        { name: 'Behance', url: 'https://www.behance.net/sravankumar9' }
-                                    ].map((social) => (
-                                        <Link
-                                            key={social.name}
-                                            href={social.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            sx={{
-                                                color: darkMode ? '#e0e0e0' : '#555',
-                                                textDecoration: 'none',
-                                                transition: 'all 0.3s ease',
-                                                '&:hover': { color: darkMode ? '#00d4ff' : '#0066ff', transform: 'translateY(-2px)' },
-                                            }}
-                                        >
-                                            {social.name}
-                                        </Link>
-                                    ))}
-                                </Box>
-                            </Box>
+                                        {social.icon}
+                                    </IconButton>
+                                ))}
+                            </Stack>
                         </Box>
                     </Grid>
 
-                    {/* Business Hours / Additional Info */}
-                    <Grid item xs={12} md={6} component={motion.div} variants={itemVariants}>
+                    <Grid item xs={12} md={6}>
                         <Box
+                            className="glass-effect"
                             sx={{
                                 p: 5,
-                                borderRadius: '24px',
-                                backgroundColor: darkMode ? 'rgba(255, 255, 255, 0.03)' : '#ffffff',
-                                backdropFilter: 'blur(10px)',
-                                border: `1px solid ${darkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)'}`,
-                                height: '100%',
-                                boxShadow: darkMode ? 'none' : '0 10px 40px rgba(0,0,0,0.05)',
-                                transition: 'transform 0.3s ease',
-                                '&:hover': {
-                                    transform: 'translateY(-5px)',
-                                }
+                                borderRadius: '32px',
+                                border: '1px solid var(--border-color)',
+                                bgcolor: 'rgba(255,255,255,0.01)'
                             }}
                         >
-                            <Typography variant="h5" sx={{ mb: 3, color: darkMode ? '#fff' : '#1a1a1a', fontWeight: 700 }}>
-                                Get in Touch
-                            </Typography>
-
-                            <Typography variant="body1" sx={{ mb: 4, color: 'var(--text-color)', lineHeight: 1.8, fontSize: '1.05rem' }}>
-                                I'm available for freelance projects, full-time opportunities, and collaborations. Feel free to reach out through any of the contact methods listed.
-                            </Typography>
-
-                            <Box sx={{ mb: 4 }}>
-                                <Typography variant="caption" sx={{ display: 'block', mb: 1, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>
-                                    Response Time
-                                </Typography>
-                                <Typography variant="body1" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                    <span style={{ color: '#4caf50' }}>●</span> I typically respond within 24-48 hours
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
+                                <HiOutlineGlobeAlt size={24} style={{ color: 'var(--accent-color)' }} />
+                                <Typography variant="h6" sx={{ fontWeight: 800, color: 'var(--text-color-2)' }}>
+                                    Current Availability
                                 </Typography>
                             </Box>
 
-                            <Divider sx={{ my: 3, borderColor: darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)' }} />
+                            <Typography variant="body2" sx={{ color: 'var(--text-muted)', lineHeight: 1.8, mb: 4 }}>
+                                I am currently accepting select freelance projects and strategic partnerships.
+                                My typical response time is within 24 hours.
+                            </Typography>
 
-                            <Box>
-                                <Typography variant="caption" sx={{ display: 'block', mb: 2, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>
-                                    Services Offered
+                            <Box
+                                sx={{
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: 1.5,
+                                    px: 2,
+                                    py: 1,
+                                    borderRadius: '12px',
+                                    bgcolor: 'rgba(16, 185, 129, 0.1)',
+                                    border: '1px solid rgba(16, 185, 129, 0.2)'
+                                }}
+                            >
+                                <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: '#10b981' }} />
+                                <Typography variant="caption" sx={{ color: '#10b981', fontWeight: 800, letterSpacing: '0.5px' }}>
+                                    AVAILABLE FOR NEW PROJECTS
                                 </Typography>
-                                <Box component="ul" sx={{
-                                    pl: 2,
-                                    color: 'var(--text-color)',
-                                    lineHeight: 2,
-                                    '& li': {
-                                        marginBottom: '8px',
-                                    }
-                                }}>
-                                    <li>Website Design & Development</li>
-                                    <li>UI/UX Design</li>
-                                    <li>Logo Design</li>
-                                    <li>Video Design & Editing</li>
-                                    <li>Frontend Development</li>
-                                    <li>Consulting Services</li>
-                                </Box>
                             </Box>
                         </Box>
                     </Grid>
                 </Grid>
-
-                <Box sx={{ mt: 8, textAlign: 'center', mb: 4 }}>
-                    <Typography variant="body2" sx={{ color: 'var(--text-muted)' }}>
-                        For business inquiries, project proposals, or general questions, please use the contact information above.
-                    </Typography>
-                </Box>
             </Container>
             <Contact />
         </Box>

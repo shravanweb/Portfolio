@@ -1,291 +1,210 @@
 import React from 'react';
-import { Box, Container, Grid, Typography, Link } from '@mui/material';
+import { Box, Container, Grid, Typography, Link, IconButton, Stack } from '@mui/material';
 import { useThemeToggle } from '../app/ThemeToggleProvider';
+import { HiOutlineMail, HiOutlinePhone, HiOutlineLocationMarker } from 'react-icons/hi';
+import { FaLinkedin, FaGithub, FaBehance, FaTwitter } from 'react-icons/fa';
 import useVisitorCount from '../hooks/useVisitorCount';
 
 const Footer = () => {
     const { darkMode } = useThemeToggle();
     const { visitorCount, loading } = useVisitorCount();
 
+    const socialLinks = [
+        { icon: <FaLinkedin size={20} />, url: "https://www.linkedin.com/in/shravan-rasamalla/", label: "LinkedIn" },
+        { icon: <FaGithub size={20} />, url: "https://github.com/shravanweb", label: "GitHub" },
+        { icon: <FaBehance size={20} />, url: "https://www.behance.net/shravanrasamalla", label: "Behance" },
+        { icon: <FaTwitter size={20} />, url: "#", label: "Twitter" }
+    ];
+
+    const quickLinks = [
+        { name: "Home", url: "/" },
+        { name: "About Us", url: "/about" },
+        { name: "Contact Us", url: "/contact" },
+        { name: "Privacy Policy", url: "/privacy" },
+        { name: "Terms & Conditions", url: "/terms" }
+    ];
+
     return (
         <Box
+            id="footer"
             sx={{
-                backgroundColor: darkMode ? 'var(--bg-primary)' : 'var(--bg-secondary)',
+                backgroundColor: 'transparent',
                 color: 'var(--text-color)',
-                py: 8,
-                borderTop: `1px solid var(--border-color)`,
+                pt: 12,
+                pb: 6,
+                borderTop: '1px solid var(--border-color)',
                 position: 'relative',
+                overflow: 'hidden'
             }}
         >
             <Container maxWidth="lg">
-                <Grid container spacing={4}>
-                    <Grid item xs={12} sm={6} md={4}>
-                        <Typography 
-                            variant="h5" 
-                            sx={{ 
-                                fontWeight: 700,
-                                mb: 2,
-                                background: darkMode 
-                                    ? 'linear-gradient(135deg, var(--accent-color) 0%, #6366f1 100%)'
-                                    : 'linear-gradient(135deg, var(--accent-color) 0%, #6366f1 100%)',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                                backgroundClip: 'text',
-                            }}
+                <Grid container spacing={8}>
+                    <Grid item xs={12} md={5}>
+                        <Typography
+                            variant="h4"
+                            className="gradient-text"
+                            sx={{ fontWeight: 900, mb: 3, fontSize: '1.8rem' }}
                         >
                             Shravan Rasamalla
                         </Typography>
-                        <Typography 
-                            variant="body2" 
-                            sx={{ 
-                                color: 'var(--muted-text)',
-                                mb: 2,
-                            }}
-                        >
-                            Frontend Developer | UI Designer
-                        </Typography>
-                        <Typography 
-                            variant="body2" 
-                            sx={{ 
-                                color: 'var(--muted-text)',
+                        <Typography
+                            variant="body1"
+                            sx={{
+                                color: 'var(--text-muted)',
+                                mb: 4,
                                 lineHeight: 1.8,
+                                maxWidth: '400px',
+                                fontSize: '1.05rem'
                             }}
                         >
-                            Creating beautiful and functional web experiences with modern technologies and creative design.
+                            Architecting premium digital experiences through
+                            human-centric design and high-performance engineering.
                         </Typography>
-                    </Grid>
-
-                    <Grid item xs={12} sm={6} md={4}>
-                        <Typography 
-                            variant="h6" 
-                            sx={{ 
-                                fontWeight: 600, 
-                                mb: 3,
-                                color: 'var(--accent-color)',
-                            }}
-                        >
-                            Quick Links
-                        </Typography>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-                            <Link 
-                                href="/" 
-                                sx={{ 
-                                    color: 'var(--muted-text)',
-                                    textDecoration: 'none',
-                                    transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                    '&:hover': {
-                                        color: 'var(--accent-color)',
-                                    },
-                                }}
-                            >
-                                Home
-                            </Link>
-                            <Link 
-                                href="/about" 
-                                sx={{ 
-                                    color: 'var(--muted-text)',
-                                    textDecoration: 'none',
-                                    transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                    '&:hover': {
-                                        color: 'var(--accent-color)',
-                                    },
-                                }}
-                            >
-                                About Us
-                            </Link>
-                            <Link 
-                                href="/contact" 
-                                sx={{ 
-                                    color: 'var(--muted-text)',
-                                    textDecoration: 'none',
-                                    transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                    '&:hover': {
-                                        color: 'var(--accent-color)',
-                                    },
-                                }}
-                            >
-                                Contact Us
-                            </Link>
-                            <Link 
-                                href="/terms" 
-                                sx={{ 
-                                    color: 'var(--muted-text)',
-                                    textDecoration: 'none',
-                                    transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                    '&:hover': {
-                                        color: 'var(--accent-color)',
-                                    },
-                                }}
-                            >
-                                Terms & Conditions
-                            </Link>
-                            <Link 
-                                href="/privacy" 
-                                sx={{ 
-                                    color: 'var(--muted-text)',
-                                    textDecoration: 'none',
-                                    transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                    '&:hover': {
-                                        color: 'var(--accent-color)',
-                                    },
-                                }}
-                            >
-                                Privacy Policy
-                            </Link>
-                            <Link 
-                                href="/disclaimer" 
-                                sx={{ 
-                                    color: 'var(--muted-text)',
-                                    textDecoration: 'none',
-                                    transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                    '&:hover': {
-                                        color: 'var(--accent-color)',
-                                    },
-                                }}
-                            >
-                                Disclaimer
-                            </Link>
-                            <Link 
-                                href="/cookie-policy" 
-                                sx={{ 
-                                    color: 'var(--muted-text)',
-                                    textDecoration: 'none',
-                                    transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                    '&:hover': {
-                                        color: 'var(--accent-color)',
-                                    },
-                                }}
-                            >
-                                Cookie Policy
-                            </Link>
-                        </Box>
-                    </Grid>
-
-                    <Grid item xs={12} sm={6} md={4}>
-                        <Typography 
-                            variant="h6" 
-                            sx={{ 
-                                fontWeight: 600, 
-                                mb: 3,
-                                color: 'var(--accent-color)',
-                            }}
-                        >
-                            Contact Me
-                        </Typography>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-                            <Typography 
-                                variant="body2" 
-                                sx={{ 
-                                    color: 'var(--muted-text)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: 1,
-                                }}
-                            >
-                                📧 <Link 
-                                    href="mailto:rsravan40@gmail.com" 
-                                    sx={{ 
-                                        color: 'var(--muted-text)',
-                                        textDecoration: 'none',
-                                        transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        <Stack direction="row" spacing={1.5}>
+                            {socialLinks.map((social, index) => (
+                                <IconButton
+                                    key={index}
+                                    href={social.url}
+                                    target="_blank"
+                                    sx={{
+                                        color: 'var(--text-muted)',
+                                        border: '1px solid var(--border-color)',
+                                        transition: 'var(--transition-base)',
                                         '&:hover': {
                                             color: 'var(--accent-color)',
-                                        },
+                                            borderColor: 'var(--accent-color)',
+                                            transform: 'translateY(-3px)',
+                                            bgcolor: 'rgba(56, 189, 248, 0.05)'
+                                        }
                                     }}
+                                >
+                                    {social.icon}
+                                </IconButton>
+                            ))}
+                        </Stack>
+                    </Grid>
+
+                    <Grid item xs={6} md={3}>
+                        <Typography
+                            variant="subtitle1"
+                            sx={{ fontWeight: 800, mb: 3, color: 'var(--text-color-2)', textTransform: 'uppercase', letterSpacing: '1px' }}
+                        >
+                            Sitemap
+                        </Typography>
+                        <Stack spacing={2}>
+                            {quickLinks.map((link, index) => (
+                                <Link
+                                    key={index}
+                                    href={link.url}
+                                    sx={{
+                                        color: 'var(--text-muted)',
+                                        textDecoration: 'none',
+                                        fontSize: '0.95rem',
+                                        transition: 'var(--transition-base)',
+                                        '&:hover': { color: 'var(--accent-color)', pl: 0.5 }
+                                    }}
+                                >
+                                    {link.name}
+                                </Link>
+                            ))}
+                        </Stack>
+                    </Grid>
+
+                    <Grid item xs={6} md={4}>
+                        <Typography
+                            variant="subtitle1"
+                            sx={{ fontWeight: 800, mb: 3, color: 'var(--text-color-2)', textTransform: 'uppercase', letterSpacing: '1px' }}
+                        >
+                            Contact
+                        </Typography>
+                        <Stack spacing={3}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                                <HiOutlineMail size={24} style={{ color: 'var(--accent-color)' }} />
+                                <Link
+                                    href="mailto:rsravan40@gmail.com"
+                                    sx={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.95rem', '&:hover': { color: 'var(--accent-color)' } }}
                                 >
                                     rsravan40@gmail.com
                                 </Link>
-                            </Typography>
-                            <Typography 
-                                variant="body2" 
-                                sx={{ 
-                                    color: 'var(--muted-text)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: 1,
-                                }}
-                            >
-                                📱 <Link 
-                                    href="tel:+91-7661824166" 
-                                    sx={{ 
-                                        color: 'var(--muted-text)',
-                                        textDecoration: 'none',
-                                        transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                        '&:hover': {
-                                            color: 'var(--accent-color)',
-                                        },
-                                    }}
+                            </Box>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                                <HiOutlinePhone size={24} style={{ color: 'var(--accent-color)' }} />
+                                <Link
+                                    href="tel:+917661824166"
+                                    sx={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.95rem', '&:hover': { color: 'var(--accent-color)' } }}
                                 >
-                                    +91-7661824166
+                                    +91 76618 24166
                                 </Link>
-                            </Typography>
-                        </Box>
+                            </Box>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                                <HiOutlineLocationMarker size={24} style={{ color: 'var(--accent-color)' }} />
+                                <Typography variant="body2" sx={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>
+                                    Hyderabad, India
+                                </Typography>
+                            </Box>
+                        </Stack>
                     </Grid>
                 </Grid>
 
                 <Box
                     sx={{
-                        textAlign: 'center',
-                        mt: 6,
-                        pt: 4,
-                        borderTop: `1px solid var(--border-color)`,
+                        mt: 10,
+                        pt: 6,
+                        borderTop: '1px solid var(--border-color)',
                         display: 'flex',
-                        flexDirection: 'column',
+                        flexDirection: { xs: 'column', md: 'row' },
+                        justifyContent: 'space-between',
                         alignItems: 'center',
-                        gap: 2,
+                        gap: 4
                     }}
                 >
-                    <Typography
-                        variant="body2"
-                        sx={{
-                            color: 'var(--muted-text)',
-                        }}
-                    >
-                        © {new Date().getFullYear()} Shravan Rasamalla. All rights reserved.
+                    <Typography variant="body2" sx={{ color: 'var(--text-muted)', fontWeight: 500 }}>
+                        © {new Date().getFullYear()} Shravan Rasamalla. Crafted with Precision.
                     </Typography>
-                    {!loading && visitorCount !== null && visitorCount > 0 && (
-                        <Typography
-                            variant="body2"
-                            sx={{
-                                color: 'var(--muted-text)',
-                                fontSize: '0.875rem',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: 1,
-                            }}
-                        >
+
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                        {!loading && visitorCount !== null && (
                             <Box
-                                component="span"
+                                className="glass-effect"
                                 sx={{
-                                    display: 'inline-block',
-                                    width: '8px',
-                                    height: '8px',
-                                    borderRadius: '50%',
-                                    backgroundColor: darkMode ? '#4caf50' : '#66bb6a',
-                                    animation: 'pulse 2s infinite',
-                                    '@keyframes pulse': {
-                                        '0%': { opacity: 1 },
-                                        '50%': { opacity: 0.5 },
-                                        '100%': { opacity: 1 },
-                                    },
+                                    px: 2,
+                                    py: 1,
+                                    borderRadius: '10px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 1.5,
+                                    border: '1px solid var(--border-color)',
+                                    bgcolor: 'rgba(255,255,255,0.02)'
                                 }}
-                            />
-                            Total Visitors: <strong style={{ color: darkMode ? '#ffcc00' : '#007fff' }}>{visitorCount.toLocaleString()}</strong>
-                        </Typography>
-                    )}
-                    {!loading && visitorCount === null && (
-                        <Typography
-                            variant="body2"
-                            sx={{
-                                color: '#888',
-                                fontSize: '0.875rem',
-                            }}
-                        >
-                            Loading visitor count...
-                        </Typography>
-                    )}
+                            >
+                                <Box
+                                    sx={{
+                                        width: '8px',
+                                        height: '8px',
+                                        borderRadius: '50%',
+                                        bgcolor: '#10b981',
+                                        boxShadow: '0 0 10px #10b981',
+                                        animation: 'pulse 2s infinite'
+                                    }}
+                                />
+                                <Typography variant="caption" sx={{ color: 'var(--text-color-2)', fontWeight: 700, letterSpacing: '0.5px' }}>
+                                    {visitorCount.toLocaleString()} VISITORS
+                                </Typography>
+                            </Box>
+                        )}
+                    </Box>
                 </Box>
             </Container>
+
+            <style>
+                {`
+                @keyframes pulse {
+                    0% { opacity: 1; transform: scale(1); }
+                    50% { opacity: 0.5; transform: scale(1.2); }
+                    100% { opacity: 1; transform: scale(1); }
+                }
+                `}
+            </style>
         </Box>
     );
 };

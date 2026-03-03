@@ -29,10 +29,10 @@ function AnimatedGradientOrb({ position, size, color, mousePosition, darkMode })
       // Subtle movement based on mouse
       const targetX = position[0] + mousePosition.x * 0.5;
       const targetY = position[1] + mousePosition.y * 0.5;
-      
+
       meshRef.current.position.x += (targetX - meshRef.current.position.x) * 0.02;
       meshRef.current.position.y += (targetY - meshRef.current.position.y) * 0.02;
-      
+
       // Gentle floating animation
       meshRef.current.position.y += Math.sin(state.clock.elapsedTime * 0.5) * 0.01;
     }
@@ -65,29 +65,29 @@ const HeroBackground3D = () => {
         height: '100%',
         zIndex: 0,
         background: darkMode
-          ? 'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)'
-          : 'linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 50%, #fff3e0 100%)',
+          ? 'radial-gradient(circle at 50% 50%, #0f172a 0%, #030712 100%)'
+          : 'radial-gradient(circle at 50% 50%, #f1f5f9 0%, #f8fafc 100%)',
       }}
     >
       {/* Subtle gradient orbs - no shapes, just soft glowing orbs */}
-      <AnimatedGradientOrb 
-        position={[-5, 3, -8]} 
-        size={3} 
-        color={darkMode ? '#ffcc00' : '#007fff'} 
+      <AnimatedGradientOrb
+        position={[-5, 3, -8]}
+        size={3}
+        color={darkMode ? '#ffcc00' : '#007fff'}
         mousePosition={mousePosition}
         darkMode={darkMode}
       />
-      <AnimatedGradientOrb 
-        position={[5, -3, -10]} 
-        size={2.5} 
-        color={darkMode ? '#66bb6a' : '#ff6b6b'} 
+      <AnimatedGradientOrb
+        position={[5, -3, -10]}
+        size={2.5}
+        color={darkMode ? '#66bb6a' : '#ff6b6b'}
         mousePosition={mousePosition}
         darkMode={darkMode}
       />
-      <AnimatedGradientOrb 
-        position={[0, 0, -12]} 
-        size={2} 
-        color={darkMode ? '#ffffff' : '#4caf50'} 
+      <AnimatedGradientOrb
+        position={[0, 0, -12]}
+        size={2}
+        color={darkMode ? '#ffffff' : '#4caf50'}
         mousePosition={mousePosition}
         darkMode={darkMode}
       />

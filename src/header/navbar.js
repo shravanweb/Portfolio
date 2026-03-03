@@ -1,13 +1,23 @@
-import React from 'react';
-import { AppBar, Toolbar, Button, Box, Typography, IconButton, Container } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { AppBar, Toolbar, Button, Box, Typography, IconButton, Container, useScrollTrigger } from '@mui/material';
 import { Brightness4, Brightness7 } from '@mui/icons-material';
 import { useThemeToggle } from '../app/ThemeToggleProvider';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = ({ scrollToSection }) => {
     const { toggleTheme, darkMode } = useThemeToggle();
     const navigate = useNavigate();
     const location = useLocation();
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const navItems = [
         { label: 'Home', section: 'home' },
@@ -30,127 +40,108 @@ const Navbar = ({ scrollToSection }) => {
         if (location.pathname !== '/') {
             navigate('/');
         } else {
-            scrollToSection('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     };
 
     return (
-        <AppBar 
-            position="sticky"
+        <AppBar
+            position="fixed"
             sx={{
-                backgroundColor: darkMode 
-                    ? 'rgba(10, 14, 39, 0.98)' 
-                    : 'rgba(248, 249, 255, 0.98)',
-                backdropFilter: 'blur(20px)',
-                boxShadow: 'var(--shadow-md)',
-                borderBottom: `1px solid ${darkMode ? 'rgba(0, 212, 255, 0.1)' : 'rgba(0, 102, 255, 0.1)'}`,
-                transition: 'all 0.3s ease',
+                backgroundColor: scrolled
+                    ? (darkMode ? 'rgba(5, 8, 22, 0.8)' : 'rgba(255, 255, 255, 0.8)')
+                    : 'transparent',
+                backdropFilter: scrolled ? 'blur(20px)' : 'none',
+                boxShadow: scrolled ? 'var(--shadow-md)' : 'none',
+                borderBottom: scrolled
+                    ? `1px solid var(--border-color)`
+                    : '1px solid transparent',
+                transition: 'var(--transition-base)',
+                backgroundImage: 'none'
             }}
         >
             <Container maxWidth="lg">
-                <Toolbar 
-                    sx={{ 
-                        justifyContent: 'space-between', 
-                        py: 1.5,
-                        px: { xs: 0, sm: 2 }
+                <Toolbar
+                    sx={{
+                        justifyContent: 'space-between',
+                        py: scrolled ? 1 : 2,
+                        transition: 'var(--transition-base)'
                     }}
                 >
-                    {/* Logo */}
-                    <Typography 
-                        variant="h6" 
-                        sx={{ 
-                            fontWeight: 800,
-                            fontSize: '1.4rem',
-                            background: darkMode 
-                                ? 'linear-gradient(135deg, #00d4ff 0%, #0066ff 100%)'
-                                : 'linear-gradient(135deg, #0066ff 0%, #6366f1 100%)',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
-                            backgroundClip: 'text',
+                    <Typography
+                        variant="h5"
+                        sx={{
+                            fontWeight: 900,
+                            fontSize: '1.6rem',
                             cursor: 'pointer',
-                            letterSpacing: '-0.5px',
-                            transition: 'transform 0.3s ease',
-                            '&:hover': {
-                                transform: 'scale(1.05)',
-                            },
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 1,
+                            letterSpacing: '-1px'
                         }}
                         onClick={handleLogoClick}
                     >
-                        Shravan
+                        <Box component="span" sx={{ color: 'var(--accent-color)' }}>S</Box>
+                        <Box component="span" sx={{ color: 'var(--text-color-2)' }}>hravan</Box>
                     </Typography>
 
-                    {/* Desktop Navigation */}
-                    <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 0.5 }}>
-                        {navItems.map((item) => (
-                            <Button
-                                key={item.section}
-                                onClick={() => handleNavigation(item.section)}
-                                sx={{
-                                    color: darkMode ? '#e0e0e0' : '#333',
-                                    fontWeight: 600,
-                                    textTransform: 'none',
-                                    fontSize: '0.95rem',
-                                    px: 2.5,
-                                    py: 1,
-                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                    borderRadius: '8px',
-                                    position: 'relative',
-                                    '&::after': {
-                                        content: '""',
-                                        position: 'absolute',
-                                        bottom: '8px',
-                                        left: '50%',
-                                        width: '0',
-                                        height: '2px',
-                                        background: darkMode ? '#00d4ff' : '#0066ff',
-                                        transform: 'translateX(-50%)',
-                                        transition: 'width 0.3s ease',
-                                    },
-                                    '&:hover': {
-                                        color: darkMode ? '#00d4ff' : '#0066ff',
-                                        backgroundColor: darkMode 
-                                            ? 'rgba(0, 212, 255, 0.08)' 
-                                            : 'rgba(0, 102, 255, 0.08)',
-                                        '&::after': {
-                                            width: '80%',
-                                        },
-                                    },
-                                }}
-                            >
-                                {item.label}
-                            </Button>
-                        ))}
-
-                        {/* Theme Toggle */}
-                        <IconButton 
-                            onClick={toggleTheme} 
+                    <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 1 }}>
+                        <Box
+                            className="glass-effect"
                             sx={{
-                                color: darkMode ? '#00d4ff' : '#0066ff',
+                                display: 'flex',
+                                px: 1,
+                                py: 0.5,
+                                borderRadius: '16px',
+                                border: scrolled ? '1px solid var(--border-color)' : '1px solid transparent',
+                                transition: 'var(--transition-base)'
+                            }}
+                        >
+                            {navItems.map((item) => (
+                                <Button
+                                    key={item.section}
+                                    onClick={() => handleNavigation(item.section)}
+                                    sx={{
+                                        color: 'var(--text-muted)',
+                                        fontWeight: 700,
+                                        textTransform: 'none',
+                                        fontSize: '0.9rem',
+                                        px: 2,
+                                        py: 1,
+                                        borderRadius: '12px',
+                                        transition: 'var(--transition-fast)',
+                                        '&:hover': {
+                                            color: 'var(--accent-color)',
+                                            backgroundColor: 'rgba(56, 189, 248, 0.05)',
+                                        },
+                                    }}
+                                >
+                                    {item.label}
+                                </Button>
+                            ))}
+                        </Box>
+
+                        <IconButton
+                            onClick={toggleTheme}
+                            sx={{
+                                color: 'var(--text-color-2)',
                                 ml: 2,
-                                transition: 'all 0.3s ease',
-                                borderRadius: '8px',
-                                padding: '10px',
+                                border: '1px solid var(--border-color)',
+                                borderRadius: '12px',
+                                transition: 'var(--transition-base)',
                                 '&:hover': {
-                                    transform: 'rotate(180deg)',
-                                    backgroundColor: darkMode 
-                                        ? 'rgba(0, 212, 255, 0.1)' 
-                                        : 'rgba(0, 102, 255, 0.1)',
+                                    borderColor: 'var(--accent-color)',
+                                    color: 'var(--accent-color)',
+                                    transform: 'rotate(45deg)'
                                 },
                             }}
-                            title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
                         >
-                            {darkMode ? <Brightness7 /> : <Brightness4 />}
+                            {darkMode ? <Brightness7 fontSize="small" /> : <Brightness4 fontSize="small" />}
                         </IconButton>
                     </Box>
 
-                    {/* Mobile Theme Toggle */}
-                    <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton 
-                            onClick={toggleTheme} 
-                            sx={{
-                                color: darkMode ? '#00d4ff' : '#0066ff',
-                            }}
-                        >
+                    <Box sx={{ display: { xs: 'flex', md: 'none' }, gap: 1 }}>
+                        <IconButton onClick={toggleTheme} sx={{ color: 'var(--text-color-2)' }}>
                             {darkMode ? <Brightness7 /> : <Brightness4 />}
                         </IconButton>
                     </Box>

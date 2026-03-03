@@ -1,36 +1,62 @@
-import React, { useState } from 'react';
-import { Box, Grid, Typography, Card, CardMedia, CardContent, CardActions, Button, Container } from '@mui/material';
+import React from 'react';
+import { Box, Grid, Typography, Card, CardMedia, CardContent, Button, Container, Chip, Stack } from '@mui/material';
 import { useThemeToggle } from '../app/ThemeToggleProvider';
-import AdSense from '../components/AdSense';
 import { motion } from 'framer-motion';
+import { HiOutlineArrowNarrowRight, HiOutlineExternalLink } from 'react-icons/hi';
 
 const projects = [
     {
-        title: 'Virtual IT Job Fair',
-        description: 'A creative and modern web application designed to provide an interactive user experience with cutting-edge design and seamless functionality.',
-        image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800',
+        title: 'Job Fair Portal',
+        description: 'A robust ecosystem for hosting virtual and physical career events, featuring real-time candidate-employer matching and interview scheduling. This platform streamlines recruitment processes for both employers and job seekers, enhancing efficiency and engagement.',
+        image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800',
         link: 'https://jobfair.jobsnprofiles.com/',
-        tech: ['React', 'Material-UI', 'Node.js', 'MongoDB'],
+        tech: ['React', 'Node.js', 'PostgreSQL', 'Docker'],
+        category: 'Enterprise'
     },
     {
-        title: 'Content Management System',
-        description: 'An advanced e-commerce solution with integrated payment gateways and product management system for modern businesses.',
+        title: 'JNP Career Hub',
+        description: 'Comprehensive talent management platform providing personalized career paths, skill assessments, and professional networking. It empowers individuals to navigate their career journey with tailored resources and community support.',
+        image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800',
+        link: 'https://hub.jobsnprofiles.com',
+        tech: ['Next.js', 'MUI', 'Redis', 'WebSockets'],
+        category: 'Platform'
+    },
+    {
+        title: 'JNP Business Solutions',
+        description: 'Advanced B2B suite for enterprise recruitment, workforce analytics, and strategic human capital management. This solution offers powerful tools for businesses to optimize their talent acquisition and retention strategies.',
+        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800',
+        link: 'https://bs.jobsnprofiles.com',
+        tech: ['React', 'Chart.js', 'GraphQL', 'AWS'],
+        category: 'SaaS'
+    },
+    {
+        title: 'JobsNProfiles Portal',
+        description: 'The global flagship career bridge connecting over 5 million professionals with top-tier international opportunities. It serves as a vital link between talent and global employers, fostering career growth and international mobility.',
+        image: 'https://images.unsplash.com/photo-1454165833767-027eeef1593e?w=800',
+        link: 'https://jobsnprofiles.com/',
+        tech: ['React', 'Express', 'MySQL', 'Search API'],
+        category: 'Main Product'
+    },
+    {
+        title: 'D3E Design Studio',
+        description: 'Creative technology studio specializing in high-performance design systems, interactive experiences, and digital branding. We craft visually stunning and highly functional digital products that captivate and engage users.',
+        image: 'https://images.unsplash.com/photo-1541462608141-ad4d01947f6d?w=800',
+        link: 'https://d3e.studio',
+        tech: ['Three.js', 'Framer Motion', 'React', 'GSAP'],
+        category: 'Creative Technology'
+    },
+    {
+        title: 'ContractFlow CMS',
+        description: 'Enterprise-grade contract lifecycle management system with automated compliance tracking and secure legal workflows. This platform ensures seamless contract management, reducing risks and improving operational efficiency.',
         image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800',
         link: 'https://contracts.jobsnprofiles.com/login',
-        tech: ['React', 'Node.js', 'MySQL',],
-    },
-    {
-        title: 'Jobsnprofiles',
-        description: 'A sleek portfolio website to showcase skills, projects, and contact information with modern design principles.',
-        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800',
-        link: 'https://jobsnprofiles.com/',
-        tech: ['React', 'Material-UI', 'Node.js', 'MySQL'],
+        tech: ['Next.js', 'Tailwind', 'PostgreSQL', 'Auth0'],
+        category: 'LegalTech'
     },
 ];
 
 const Projects = () => {
     const { darkMode } = useThemeToggle();
-    const [hoveredIndex, setHoveredIndex] = useState(null);
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -49,7 +75,7 @@ const Projects = () => {
             y: 0,
             transition: {
                 type: "spring",
-                stiffness: 100,
+                stiffness: 80,
                 damping: 12
             }
         }
@@ -57,227 +83,221 @@ const Projects = () => {
 
     return (
         <Box
-            sx={{
-                backgroundColor: darkMode ? 'var(--bg-secondary)' : '#f9fafb',
-                padding: { xs: '80px 20px', md: '140px 40px' },
-                minHeight: '100vh',
-                position: 'relative',
-            }}
             id="projects"
+            sx={{
+                py: { xs: 8, md: 16 },
+                backgroundColor: 'transparent',
+                color: 'var(--text-color)',
+                position: 'relative',
+                overflow: 'hidden',
+            }}
         >
             <Container maxWidth="lg">
                 <Box
+                    sx={{ textAlign: 'center', mb: 12 }}
                     component={motion.div}
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    sx={{ textAlign: 'center', mb: 12 }}
+                    transition={{ duration: 0.6 }}
                 >
                     <Typography
-                        variant="h2"
-                        component="h2"
+                        variant="overline"
                         sx={{
-                            fontWeight: 900,
-                            fontSize: { xs: '2.5rem', md: '4rem' },
-                            mb: 2,
-                            background: darkMode
-                                ? 'linear-gradient(135deg, #00d4ff 0%, #0066ff 100%)'
-                                : 'linear-gradient(135deg, #0066ff 0%, #6366f1 100%)',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
-                            backgroundClip: 'text',
-                            letterSpacing: '-1px',
+                            color: 'var(--accent-color)',
+                            fontWeight: 800,
+                            letterSpacing: '3px',
+                            mb: 1,
+                            display: 'block'
                         }}
                     >
-                        Featured Projects
+                        Portfolio
                     </Typography>
-                    <Box
-                        sx={{
-                            width: '80px',
-                            height: '4px',
-                            background: darkMode
-                                ? 'linear-gradient(90deg, #00d4ff, #0066ff)'
-                                : 'linear-gradient(90deg, #0066ff, #6366f1)',
-                            margin: '0 auto',
-                            borderRadius: '2px',
-                            mb: 3,
-                        }}
-                    />
+                    <Typography
+                        variant="h2"
+                        className="section-title gradient-text"
+                        sx={{ mb: 3 }}
+                    >
+                        Success Stories
+                    </Typography>
                     <Typography
                         variant="h6"
                         sx={{
                             color: 'var(--text-muted)',
                             fontWeight: 400,
                             fontSize: '1.2rem',
-                            mb: 6,
-                            maxWidth: '700px',
+                            maxWidth: '750px',
                             margin: '0 auto',
                         }}
                     >
-                        Explore my portfolio of carefully crafted projects that demonstrate expertise in modern web development, user experience design, and innovative solutions.
+                        Diving deep into complex problems to deliver elegant,
+                        scalable, and human-centric digital solutions.
                     </Typography>
-                </Box>
-
-                {/* AdSense Ad Unit */}
-                <Box sx={{ mb: 6 }}>
-                    <AdSense adFormat="auto" requireMinContent={true} />
                 </Box>
 
                 <Grid
                     container
-                    spacing={4}
-                    justifyContent="center"
+                    spacing={6}
                     component={motion.div}
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, amount: 0.2 }}
+                    viewport={{ once: true }}
                 >
                     {projects.map((project, index) => (
-                        <Grid
-                            item
-                            xs={12}
-                            sm={6}
-                            md={4}
-                            key={index}
-                            component={motion.div}
-                            variants={cardVariants}
-                        >
-                            <Card
-                                onMouseEnter={() => setHoveredIndex(index)}
-                                onMouseLeave={() => setHoveredIndex(null)}
-                                sx={{
-                                    backgroundColor: darkMode ? 'rgba(255, 255, 255, 0.03)' : '#ffffff',
-                                    backdropFilter: 'blur(10px)',
-                                    color: 'var(--text-color)',
-                                    borderRadius: '24px',
-                                    overflow: 'hidden',
-                                    border: `1px solid ${darkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)'}`,
-                                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                                    height: '100%',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    position: 'relative',
-                                    boxShadow: darkMode ? 'none' : '0 10px 40px rgba(0,0,0,0.05)',
-                                    '&:hover': {
-                                        transform: 'translateY(-12px)',
-                                        boxShadow: darkMode
-                                            ? '0 20px 40px rgba(0,0,0,0.4)'
-                                            : '0 30px 60px rgba(0,0,0,0.12)',
-                                        borderColor: darkMode ? 'rgba(0, 212, 255, 0.3)' : 'rgba(0, 102, 255, 0.3)',
-                                    },
-                                }}
-                            >
-                                <Box sx={{ position: 'relative', overflow: 'hidden' }}>
-                                    <CardMedia
-                                        component="img"
-                                        height="220"
-                                        image={project.image}
-                                        alt={project.title}
-                                        sx={{
-                                            objectFit: 'cover',
-                                            transition: 'transform 0.6s ease',
-                                            transform: hoveredIndex === index ? 'scale(1.1)' : 'scale(1)',
-                                            filter: darkMode ? 'brightness(0.85)' : 'brightness(0.95)',
-                                        }}
-                                    />
+                        <Grid item xs={12} key={index}>
+                            <motion.div variants={cardVariants}>
+                                <Card
+                                    className="glass-effect"
+                                    sx={{
+                                        display: 'flex',
+                                        flexDirection: { xs: 'column', md: 'row' },
+                                        backgroundColor: 'rgba(255, 255, 255, 0.02)',
+                                        border: '1px solid var(--border-color)',
+                                        borderRadius: '32px',
+                                        overflow: 'hidden',
+                                        transition: 'var(--transition-base)',
+                                        '&:hover': {
+                                            transform: 'translateY(-10px)',
+                                            borderColor: 'var(--accent-color)',
+                                            backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                                            boxShadow: '0 30px 60px -20px rgba(0,0,0,0.5)',
+                                        },
+                                    }}
+                                >
                                     <Box
                                         sx={{
-                                            position: 'absolute',
-                                            top: 0,
-                                            left: 0,
-                                            width: '100%',
-                                            height: '100%',
-                                            background: `linear-gradient(to top, ${darkMode ? '#0a0e27' : '#ffffff'} 0%, transparent 100%)`,
-                                            opacity: 0.6,
-                                        }}
-                                    />
-                                </Box>
-                                <CardContent sx={{ flexGrow: 1, p: 4 }}>
-                                    <Typography
-                                        variant="h5"
-                                        component="div"
-                                        sx={{
-                                            fontWeight: 700,
-                                            color: darkMode ? '#fff' : '#1a1a1a',
-                                            mb: 1.5,
-                                            fontSize: '1.4rem',
-                                            transition: 'color 0.3s ease',
-                                            ...(hoveredIndex === index && {
-                                                color: 'var(--accent-color)',
-                                            }),
+                                            width: { xs: '100%', md: '45%' },
+                                            position: 'relative',
+                                            overflow: 'hidden',
+                                            minHeight: { xs: '250px', md: '400px' }
                                         }}
                                     >
-                                        {project.title}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2"
-                                        sx={{
-                                            color: 'var(--text-muted)',
-                                            lineHeight: 1.7,
-                                            mb: 3,
-                                            fontWeight: 400,
-                                            fontSize: '0.95rem',
-                                        }}
-                                    >
-                                        {project.description}
-                                    </Typography>
-                                    <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mt: 'auto' }}>
-                                        {project.tech.map((tech, i) => (
-                                            <Box
-                                                key={i}
+                                        <CardMedia
+                                            component="img"
+                                            image={project.image}
+                                            alt={project.title}
+                                            sx={{
+                                                height: '100%',
+                                                width: '100%',
+                                                objectFit: 'cover',
+                                                transition: 'transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)',
+                                                '.glass-effect:hover &': {
+                                                    transform: 'scale(1.1)',
+                                                }
+                                            }}
+                                        />
+                                        <Box
+                                            sx={{
+                                                position: 'absolute',
+                                                top: 20,
+                                                left: 20,
+                                                zIndex: 2
+                                            }}
+                                        >
+                                            <Chip
+                                                label={project.category}
                                                 sx={{
-                                                    px: 1.5,
-                                                    py: 0.5,
+                                                    bgcolor: 'rgba(255,255,255,0.1)',
+                                                    backdropFilter: 'blur(10px)',
+                                                    color: '#fff',
+                                                    fontWeight: 700,
                                                     borderRadius: '8px',
-                                                    backgroundColor: darkMode
-                                                        ? 'rgba(255, 255, 255, 0.05)'
-                                                        : 'rgba(0, 0, 0, 0.05)',
-                                                    color: darkMode ? '#e0e0e0' : '#555',
-                                                    fontSize: '0.75rem',
-                                                    fontWeight: 600,
-                                                    border: `1px solid ${darkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)'}`,
+                                                    border: '1px solid rgba(255,255,255,0.1)'
                                                 }}
-                                            >
-                                                {tech}
-                                            </Box>
-                                        ))}
+                                            />
+                                        </Box>
                                     </Box>
-                                </CardContent>
-                                <CardActions sx={{ p: 4, pt: 0 }}>
-                                    <Button
-                                        variant="text"
-                                        href={project.link}
-                                        endIcon={
-                                            <Box
-                                                component="span"
-                                                sx={{
-                                                    transition: 'transform 0.3s ease',
-                                                    transform: hoveredIndex === index ? 'translateX(4px)' : 'translateX(0)',
-                                                    display: 'inline-flex'
-                                                }}
-                                            >
-                                                →
-                                            </Box>
-                                        }
+
+                                    <CardContent
                                         sx={{
-                                            fontWeight: 700,
-                                            textTransform: 'none',
-                                            color: 'var(--accent-color)',
-                                            padding: 0,
-                                            minWidth: 0,
-                                            fontSize: '1rem',
-                                            '&:hover': {
-                                                backgroundColor: 'transparent',
-                                                textDecoration: 'none',
-                                            },
+                                            width: { xs: '100%', md: '55%' },
+                                            p: { xs: 4, md: 8 },
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            justifyContent: 'center'
                                         }}
                                     >
-                                        View Case Study
-                                    </Button>
-                                </CardActions>
-                            </Card>
+                                        <Typography
+                                            variant="h3"
+                                            sx={{
+                                                fontWeight: 800,
+                                                mb: 3,
+                                                color: 'var(--text-color-2)',
+                                                fontSize: { xs: '2rem', md: '2.5rem' },
+                                                letterSpacing: '-0.02em'
+                                            }}
+                                        >
+                                            {project.title}
+                                        </Typography>
+                                        <Typography
+                                            variant="body1"
+                                            sx={{
+                                                color: 'var(--text-muted)',
+                                                fontSize: '1.1rem',
+                                                lineHeight: 1.8,
+                                                mb: 4,
+                                                maxWidth: '500px'
+                                            }}
+                                        >
+                                            {project.description}
+                                        </Typography>
+
+                                        <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ mb: 6 }}>
+                                            {project.tech.map((t, i) => (
+                                                <Chip
+                                                    key={i}
+                                                    label={t}
+                                                    variant="outlined"
+                                                    sx={{
+                                                        borderColor: 'var(--border-color)',
+                                                        color: 'var(--text-muted)',
+                                                        fontWeight: 600,
+                                                        mb: 1
+                                                    }}
+                                                />
+                                            ))}
+                                        </Stack>
+
+                                        <Stack direction="row" spacing={3}>
+                                            <Button
+                                                variant="contained"
+                                                endIcon={<HiOutlineArrowNarrowRight />}
+                                                href={project.link}
+                                                target="_blank"
+                                                sx={{
+                                                    bgcolor: 'var(--accent-color)',
+                                                    color: '#000',
+                                                    fontWeight: 800,
+                                                    borderRadius: '12px',
+                                                    px: 4,
+                                                    py: 1.5,
+                                                    textTransform: 'none',
+                                                    fontSize: '1rem',
+                                                    '&:hover': {
+                                                        bgcolor: 'var(--accent-alt)',
+                                                        color: '#fff'
+                                                    }
+                                                }}
+                                            >
+                                                Explore Impact
+                                            </Button>
+                                            <Button
+                                                variant="text"
+                                                startIcon={<HiOutlineExternalLink />}
+                                                sx={{
+                                                    color: 'var(--text-muted)',
+                                                    fontWeight: 700,
+                                                    textTransform: 'none',
+                                                    '&:hover': { color: 'var(--accent-color)' }
+                                                }}
+                                            >
+                                                Live Preview
+                                            </Button>
+                                        </Stack>
+                                    </CardContent>
+                                </Card>
+                            </motion.div>
                         </Grid>
                     ))}
                 </Grid>
