@@ -1,14 +1,11 @@
 import React from 'react';
 import { Box, Container, Typography, Grid, Link, Stack, IconButton } from '@mui/material';
-import { useThemeToggle } from '../app/ThemeToggleProvider';
 import Contact from './footer';
 import { motion } from 'framer-motion';
 import { HiOutlineMail, HiOutlinePhone, HiOutlineLocationMarker, HiOutlineGlobeAlt } from 'react-icons/hi';
 import { FaLinkedin, FaGithub, FaBehance, FaTwitter } from 'react-icons/fa';
 
 const ContactPage = () => {
-    const { darkMode } = useThemeToggle();
-
     const contactInfo = [
         {
             title: 'Email Address',

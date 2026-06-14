@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { AppBar, Toolbar, Button, Box, Typography, IconButton, Container, useScrollTrigger } from '@mui/material';
+import { AppBar, Toolbar, Button, Box, Typography, IconButton, Container } from '@mui/material';
 import { Brightness4, Brightness7 } from '@mui/icons-material';
 import { useThemeToggle } from '../app/ThemeToggleProvider';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-
 const Navbar = ({ scrollToSection }) => {
     const { toggleTheme, darkMode } = useThemeToggle();
     const navigate = useNavigate();

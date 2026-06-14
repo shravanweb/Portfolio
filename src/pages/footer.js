@@ -1,12 +1,10 @@
 import React from 'react';
 import { Box, Container, Grid, Typography, Link, IconButton, Stack } from '@mui/material';
-import { useThemeToggle } from '../app/ThemeToggleProvider';
 import { HiOutlineMail, HiOutlinePhone, HiOutlineLocationMarker } from 'react-icons/hi';
 import { FaLinkedin, FaGithub, FaBehance, FaTwitter } from 'react-icons/fa';
 import useVisitorCount from '../hooks/useVisitorCount';
 
 const Footer = () => {
-    const { darkMode } = useThemeToggle();
     const { visitorCount, loading } = useVisitorCount();
 
     const socialLinks = [

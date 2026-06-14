@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Typography, Grid, Card, CardContent, Container, IconButton } from '@mui/material';
-import { useThemeToggle } from '../app/ThemeToggleProvider';
 import { motion } from 'framer-motion';
 import { HiOutlineLightBulb, HiOutlineDeviceMobile, HiOutlineCode } from 'react-icons/hi';
 
@@ -26,8 +25,6 @@ const services = [
 ];
 
 const ServicesSection = () => {
-    const { darkMode } = useThemeToggle();
-
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {

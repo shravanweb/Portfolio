@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Grid, Typography, Card, CardMedia, CardContent, Button, Container, Chip, Stack } from '@mui/material';
-import { useThemeToggle } from '../app/ThemeToggleProvider';
 import { motion } from 'framer-motion';
 import { HiOutlineArrowNarrowRight, HiOutlineExternalLink } from 'react-icons/hi';
 
@@ -56,8 +55,6 @@ const projects = [
 ];
 
 const Projects = () => {
-    const { darkMode } = useThemeToggle();
-
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
