@@ -65,29 +65,29 @@ const HeroBackground3D = () => {
         height: '100%',
         zIndex: 0,
         background: darkMode
-          ? 'radial-gradient(circle at 50% 50%, #0f172a 0%, #030712 100%)'
-          : 'radial-gradient(circle at 50% 50%, #f1f5f9 0%, #f8fafc 100%)',
+          ? 'radial-gradient(ellipse at 30% 20%, #0d1729 0%, #070d1a 100%)'
+          : 'radial-gradient(ellipse at 20% 30%, #eff4ff 0%, #f6f8fc 60%, #eef2ff 100%)',
       }}
     >
       {/* Subtle gradient orbs - no shapes, just soft glowing orbs */}
       <AnimatedGradientOrb
         position={[-5, 3, -8]}
         size={3}
-        color={darkMode ? '#ffcc00' : '#007fff'}
+        color={darkMode ? '#60a5fa' : '#2563eb'}
         mousePosition={mousePosition}
         darkMode={darkMode}
       />
       <AnimatedGradientOrb
         position={[5, -3, -10]}
         size={2.5}
-        color={darkMode ? '#66bb6a' : '#ff6b6b'}
+        color={darkMode ? '#a78bfa' : '#7c3aed'}
         mousePosition={mousePosition}
         darkMode={darkMode}
       />
       <AnimatedGradientOrb
-        position={[0, 0, -12]}
+        position={[0, 2, -12]}
         size={2}
-        color={darkMode ? '#ffffff' : '#4caf50'}
+        color={darkMode ? '#34d399' : '#0891b2'}
         mousePosition={mousePosition}
         darkMode={darkMode}
       />

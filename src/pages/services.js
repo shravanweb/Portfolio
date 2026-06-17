@@ -1,100 +1,67 @@
 import React from 'react';
-import { Box, Typography, Grid, Card, CardContent, Container, IconButton } from '@mui/material';
+import { Box, Typography, Grid, Container } from '@mui/material';
 import { motion } from 'framer-motion';
 import { HiOutlineLightBulb, HiOutlineDeviceMobile, HiOutlineCode } from 'react-icons/hi';
+import { useThemeToggle } from '../app/ThemeToggleProvider';
 
 const services = [
     {
         title: 'Creative Strategy',
         description: 'Deep-dive analysis and architectural planning to ensure your digital product stands out in a crowded market.',
-        icon: <HiOutlineLightBulb size={32} />,
-        color: '#fbbf24'
+        icon: <HiOutlineLightBulb size={28} />,
+        color: '#f59e0b',
+        number: '01',
     },
     {
         title: 'Responsive Design',
         description: 'Pixel-perfect, adaptive interfaces that deliver a consistent and delightful experience across all screen sizes.',
-        icon: <HiOutlineDeviceMobile size={32} />,
-        color: '#38bdf8'
+        icon: <HiOutlineDeviceMobile size={28} />,
+        color: '#2563eb',
+        number: '02',
     },
     {
         title: 'Full-Stack Development',
         description: 'Scalable, high-performance web applications built with the latest technologies and best practices.',
-        icon: <HiOutlineCode size={32} />,
-        color: '#818cf8'
+        icon: <HiOutlineCode size={28} />,
+        color: '#7c3aed',
+        number: '03',
     },
 ];
 
 const ServicesSection = () => {
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.15
-            }
-        }
-    };
-
-    const cardVariants = {
-        hidden: { opacity: 0, y: 30 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                type: "spring",
-                stiffness: 80,
-                damping: 12
-            }
-        }
-    };
+    const { darkMode } = useThemeToggle();
 
     return (
         <Box
             id="services"
             sx={{
-                py: { xs: 8, md: 16 },
-                backgroundColor: 'transparent',
+                py: { xs: 10, md: 16 },
+                backgroundColor: 'var(--bg-tertiary)',
                 color: 'var(--text-color)',
                 position: 'relative',
-                overflow: 'hidden',
             }}
         >
             <Container maxWidth="lg">
+                {/* Header */}
                 <Box
-                    sx={{ textAlign: 'center', mb: 12 }}
                     component={motion.div}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
+                    sx={{ textAlign: 'center', mb: 9 }}
                 >
-                    <Typography
-                        variant="overline"
-                        sx={{
-                            color: 'var(--accent-color)',
-                            fontWeight: 800,
-                            letterSpacing: '3px',
-                            mb: 1,
-                            display: 'block'
-                        }}
-                    >
-                        Solutions
-                    </Typography>
-                    <Typography
-                        variant="h2"
-                        className="section-title gradient-text"
-                        sx={{ mb: 3 }}
-                    >
+                    <Box component="span" className="section-badge">Solutions</Box>
+                    <Typography variant="h2" className="section-title gradient-text">
                         Impactful Services
                     </Typography>
                     <Typography
-                        variant="h6"
                         sx={{
                             color: 'var(--text-muted)',
-                            fontWeight: 400,
-                            fontSize: '1.2rem',
-                            maxWidth: '700px',
-                            margin: '0 auto',
+                            fontSize: '1.1rem',
+                            maxWidth: 600,
+                            mx: 'auto',
+                            lineHeight: 1.75,
                         }}
                     >
                         Blending aesthetics with high-performance engineering to
@@ -102,90 +69,125 @@ const ServicesSection = () => {
                     </Typography>
                 </Box>
 
-                <Grid
-                    container
-                    spacing={4}
-                    component={motion.div}
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                >
+                {/* Cards */}
+                <Grid container spacing={4}>
                     {services.map((service, index) => (
                         <Grid item xs={12} md={4} key={index}>
-                            <motion.div variants={cardVariants}>
-                                <Card
-                                    className="glass-effect"
+                            <motion.div
+                                initial={{ opacity: 0, y: 32 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: index * 0.12 }}
+                                whileHover={{ y: -8 }}
+                                style={{ height: '100%' }}
+                            >
+                                <Box
                                     sx={{
                                         height: '100%',
-                                        p: 4,
-                                        backgroundColor: 'rgba(255, 255, 255, 0.02)',
-                                        border: '1px solid var(--border-color)',
-                                        transition: 'var(--transition-base)',
+                                        p: { xs: 3.5, md: 4.5 },
+                                        borderRadius: 'var(--radius-xl)',
+                                        background: 'var(--bg-card)',
+                                        border: '1px solid var(--border-subtle)',
+                                        boxShadow: 'var(--shadow-sm)',
                                         display: 'flex',
                                         flexDirection: 'column',
-                                        alignItems: 'center',
-                                        textAlign: 'center',
+                                        gap: 2,
+                                        position: 'relative',
+                                        overflow: 'hidden',
+                                        transition: 'var(--transition-base)',
                                         '&:hover': {
-                                            transform: 'translateY(-15px)',
-                                            borderColor: 'var(--accent-color)',
-                                            boxShadow: `0 20px 40px -20px ${service.color}33`,
-                                            backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                                            borderColor: `${service.color}44`,
+                                            boxShadow: `0 16px 40px ${service.color}18`,
+                                        },
+                                        /* Large number watermark */
+                                        '&::before': {
+                                            content: `"${service.number}"`,
+                                            position: 'absolute',
+                                            top: -12,
+                                            right: 24,
+                                            fontSize: '6rem',
+                                            fontWeight: 900,
+                                            color: service.color,
+                                            opacity: 0.06,
+                                            lineHeight: 1,
+                                            letterSpacing: '-4px',
+                                            pointerEvents: 'none',
                                         },
                                     }}
                                 >
-                                    <IconButton
+                                    {/* Icon */}
+                                    <Box
                                         sx={{
-                                            p: 2.5,
-                                            mb: 3,
-                                            backgroundColor: `${service.color}15`,
+                                            width: 56, height: 56,
+                                            borderRadius: 'var(--radius-md)',
+                                            background: `${service.color}14`,
+                                            border: `1px solid ${service.color}28`,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
                                             color: service.color,
-                                            borderRadius: '20px',
                                             transition: 'var(--transition-base)',
                                             '&:hover': {
-                                                backgroundColor: service.color,
+                                                background: service.color,
                                                 color: '#fff',
-                                                transform: 'rotate(10deg)',
-                                            }
+                                            },
                                         }}
                                     >
                                         {service.icon}
-                                    </IconButton>
-                                    <CardContent sx={{ p: 0 }}>
-                                        <Typography
-                                            variant="h5"
-                                            sx={{
-                                                fontWeight: 800,
-                                                mb: 2,
-                                                color: 'var(--text-color-2)',
-                                                fontSize: '1.5rem',
-                                            }}
-                                        >
-                                            {service.title}
-                                        </Typography>
-                                        <Typography
-                                            variant="body1"
-                                            sx={{
-                                                color: 'var(--text-muted)',
-                                                lineHeight: 1.8,
-                                                fontSize: '1rem',
-                                            }}
-                                        >
-                                            {service.description}
-                                        </Typography>
-                                    </CardContent>
+                                    </Box>
 
+                                    <Typography
+                                        sx={{
+                                            fontWeight: 800,
+                                            fontSize: '1.2rem',
+                                            color: 'var(--text-color-2)',
+                                            letterSpacing: '-0.01em',
+                                        }}
+                                    >
+                                        {service.title}
+                                    </Typography>
+
+                                    <Typography
+                                        sx={{
+                                            color: 'var(--text-muted)',
+                                            lineHeight: 1.75,
+                                            fontSize: '0.95rem',
+                                        }}
+                                    >
+                                        {service.description}
+                                    </Typography>
+
+                                    {/* Bottom accent line */}
                                     <Box
                                         sx={{
-                                            mt: 4,
-                                            width: '40px',
-                                            height: '2px',
-                                            backgroundColor: service.color,
-                                            opacity: 0.5,
-                                            borderRadius: '2px'
+                                            mt: 'auto',
+                                            pt: 2,
+                                            borderTop: `1px solid ${service.color}20`,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: 1,
                                         }}
-                                    />
-                                </Card>
+                                    >
+                                        <Box
+                                            sx={{
+                                                width: 24, height: 2,
+                                                background: service.color,
+                                                borderRadius: 2,
+                                            }}
+                                        />
+                                        <Typography
+                                            sx={{
+                                                fontSize: '0.72rem',
+                                                fontWeight: 700,
+                                                color: service.color,
+                                                letterSpacing: 1,
+                                                textTransform: 'uppercase',
+                                            }}
+                                        >
+                                            {service.number}
+                                        </Typography>
+                                    </Box>
+                                </Box>
                             </motion.div>
                         </Grid>
                     ))}

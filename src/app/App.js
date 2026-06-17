@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { ThemeToggleProvider } from './ThemeToggleProvider';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { Container } from '@mui/material';
 import Navbar from '../header/navbar';
 import Aboutus from '../pages/aboutus';
 import ServicesSection from '../pages/services';
@@ -16,52 +17,43 @@ import ContactPage from '../pages/ContactPage';
 import AboutPage from '../pages/AboutPage';
 import Disclaimer from '../pages/Disclaimer';
 import CookiePolicy from '../pages/CookiePolicy';
+import AdSense from '../components/AdSense';
+
+/* ----------------------------------------------------------------
+   Reusable AdSense divider — renders a centered ad between sections
+   ---------------------------------------------------------------- */
+const SectionAd = ({ slot }) => (
+    <Container maxWidth="lg" sx={{ py: 1 }}>
+        <AdSense adSlot={slot} adFormat="horizontal" />
+    </Container>
+);
 
 const HomePage = ({ scrollToSection, homeRef, aboutRef, skillsRef, servicesRef, projectsRef, contactRef, scrollToSectionOnMount }) => {
-  // Scroll to section on mount if needed (when navigating from another page)
   useEffect(() => {
     if (scrollToSectionOnMount) {
-      // Wait for DOM to be ready and refs to be attached
       let retryCount = 0;
       const maxRetries = 10;
-      
+
       const scrollToTarget = () => {
-        // Get the appropriate ref based on section
         let targetRef = null;
         switch (scrollToSectionOnMount) {
-          case 'home':
-            targetRef = homeRef;
-            break;
-          case 'about':
-            targetRef = aboutRef;
-            break;
-          case 'skills':
-            targetRef = skillsRef;
-            break;
-          case 'services':
-            targetRef = servicesRef;
-            break;
-          case 'projects':
-            targetRef = projectsRef;
-            break;
-          case 'contact':
-            targetRef = contactRef;
-            break;
-          default:
-            return;
+          case 'home': targetRef = homeRef; break;
+          case 'about': targetRef = aboutRef; break;
+          case 'skills': targetRef = skillsRef; break;
+          case 'services': targetRef = servicesRef; break;
+          case 'projects': targetRef = projectsRef; break;
+          case 'contact': targetRef = contactRef; break;
+          default: return;
         }
-        
-        // Check if ref is available, if not, try again
+
         if (targetRef?.current) {
           targetRef.current.scrollIntoView({ behavior: 'smooth' });
         } else if (retryCount < maxRetries) {
           retryCount++;
-          // Retry after a short delay
           setTimeout(scrollToTarget, 50);
         }
       };
-      
-      // Initial delay to allow component to fully render
+
       setTimeout(scrollToTarget, 150);
     }
   }, [scrollToSectionOnMount, homeRef, aboutRef, skillsRef, servicesRef, projectsRef, contactRef]);
@@ -71,18 +63,32 @@ const HomePage = ({ scrollToSection, homeRef, aboutRef, skillsRef, servicesRef, 
       <div ref={homeRef}>
         <Herosection />
       </div>
+
       <div ref={aboutRef}>
         <Aboutus />
       </div>
+
+      {/* Ad between About and Skills */}
+      <SectionAd slot="1234567890" />
+
       <div ref={skillsRef}>
         <SkillsSection />
       </div>
+
+      {/* Ad between Skills and Services */}
+      <SectionAd slot="1234567891" />
+
       <div ref={servicesRef}>
         <ServicesSection />
       </div>
+
+      {/* Ad between Services and Projects */}
+      <SectionAd slot="1234567892" />
+
       <div ref={projectsRef}>
         <Projects />
       </div>
+
       <div ref={contactRef}>
         <Contact />
       </div>

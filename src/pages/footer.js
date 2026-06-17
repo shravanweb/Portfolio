@@ -3,9 +3,11 @@ import { Box, Container, Grid, Typography, Link, IconButton, Stack } from '@mui/
 import { HiOutlineMail, HiOutlinePhone, HiOutlineLocationMarker } from 'react-icons/hi';
 import { FaLinkedin, FaGithub, FaBehance, FaTwitter } from 'react-icons/fa';
 import useVisitorCount from '../hooks/useVisitorCount';
+import { useThemeToggle } from '../app/ThemeToggleProvider';
 
 const Footer = () => {
     const { visitorCount, loading } = useVisitorCount();
+    const { darkMode } = useThemeToggle();
 
     const socialLinks = [
         { icon: <FaLinkedin size={20} />, url: "https://www.linkedin.com/in/shravan-rasamalla/", label: "LinkedIn" },
@@ -26,13 +28,13 @@ const Footer = () => {
         <Box
             id="footer"
             sx={{
-                backgroundColor: 'transparent',
+                backgroundColor: darkMode ? 'var(--bg-secondary)' : '#f8fafc',
                 color: 'var(--text-color)',
-                pt: 12,
+                pt: 10,
                 pb: 6,
                 borderTop: '1px solid var(--border-color)',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
             }}
         >
             <Container maxWidth="lg">
@@ -157,7 +159,7 @@ const Footer = () => {
                     }}
                 >
                     <Typography variant="body2" sx={{ color: 'var(--text-muted)', fontWeight: 500 }}>
-                        © {new Date().getFullYear()} Shravan Rasamalla. Crafted with Precision.
+                        © {new Date().getFullYear()} Shravan Rasamalla.
                     </Typography>
 
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 4 }}>

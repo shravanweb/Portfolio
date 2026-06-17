@@ -173,16 +173,18 @@ const Aboutus = () => {
                                     variant="contained"
                                     startIcon={<HiOutlineDownload />}
                                     sx={{
-                                        bgcolor: 'var(--text-color-2)',
-                                        color: darkMode ? '#000' : '#fff',
+                                        bgcolor: 'var(--accent-color)',
+                                        color: '#fff',
                                         fontWeight: 800,
                                         borderRadius: '12px',
                                         px: 4,
                                         py: 1.5,
                                         textTransform: 'none',
                                         '&:hover': {
-                                            bgcolor: 'var(--accent-color)',
-                                            color: '#000'
+                                            bgcolor: 'var(--accent-alt)',
+                                            color: '#fff',
+                                            transform: 'translateY(-3px)',
+                                            boxShadow: 'var(--shadow-lg)',
                                         }
                                     }}
                                 >
@@ -200,7 +202,8 @@ const Aboutus = () => {
                                         '&:hover': {
                                             borderColor: 'var(--accent-color)',
                                             color: 'var(--accent-color)',
-                                            bgcolor: 'transparent'
+                                            bgcolor: 'transparent',
+                                            transform: 'translateY(-3px)',
                                         }
                                     }}
                                 >

@@ -2,333 +2,193 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { useThemeToggle } from '../app/ThemeToggleProvider';
 
-const AdSense = ({ 
-  adSlot, 
-  adFormat = 'auto', 
-  fullWidthResponsive = true, 
-  style = {},
-  requireMinContent = true // New: Only show ads if there's sufficient page content
+/**
+ * AdSense Component — Professional, theme-aware ad unit.
+ *
+ * Props:
+ *  adSlot              — Google AdSense slot ID
+ *  adFormat            — 'auto' | 'horizontal' | 'rectangle' | 'vertical'
+ *  fullWidthResponsive — boolean
+ *  style               — extra sx styles for outer wrapper
+ *  label               — label above the ad (default: 'Advertisement')
+ *  showLabel           — show/hide the label (default: true)
+ */
+const AdSense = ({
+    adSlot,
+    adFormat = 'auto',
+    fullWidthResponsive = true,
+    style = {},
+    label = 'Advertisement',
+    showLabel = true,
 }) => {
-  const adRef = useRef(null);
-  const pushedRef = useRef(false);
-  const [scriptLoaded, setScriptLoaded] = useState(false);
-  const [adStatus, setAdStatus] = useState('loading');
-  const [hasMinContent, setHasMinContent] = useState(true);
-  const { darkMode } = useThemeToggle();
-  // Use client ID from HTML script or env variable
-  const clientId = process.env.REACT_APP_ADSENSE_CLIENT_ID || 'ca-pub-6696519751206944';
+    const adRef = useRef(null);
+    const pushedRef = useRef(false);
+    const [scriptLoaded, setScriptLoaded] = useState(false);
+    const [adStatus, setAdStatus] = useState('loading');
+    const { darkMode } = useThemeToggle();
 
-  // Check if page has sufficient content for ads (AdSense policy compliance)
-  useEffect(() => {
-    if (!requireMinContent) {
-      setHasMinContent(true);
-      return;
-    }
+    const clientId = process.env.REACT_APP_ADSENSE_CLIENT_ID || 'ca-pub-6696519751206944';
+    const isDev = process.env.NODE_ENV === 'development';
 
-    const checkContentLength = () => {
-      // Get main content area (exclude header, footer, nav)
-      const main = document.querySelector('main') || document.querySelector('[role="main"]') || document.body;
-      const textContent = main?.innerText || '';
-      const wordCount = textContent.split(/\s+/).filter(word => word.length > 0).length;
-      
-      // Require at least 300 words of content for ads (Google AdSense best practices)
-      const hasEnoughContent = wordCount >= 300;
-      setHasMinContent(hasEnoughContent);
-      
-      if (!hasEnoughContent) {
-        console.warn(`⚠️ Page has insufficient content (${wordCount} words). Minimum 300 words recommended for AdSense.`);
-      }
-    };
+    // Load AdSense script once
+    useEffect(() => {
+        if (window.adsbygoogle) { setScriptLoaded(true); return; }
 
-    // Check immediately and after content loads
-    checkContentLength();
-    const timer = setTimeout(checkContentLength, 500);
-
-    return () => clearTimeout(timer);
-  }, [requireMinContent]);
-
-  // Load AdSense script dynamically if not already loaded
-  useEffect(() => {
-    if (!hasMinContent) return; // Don't load script if content requirement not met
-
-    const checkScript = () => {
-      if (window.adsbygoogle) {
-        setScriptLoaded(true);
-        return true;
-      }
-      return false;
-    };
-
-    // Check if script is already loaded
-    if (checkScript()) return;
-
-    // Check if script tag already exists in DOM
-    let script = document.querySelector('script[src*="adsbygoogle.js"]');
-    
-    if (!script) {
-      // Dynamically load AdSense script only when this component mounts
-      script = document.createElement('script');
-      script.async = true;
-      script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${clientId}`;
-      script.crossOrigin = 'anonymous';
-      script.setAttribute('data-ad-client', clientId);
-      
-      script.onload = () => {
-        setScriptLoaded(true);
-      };
-      
-      script.onerror = () => {
-        console.error('❌ Failed to load AdSense script');
-        setScriptLoaded(false);
-      };
-      
-      document.head.appendChild(script);
-    } else {
-      // Script exists, wait for it to load
-      if (script.complete || script.readyState === 'complete') {
-        setScriptLoaded(true);
-      } else {
-        script.addEventListener('load', () => {
-          setScriptLoaded(true);
-        });
-        script.addEventListener('error', () => {
-          console.error('❌ AdSense script failed to load');
-          setScriptLoaded(false);
-        });
-      }
-    }
-
-    // Check periodically as fallback
-    const interval = setInterval(() => {
-      if (checkScript()) {
-        clearInterval(interval);
-      }
-    }, 500);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [clientId, hasMinContent]);
-
-  // Monitor ad status
-  useEffect(() => {
-    if (!adRef.current) return;
-
-    const observer = new MutationObserver(() => {
-      const status = adRef.current?.getAttribute('data-adsbygoogle-status');
-      if (status) {
-        setAdStatus(status);
-      }
-    });
-
-    observer.observe(adRef.current, {
-      attributes: true,
-      attributeFilter: ['data-adsbygoogle-status'],
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!scriptLoaded || pushedRef.current || !adRef.current) return;
-
-    let retryCount = 0;
-    const maxRetries = 15;
-
-    const initializeAd = () => {
-      if (pushedRef.current) return;
-      
-      try {
-        if (window.adsbygoogle && adRef.current) {
-          const status = adRef.current.getAttribute('data-adsbygoogle-status');
-          
-          // If ad is already done or in progress, don't push again
-          if (status === 'done' || status === 'filled') {
-            pushedRef.current = true;
-            setAdStatus(status);
-            console.log('✅ AdSense ad already loaded');
-            return;
-          }
-
-          // Only push if not initialized
-          if (!status || status === 'unfilled') {
-            try {
-              (window.adsbygoogle = window.adsbygoogle || []).push({});
-              pushedRef.current = true;
-              setAdStatus('initialized');
-              console.log('✅ AdSense ad initialized successfully');
-            } catch (pushError) {
-              console.error('❌ AdSense push error:', pushError);
-              retryCount++;
-              if (retryCount < maxRetries) {
-                setTimeout(initializeAd, 2000);
-              } else {
-                setAdStatus('error');
-              }
-            }
-          }
-        } else {
-          retryCount++;
-          if (retryCount < maxRetries) {
-            setTimeout(initializeAd, 1000);
-          } else {
-            console.warn('⚠️ AdSense script not loaded after max retries');
-            setAdStatus('error');
-          }
+        let script = document.querySelector('script[src*="adsbygoogle.js"]');
+        if (!script) {
+            script = document.createElement('script');
+            script.async = true;
+            script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${clientId}`;
+            script.crossOrigin = 'anonymous';
+            script.setAttribute('data-ad-client', clientId);
+            document.head.appendChild(script);
         }
-      } catch (err) {
-        console.error('❌ AdSense initialization error:', err);
-        setAdStatus('error');
-      }
-    };
 
-    // Wait a bit for DOM to be ready
-    const timer = setTimeout(initializeAd, 1000);
+        const onLoad = () => setScriptLoaded(true);
+        script.addEventListener('load', onLoad);
 
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [scriptLoaded]);
+        const poll = setInterval(() => {
+            if (window.adsbygoogle) { setScriptLoaded(true); clearInterval(poll); }
+        }, 500);
 
-  // Show debug info in development
-  const isDevelopment = process.env.NODE_ENV === 'development';
-  const showPlaceholder = isDevelopment && (adStatus === 'loading' || adStatus === 'unfilled' || adStatus === 'error');
+        return () => {
+            script.removeEventListener('load', onLoad);
+            clearInterval(poll);
+        };
+    }, [clientId]);
 
-  // Don't render ads if content requirement not met
-  if (!hasMinContent) {
-    if (isDevelopment) {
-      return (
+    // Watch ad status attribute
+    useEffect(() => {
+        if (!adRef.current) return;
+        const obs = new MutationObserver(() => {
+            const s = adRef.current?.getAttribute('data-adsbygoogle-status');
+            if (s) setAdStatus(s);
+        });
+        obs.observe(adRef.current, {
+            attributes: true,
+            attributeFilter: ['data-adsbygoogle-status'],
+        });
+        return () => obs.disconnect();
+    }, []);
+
+    // Push ad unit
+    useEffect(() => {
+        if (!scriptLoaded || pushedRef.current || !adRef.current) return;
+        const timer = setTimeout(() => {
+            if (pushedRef.current) return;
+            try {
+                const status = adRef.current?.getAttribute('data-adsbygoogle-status');
+                if (!status || status === 'unfilled') {
+                    (window.adsbygoogle = window.adsbygoogle || []).push({});
+                    pushedRef.current = true;
+                    setAdStatus('initialized');
+                }
+            } catch (e) {
+                console.error('AdSense push error:', e);
+                setAdStatus('error');
+            }
+        }, 800);
+        return () => clearTimeout(timer);
+    }, [scriptLoaded]);
+
+    const showDevPlaceholder = isDev && (
+        adStatus === 'loading' || adStatus === 'unfilled' || adStatus === 'error'
+    );
+
+    return (
         <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            margin: '40px 0',
-            minHeight: '100px',
-            width: '100%',
-            position: 'relative',
-            border: '2px dashed rgba(255, 100, 100, 0.3)',
-            borderRadius: '8px',
-            backgroundColor: 'rgba(255, 100, 100, 0.05)',
-            padding: '20px',
-            ...style,
-          }}
-        >
-          <Typography
-            variant="caption"
             sx={{
-              color: '#ff6464',
-              fontSize: '0.85rem',
-              fontWeight: 500,
-              textAlign: 'center',
+                width: '100%',
+                my: { xs: 3, md: 4 },
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '6px',
+                ...style,
             }}
-          >
-            ⚠️ AdSense Disabled: Page doesn't meet minimum content requirement (300+ words)
-          </Typography>
-        </Box>
-      );
-    }
-    return null;
-  }
+        >
+            {/* "Advertisement" label */}
+            {showLabel && (
+                <Typography
+                    component="span"
+                    sx={{
+                        alignSelf: 'flex-start',
+                        fontSize: '0.62rem',
+                        fontWeight: 700,
+                        letterSpacing: '2px',
+                        textTransform: 'uppercase',
+                        color: 'var(--ad-label)',
+                        px: '2px',
+                        userSelect: 'none',
+                    }}
+                >
+                    {label}
+                </Typography>
+            )}
 
-  return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: '40px 0',
-        minHeight: '100px',
-        width: '100%',
-        position: 'relative',
-        ...style,
-      }}
-    >
-      {/* AdSense Ad Container */}
-      <Box
-        sx={{
-          width: '100%',
-          minHeight: '100px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          border: showPlaceholder 
-            ? `2px dashed ${darkMode ? 'rgba(255, 204, 0, 0.3)' : 'rgba(0, 127, 255, 0.3)'}` 
-            : 'none',
-          borderRadius: showPlaceholder ? '8px' : '0',
-          backgroundColor: showPlaceholder 
-            ? darkMode ? 'rgba(255, 204, 0, 0.05)' : 'rgba(0, 127, 255, 0.05)' 
-            : 'transparent',
-          padding: showPlaceholder ? '20px' : '0',
-        }}
-      >
-        <ins
-          ref={adRef}
-          className="adsbygoogle"
-          style={{
-            display: 'block',
-            width: '100%',
-            minHeight: '100px',
-          }}
-          data-ad-client={clientId}
-          data-ad-slot={adSlot || ''}
-          data-ad-format={adFormat}
-          data-full-width-responsive={fullWidthResponsive ? 'true' : 'false'}
-        />
-        {showPlaceholder && (
-          <Box
-            sx={{
-              position: 'absolute',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: 1,
-              pointerEvents: 'none',
-            }}
-          >
-            <Typography
-              variant="caption"
-              sx={{
-                color: darkMode ? '#ffcc00' : '#007fff',
-                fontSize: '0.75rem',
-                fontWeight: 500,
-              }}
+            {/* Ad container */}
+            <Box
+                sx={{
+                    width: '100%',
+                    minHeight: 90,
+                    backgroundColor: 'var(--ad-bg)',
+                    border: '1px solid var(--ad-border)',
+                    borderRadius: '10px',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    position: 'relative',
+                    transition: 'var(--transition-base)',
+                }}
             >
-              📢 AdSense Ad Placeholder
-            </Typography>
-            <Typography
-              variant="caption"
-              sx={{
-                color: darkMode ? '#888' : '#666',
-                fontSize: '0.65rem',
-              }}
-            >
-              {adStatus === 'loading' && '⏳ Loading...'}
-              {adStatus === 'unfilled' && '⏳ Waiting for ads...'}
-              {adStatus === 'error' && '❌ Ad failed to load'}
-              {adStatus === 'initialized' && '✅ Ad initialized'}
-            </Typography>
-          </Box>
-        )}
-      </Box>
-      {isDevelopment && (
-        <Typography
-          variant="caption"
-          sx={{
-            mt: 1,
-            color: darkMode ? '#888' : '#666',
-            fontSize: '0.7rem',
-          }}
-        >
-          {scriptLoaded ? '✅ Script loaded' : '⏳ Loading script...'} | 
-          Status: {adStatus} | 
-          {adSlot ? ` Slot: ${adSlot}` : ' Auto ads'}
-        </Typography>
-      )}
-    </Box>
-  );
+                <ins
+                    ref={adRef}
+                    className="adsbygoogle"
+                    style={{ display: 'block', width: '100%', minHeight: '90px' }}
+                    data-ad-client={clientId}
+                    data-ad-slot={adSlot || ''}
+                    data-ad-format={adFormat}
+                    data-full-width-responsive={fullWidthResponsive ? 'true' : 'false'}
+                />
+
+                {/* Dev overlay */}
+                {showDevPlaceholder && (
+                    <Box
+                        sx={{
+                            position: 'absolute',
+                            inset: 0,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: 0.5,
+                            pointerEvents: 'none',
+                            background: darkMode
+                                ? 'repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(56,189,248,0.03) 8px, rgba(56,189,248,0.03) 16px)'
+                                : 'repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(3,105,161,0.04) 8px, rgba(3,105,161,0.04) 16px)',
+                        }}
+                    >
+                        <Typography
+                            sx={{
+                                fontSize: '0.72rem',
+                                fontWeight: 700,
+                                color: 'var(--text-subtle)',
+                                letterSpacing: '1px',
+                            }}
+                        >
+                            AD UNIT {adSlot ? `· ${adSlot}` : '· Auto'}
+                        </Typography>
+                        <Typography sx={{ fontSize: '0.65rem', color: 'var(--text-subtle)', opacity: 0.6 }}>
+                            {adStatus === 'loading' && 'Loading…'}
+                            {adStatus === 'unfilled' && 'Awaiting fill'}
+                            {adStatus === 'error' && 'Failed to load'}
+                        </Typography>
+                    </Box>
+                )}
+            </Box>
+        </Box>
+    );
 };
 
 export default AdSense;

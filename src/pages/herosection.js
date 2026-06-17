@@ -85,7 +85,6 @@ const Herosection = () => {
                                 mb: 2,
                                 display: 'block',
                                 fontSize: '0.9rem',
-                                textShadow: darkMode ? '0 0 20px rgba(56, 189, 248, 0.3)' : 'none',
                             }}
                         >
                             Design • Code • Create
@@ -161,19 +160,19 @@ const Herosection = () => {
                                 startIcon={<ContactMailIcon />}
                                 href="/contact"
                                 sx={{
-                                    padding: '18px 48px',
-                                    fontSize: '1.1rem',
+                                    padding: '16px 44px',
+                                    fontSize: '1rem',
                                     fontWeight: 700,
-                                    borderRadius: '12px',
+                                    borderRadius: '100px',
                                     background: 'linear-gradient(135deg, var(--accent-color), var(--accent-alt))',
                                     color: '#fff',
                                     textTransform: 'none',
-                                    boxShadow: '0 10px 40px -10px rgba(56, 189, 248, 0.5)',
+                                    boxShadow: 'var(--shadow-colored)',
                                     transition: 'var(--transition-base)',
                                     '&:hover': {
                                         transform: 'translateY(-4px)',
-                                        boxShadow: '0 20px 50px -10px rgba(56, 189, 248, 0.6)',
-                                        filter: 'brightness(1.1)',
+                                        boxShadow: '0 20px 40px rgba(37,99,235,0.35)',
+                                        filter: 'brightness(1.08)',
                                     },
                                 }}
                             >
@@ -193,12 +192,18 @@ const Herosection = () => {
                                     color: 'var(--text-color)',
                                     textTransform: 'none',
                                     backdropFilter: 'blur(10px)',
-                                    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                                    backgroundColor: darkMode
+                                        ? 'rgba(255, 255, 255, 0.03)'
+                                        : 'rgba(255, 255, 255, 0.7)',
+                                    border: '1.5px solid var(--border-subtle)',
                                     transition: 'var(--transition-base)',
                                     '&:hover': {
                                         transform: 'translateY(-4px)',
-                                        backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                                        backgroundColor: darkMode
+                                            ? 'rgba(255, 255, 255, 0.08)'
+                                            : 'rgba(255, 255, 255, 0.95)',
                                         borderColor: 'var(--accent-color)',
+                                        color: 'var(--accent-color)',
                                     },
                                 }}
                             >
