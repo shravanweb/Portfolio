@@ -42,7 +42,7 @@ const projects = [
     {
         title: 'JobsNProfiles Portal',
         description: 'Global flagship career bridge connecting 5M+ professionals with top-tier international opportunities.',
-        image: 'https://images.unsplash.com/photo-1454165833767-027eeef1593e?w=900&auto=format',
+        image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&auto=format',
         link: 'https://jobsnprofiles.com/',
         tech: ['React', 'Express', 'MySQL', 'Search API'],
         category: 'Main Product',
@@ -52,7 +52,7 @@ const projects = [
     {
         title: 'D3E Design Studio',
         description: 'Creative technology studio specialising in high-performance design systems, interactive experiences, and digital branding.',
-        image: 'https://images.unsplash.com/photo-1541462608141-ad4d01947f6d?w=900&auto=format',
+        image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=900&auto=format',
         link: 'https://d3e.studio',
         tech: ['Three.js', 'Framer Motion', 'React', 'GSAP'],
         category: 'Creative',

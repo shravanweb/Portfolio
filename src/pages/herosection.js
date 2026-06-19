@@ -7,8 +7,9 @@ import ContactMailIcon from '@mui/icons-material/ContactMail';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { TypeAnimation } from 'react-type-animation';
 import { motion } from 'framer-motion';
-import Download from "../assets/Shravan_Rasamalla-Ui Developer.doc";
 import HeroBackground3D from '../components/HeroBackground3D';
+
+const RESUME_PDF = "/Shravan Rasamalla - UI UX  Frontend developer.pdf";
 
 const Herosection = () => {
     const { darkMode } = useThemeToggle();
@@ -180,8 +181,8 @@ const Herosection = () => {
                             </Button>
                             <Button
                                 variant="outlined"
-                                href={Download}
-                                download="Shravan_Rasamalla-Ui Developer.doc"
+                                href={RESUME_PDF}
+                                download="Shravan Rasamalla - UI UX Frontend Developer.pdf"
                                 startIcon={<DownloadIcon />}
                                 sx={{
                                     padding: '18px 48px',

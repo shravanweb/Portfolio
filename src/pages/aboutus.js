@@ -5,6 +5,7 @@ import { HiOutlineDownload, HiOutlineLightningBolt } from 'react-icons/hi';
 import { motion } from 'framer-motion';
 
 const Pic = "/img.png";
+const RESUME_PDF = "/Shravan Rasamalla - UI UX  Frontend developer.pdf";
 
 const Aboutus = () => {
     const { darkMode } = useThemeToggle();
@@ -170,6 +171,9 @@ const Aboutus = () => {
 
                             <Stack direction="row" spacing={3}>
                                 <Button
+                                    component="a"
+                                    href={RESUME_PDF}
+                                    download="Shravan Rasamalla - UI UX Frontend Developer.pdf"
                                     variant="contained"
                                     startIcon={<HiOutlineDownload />}
                                     sx={{
