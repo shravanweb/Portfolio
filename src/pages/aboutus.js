@@ -112,7 +112,7 @@ const Aboutus = () => {
                                     display: 'block'
                                 }}
                             >
-                                About the Architect
+                                About the Architect11111
                             </Typography>
 
                             <Typography
