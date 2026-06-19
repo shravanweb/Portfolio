@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Typography, Container, Grid, Tooltip } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useThemeToggle } from '../app/ThemeToggleProvider';
 
 /* ── Data ───────────────────────────────────────────────── */
 const categories = [
@@ -81,8 +80,6 @@ const ArcProgress = ({ pct, color, size = 80 }) => {
 
 /* ── Single Skill Card ──────────────────────────────────── */
 const SkillCard = ({ skill, color, i }) => {
-    const { darkMode } = useThemeToggle();
-
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}

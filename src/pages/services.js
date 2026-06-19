@@ -2,7 +2,6 @@ import React from 'react';
 import { Box, Typography, Grid, Container } from '@mui/material';
 import { motion } from 'framer-motion';
 import { HiOutlineLightBulb, HiOutlineDeviceMobile, HiOutlineCode } from 'react-icons/hi';
-import { useThemeToggle } from '../app/ThemeToggleProvider';
 
 const services = [
     {
@@ -29,8 +28,6 @@ const services = [
 ];
 
 const ServicesSection = () => {
-    const { darkMode } = useThemeToggle();
-
     return (
         <Box
             id="services"

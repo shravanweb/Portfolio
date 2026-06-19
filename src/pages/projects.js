@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-    Box, Grid, Typography, Container, Chip, Stack, Button, IconButton
+    Box, Grid, Typography, Container, Stack, Button, IconButton
 } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiOutlineArrowNarrowRight, HiOutlineExternalLink } from 'react-icons/hi';
