@@ -26,6 +26,7 @@ if (fs.existsSync(envFile)) {
 let htmlContent = fs.readFileSync(htmlFile, 'utf8');
 
 // Replace placeholder or add script if not present
+const metaTag = `  <meta name="google-adsense-account" content="${clientId}">`;
 const scriptTag = `    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${clientId}"
      crossorigin="anonymous"></script>`;
 
@@ -33,13 +34,18 @@ if (htmlContent.includes('<!-- Google AdSense script will be loaded dynamically 
   // Replace the comment with the actual script
   htmlContent = htmlContent.replace(
     '    <!-- Google AdSense script will be loaded dynamically via React -->',
-    `    <!-- Google AdSense -->\n${scriptTag}`
+    `    <!-- Google AdSense -->\n${metaTag}\n${scriptTag}`
   );
 } else if (!htmlContent.includes('adsbygoogle.js')) {
   // Add script before closing head tag if it doesn't exist
   htmlContent = htmlContent.replace(
     '</head>',
-    `    <!-- Google AdSense -->\n${scriptTag}\n\n</head>`
+    `    <!-- Google AdSense -->\n${metaTag}\n${scriptTag}\n\n</head>`
+  );
+} else if (!htmlContent.includes('google-adsense-account')) {
+  htmlContent = htmlContent.replace(
+    '    <!-- Google AdSense -->',
+    `    <!-- Google AdSense -->\n${metaTag}`
   );
 }
 
